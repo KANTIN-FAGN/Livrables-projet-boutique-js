@@ -18,13 +18,17 @@ exports.getArticle = async (req, res) => {
         article.images = formattedImages;
 
         const sizes = await Article.getSizesForArticle(articleID);
-
         const sizesWithQuantities = {};
         sizes.forEach(size => {
             sizesWithQuantities[size.size] = size.quantity;
         });
-
         article.sizes = sizesWithQuantities;
+
+        const colors = await Article.getColorsForArticle(articleID);
+        article.colors = colors;
+
+        const categories = await Article.getCategorysForArticle(articleID);
+        article.categorys = categories;
 
         return res.status(200).json({
             message: "Article found successfully",
@@ -51,7 +55,6 @@ exports.getArticleHomme = async (req, res) => {
 
         const link = process.env.BASE_URL;
 
-        // Récupération des images et des tailles pour chaque article
         for (let i = 0; i < articles.length; i++) {
             const article = articles[i];
 
@@ -60,10 +63,10 @@ exports.getArticleHomme = async (req, res) => {
             // Récupération des images de l'article
             const images = await Article.getImagesForArticle(articleID);
             const formattedImages = images.map(image => `${link}${image.URL}.jpg`);
-            
+
             // Récupération uniquement des deux premières images
             const firstTwoImages = formattedImages.slice(0, 2);
-            
+
             article.images = firstTwoImages;
 
             // Récupération des tailles de l'article
@@ -73,6 +76,12 @@ exports.getArticleHomme = async (req, res) => {
                 sizesWithQuantities[size.size] = size.quantity;
             });
             article.sizes = sizesWithQuantities;
+
+            // Récupération des couleurs
+            article.colors = await Article.getColorsForArticle(articleID);
+
+            // Récupération des catégaries
+            article.categorys = await Article.getCategorysForArticle(articleID);
         }
 
         return res.status(200).json({
@@ -86,7 +95,6 @@ exports.getArticleHomme = async (req, res) => {
         });
     }
 }
-
 exports.getArticleFemme = async (req, res) => {
     try {
         const sex = false; // false pour femme
@@ -109,10 +117,10 @@ exports.getArticleFemme = async (req, res) => {
             // Récupération des images de l'article
             const images = await Article.getImagesForArticle(articleID);
             const formattedImages = images.map(image => `${link}${image.URL}.jpg`);
-            
+
             // Récupération uniquement des deux premières images
             const firstTwoImages = formattedImages.slice(0, 2);
-            
+
             article.images = firstTwoImages;
 
             // Récupération des tailles de l'article
@@ -122,6 +130,9 @@ exports.getArticleFemme = async (req, res) => {
                 sizesWithQuantities[size.size] = size.quantity;
             });
             article.sizes = sizesWithQuantities;
+
+            article.colors = await Article.getColorsForArticle(articleID);
+            article.categorys = await Article.getCategorysForArticle(articleID);
         }
 
         return res.status(200).json({

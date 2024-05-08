@@ -26,3 +26,27 @@ CREATE TABLE IF NOT EXISTS `sizes` (
     PRIMARY KEY (`id`),
     FOREIGN KEY (`article_id`) REFERENCES `articles`(`id`) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS `colors` (
+    `id` INT AUTO_INCREMENT,
+    `article_id` INT NOT NULL,
+    `color` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`article_id`) REFERENCES `articles`(`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS `materials` (
+    `id` INT AUTO_INCREMENT,
+    `article_id` INT NOT NULL,
+    `material` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`article_id`) REFERENCES `articles`(`id`) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS `categorys` (
+    `id` INT AUTO_INCREMENT,
+    `article_id` INT NOT NULL,
+    `category` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`article_id`) REFERENCES `articles`(`id`) ON DELETE CASCADE
+);
