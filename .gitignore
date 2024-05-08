@@ -1,4 +1,5 @@
-node_modules
-Frontend\.env
-Backend\node_modules
-Backend\.env
+# Ignorer les dossiers node_modules
+**/node_modules/
+
+# Ignorer les fichiers .env
+**/.env
