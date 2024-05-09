@@ -41,7 +41,6 @@ exports.getArticle = async (req, res) => {
         });
     }
 }
-
 exports.getArticleHomme = async (req, res) => {
     try {
         const sex = true; // true pour homme
