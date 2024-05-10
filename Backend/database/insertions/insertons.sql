@@ -56,7 +56,7 @@ INSERT INTO images (`article_id`, `URL`) VALUES
 (13, '/images/Homme/Accessories/Lunettes/3D/Gris/img_1'), (13, '/images/Homme/Accessories/Lunettes/3D/Gris/img_2'), (13, '/images/Homme/Accessories/Lunettes/3D/Gris/img_3'), (13, '/images/Homme/Accessories/Lunettes/3D/Gris/img_4'), (13, '/images/Homme/Accessories/Lunettes/3D/Gris/img_5'), (13, '/images/Homme/Accessories/Lunettes/3D/Gris/img_6'),
 (14, '/images/Homme/Accessories/Bracelet/Laiton_argente_vieilli/img_1'), (14, '/images/Homme/Accessories/Bracelet/Laiton_argente_vieilli/img_2'), (14, '/images/Homme/Accessories/Bracelet/Laiton_argente_vieilli/img_3'),
 (15, '/images/Homme/Shoes/SneakerB30/Rose_pale/img_1'), (15, '/images/Homme/Shoes/SneakerB30/Rose_pale/img_2'), (15, '/images/Homme/Shoes/SneakerB30/Rose_pale/img_3'), (15, '/images/Homme/Shoes/SneakerB30/Rose_pale/img_4'),
-(16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_1'), (16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_2'), (16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_3'), (16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_4'), (16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_5'), (16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_6'), (16, '/images/Homme/Shoes/Tops/Veste/Cannage_coton-melanger-ecrue/img_7'),
+(16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_1'), (16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_2'), (16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_3'), (16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_4'), (16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_5'), (16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_6'), (16, '/images/Homme/Tops/Veste/Cannage_coton-melanger-ecrue/img_7'),
 (17, '/images/Homme/Accessories/Porte-carte/Kaki/img_1'), (17, '/images/Homme/Accessories/Porte-carte/Kaki/img_2'), (17, '/images/Homme/Accessories/Porte-carte/Kaki/img_3'), (17, '/images/Homme/Accessories/Porte-carte/Kaki/img_4'), (17, '/images/Homme/Accessories/Porte-carte/Kaki/img_5'),
 (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_1'), (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_2'), (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_3'), (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_4'), (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_5'), (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_6'), (18, '/images/Homme/Tops/Sweatshirt/Capuche_Noir/img_7'),
 (19, '/images/Homme/Accessories/Bracelet/Cannage/img_1'), (19, '/images/Homme/Accessories/Bracelet/Cannage/img_2'), (19, '/images/Homme/Accessories/Bracelet/Cannage/img_3'),
@@ -123,7 +123,7 @@ INSERT INTO sizes (`article_id`, `size`, `quantity`) VALUES
 (37, '34', 0), (37, '34.5', 0), (37, '35', 0), (37, '35.5', 0), (37, '36', 0), (37, '36.5', 1), (37, '37', 10), (37, '37.5', 0), (37, '38', 0), (37, '38.5', 0), (37, '39', 10),(37, '39.5', 0), (37, '40', 2), (37, '40.5', 10),(37, '41', 0), (37, '41.5', 0), (37, '42', 10),
 (38, 'XS', 0), (38, 'S', 0), (38, 'M', 2), (38, 'L', 0), (38, 'XL', 0), (38, 'XXL', 0),
 (39, 'XS', 10), (39, 'S', 0), (39, 'M', 2), (39, 'L', 0), (39, 'XL', 0), (39, 'XXL', 0),
-(39, 'XS', 10), (39, 'S', 0), (39, 'M', 2), (39, 'L', 8), (39, 'XL', 9), (39, 'XXL', 100);
+(39, 'XS', 10), (39, 'S', 0), (39, 'M', 2), (39, 'L', 8), (39, 'XL', 9), (39, 'XXL', 80);
 
 INSERT INTO colors (`article_id`, `color`) VALUES
 (1, 'Bleu'),

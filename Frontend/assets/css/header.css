@@ -1,0 +1,75 @@
+.Header-global {
+    width: 85%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Logo-global p {
+    font-family: var(--font-Logo-Regular);
+    font-size: var(--font-size-logo);
+}
+
+.menu-btn {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.menu-btn .bar {
+    width: 30px;
+    height: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    background-color: blue;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-btn .bar:nth-of-type(2) {
+    top: calc(50% - 9px);
+}
+
+.menu-btn .bar:nth-of-type(3) {
+    top: calc(50% + 9px);
+}
+
+/* Меняем гамбургер иконку, когда меню открыто */
+.menu-btn.active .bar:nth-of-type(1) {
+    display: none;
+}
+
+.menu-btn.active .bar:nth-of-type(2) {
+    top: 50%;
+    transform: translate(-50%, 0%) rotate(45deg);
+}
+
+.menu-btn.active .bar:nth-of-type(3) {
+    top: 50%;
+    transform: translate(-50%, 0%) rotate(-45deg);
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: #ffffff;
+    transform: translateX(100%);
+    transition: transform 0.5s;
+}
+
+.nav.active {
+    transform: translateX(10%);
+}
+
+.nav .nav__list_item {
+    list-style-type: none;
+}

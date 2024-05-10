@@ -15,6 +15,18 @@
     src: '../font/fonts_Logo/EBGaramond-Regular.ttf' format("truetype");
 }
 
+* {
+    padding : 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 :root {
     --font-regular: 'Gothic_Regular';
     --font-Bold: 'Gothic_Bold';
@@ -27,4 +39,9 @@
     --gris-footer-link : #BDBDBD;
     --gris-Non_Utilisable : #E5E5E5;
     --gris-descriptionProduit : #7C7C7C;
+    --font-size-placehorder : 14px;
+    --font-size-logo : 36px;
+    --font-size-titre : 20px;
+    --font-size-description : 12px;
+    --font-menu-burger: 13px;
 }
