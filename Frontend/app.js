@@ -11,4 +11,4 @@ app.use(routes)
 
 const port = 3000
 
-app.listen(port, '0.0.0.0', console.log(`Server Frontend lancé sur => http://localhost:${port}/accueil`));
+app.listen(port, '0.0.0.0', console.log(`Server Frontend lancé sur => http://localhost:${port}/Roid`));

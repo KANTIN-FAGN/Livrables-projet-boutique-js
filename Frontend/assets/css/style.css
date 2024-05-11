@@ -1,0 +1,40 @@
+.mode-homme-link img,
+.mode-femme-link img {
+    width: 100%;
+}
+
+.mode-homme-link,
+.mode-femme-link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-mode a,
+.select-mode a {
+    height: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-mode {
+    height: 667px;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-mode {
+    position: absolute;
+    font-size: var(--font-size-titre);
+    color: #fff;
+    font-family: var(--font-regular), sans-serif;
+    font-weight: bold;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

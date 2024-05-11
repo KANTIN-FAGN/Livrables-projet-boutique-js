@@ -7,41 +7,45 @@
 }
 
 .Logo-global p {
-    font-family: var(--font-Logo-Regular);
     font-size: var(--font-size-logo);
 }
 
 .menu-btn {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     position: relative;
-    z-index: 2;
+    z-index: 999;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .menu-btn .bar {
-    width: 30px;
-    height: 4px;
+    width: 20px;
+    height: 2px;
     position: absolute;
-    top: 50%;
     left: 50%;
     border-radius: 4px;
     transform: translate(-50%, -50%);
-    background-color: blue;
+    background-color: var(--gris-roid);
     transition: all 0.3s ease-in-out;
 }
 
 .menu-btn .bar:nth-of-type(2) {
-    top: calc(50% - 9px);
+    top: calc(50% - 7px);
 }
 
 .menu-btn .bar:nth-of-type(3) {
-    top: calc(50% + 9px);
+    top: calc(50% + 5px);
 }
 
-/* Меняем гамбургер иконку, когда меню открыто */
 .menu-btn.active .bar:nth-of-type(1) {
     display: none;
+}
+
+.menu-btn.active body {
+    overflow: hidden;
 }
 
 .menu-btn.active .bar:nth-of-type(2) {
@@ -60,7 +64,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 15px;
     background: #ffffff;
     transform: translateX(100%);
     transition: transform 0.5s;
@@ -70,6 +73,101 @@
     transform: translateX(10%);
 }
 
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
 .nav .nav__list_item {
     list-style-type: none;
+}
+
+.nav .nav__list_item .nav__link {
+    color: black;
+    text-decoration: none;
+    font-family: var(--font-regular), sans-serif;
+    font-size: 13px;
+}
+
+.nav .nav__list_item .nav__link:hover {
+    text-decoration: underline;
+}
+
+.header_nav-sexe {
+    margin-top: 85px;
+    display: flex;
+    width: 90%;
+}
+
+.header_nav_homme,
+.header_nav_femme {
+    font-family: var(--font-regular), sans-serif;
+    font-size: 15px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.header_nav_homme {
+    border-right: 1px solid #000;
+}
+
+.select-sex {
+    border-top: 1px solid #000;
+}
+
+.not-select-sex {
+    border-bottom: 1px solid #000;
+    color: var(--gris-footer-link);
+}
+
+.line-nav {
+    width: 100%;
+    height: 1px;
+    background-color: var(--gris-footer-link);
+}
+
+.title-nav {
+    font-family: var(--font-Bold), sans-serif;
+    font-size: var(--font-menu-burger);
+    font-weight: bold;
+}
+
+.service_nav {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.service_nav div {
+    font-family: var(--font-regular), sans-serif;
+    font-size: var(--font-menu-burger);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.masque-sex {
+    display: none;
 }

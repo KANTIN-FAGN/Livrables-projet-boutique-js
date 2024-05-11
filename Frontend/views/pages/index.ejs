@@ -2,10 +2,26 @@
 <html lang="en">
 <head>
     <%- include('../partials/head'); %>
-    <title>Accueil</title>
+    <title>Riod</title>
 </head>
-<body>
-    <%-include('../partials/header'); %>
+<body id="body">
+    <%- include('../partials/header'); %>
+    <div class="select-mode">
+        <a href="/mode-homme">
+            <div class="mode-homme-link">
+                <p class="title-mode">MODE HOMME</p>
+                <img src="/public/images/mode-homme.jpg" alt="image mode homme">
+            </div>
+        </a>
+        <a href="/mode-femme">
+            <div class="mode-femme-link">
+                <p class="title-mode">MODE FEMME</p>
+                <img src="/public/images/mode-femme.jpg" alt="image mode homme">
+            </div>
+        </a>
+    </div>
+    <%- include('../partials/footer'); %>
+    <%- include('../partials/nav-burger'); %>
     <script src="/public/js/main.js"></script>
 </body>
 </html>
