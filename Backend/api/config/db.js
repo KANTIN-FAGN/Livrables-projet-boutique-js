@@ -14,8 +14,6 @@ const connectionConfig = {
     connnectionLimit: 10,
 }
 
-console.log(connectionConfig);
-
 // Create connection
 const connection = mysql.createConnection(connectionConfig);
 connection.connect((err) => {
