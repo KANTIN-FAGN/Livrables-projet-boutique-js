@@ -1,8 +1,10 @@
-const app = require("./api/app")
-const dotenv = require('dotenv');
-dotenv.config();
+//importation des modules
+const app = require("./api/app");
+require('dotenv').config();
 
+//Port et nom domaine de l'api
 const port = process.env.PORT || 4000;
 const host = process.env.HOST || 'localhost';
 
-app.listen(port, host, () => console.log(`Server lancé sur => http://localhost:${port}/`));
+//lancement de l'api
+app.listen(port, host, () => console.log(`Server listening on server ${process.env.BASE_URL}`));

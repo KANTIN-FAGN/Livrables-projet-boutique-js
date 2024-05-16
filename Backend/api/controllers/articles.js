@@ -1,147 +1,141 @@
 const Article = require('../models/article');
 const dotenv = require('dotenv');
 dotenv.config();
+const baseUrl = process.env.BASE_URL;
 
-exports.getArticle = async (req, res) => {
-    const link = process.env.BASE_URL;
-    const articleID = req.params.id;
+
+exports.getArticleById = async (req, res) => {
+    const articleById = req.article;
     try {
-        const article = await Article.getArticlebyID(articleID); 
-        if (!article) {
-            return res.status(404).json({
-                message: "Article not found"
-            });
-        }
-        
-        const images = await Article.getImagesForArticle(articleID);
-        const formattedImages = images.map(image => `${link}${image.URL}.jpg`);
-        article.images = formattedImages;
+        // Exécuter les trois requêtes en parallèle
+        const [images, colors, category] = await Promise.all([
+            Article.getImages(articleById.id_article),
+            Article.getColors(articleById.id_article),
+            Article.getCategory(articleById.id_article)
+        ]);
 
-        const sizes = await Article.getSizesForArticle(articleID);
-        const sizesWithQuantities = {};
-        sizes.forEach(size => {
-            sizesWithQuantities[size.size] = size.quantity;
-        });
-        article.sizes = sizesWithQuantities;
-
-        const colors = await Article.getColorsForArticle(articleID);
-        article.colors = colors;
-
-        const categories = await Article.getCategorysForArticle(articleID);
-        article.categorys = categories;
+        // Formater les URLs des images
+        articleById.img = images.map(image => `${baseUrl}/asset${image.img}.jpg`);
+        // Ajouter les couleurs à l'article
+        articleById.colors = colors.map(color => color.color);
+        // Ajouter la catégorie à l'article
+        articleById.category = category.length > 0 ? category[0].category : null;
 
         return res.status(200).json({
-            message: "Article found successfully",
-            article
+            message: `Article with id ${req.params.id} was successfully retrieved`,
+            status: 200,
+            article: articleById
         });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: "Internal server error"
+    } catch (err) {
+        return res.status(500).json({
+            message: `Error retrieving article: ${err.message}`,
+            status: 500
         });
     }
-}
+};
 exports.getArticleHomme = async (req, res) => {
     try {
-        const sex = true; // true pour homme
-        const articles = await Article.getArticlesBySex(sex);
+        const articles = await Article.getArticleHomme(req.query);
 
         if (!articles || articles.length === 0) {
             return res.status(404).json({
-                message: "No articles found for men"
+                message: `Articles not found`,
+                status: 404
+            });
+        } else {
+            const articlesWithDetails = await Promise.all(articles.map(async article => {
+                const [images, colors, category, materials] = await Promise.all([
+                    Article.getImages(article.id_article),
+                    Article.getColors(article.id_article),
+                    Article.getCategory(article.id_article),
+                    Article.getMaterial(article.id_article)
+                ]);
+
+                article.images = {
+                    img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
+                    img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
+                };
+                article.materials = materials.map(material => material.material);
+                article.colors = colors.map(color => color.color);
+                article.category = category.length > 0 ? category[0].category : null;
+                return article;
+            }));
+
+            const offset = parseInt(req.query.offset) || 0;
+            const limit = parseInt(req.query.limit) || 6;
+            const href = baseUrl + "/mode-homme/";
+
+            return res.status(200).json({
+                message: `Articles successfully found`,
+                status: 200,
+                articles: {
+                    href,
+                    offset,
+                    limit,
+                    next: `${href}?limit=${limit}&offset=${offset + limit}`,
+                    previous: `${href}?limit=${limit}&offset=${Math.max(0, offset - limit)}`,
+                    total: articlesWithDetails.length,
+                    items: articlesWithDetails
+                }
             });
         }
-
-        const link = process.env.BASE_URL;
-
-        for (let i = 0; i < articles.length; i++) {
-            const article = articles[i];
-
-            const articleID = article.id;
-
-            // Récupération des images de l'article
-            const images = await Article.getImagesForArticle(articleID);
-            const formattedImages = images.map(image => `${link}${image.URL}.jpg`);
-
-            // Récupération uniquement des deux premières images
-            const firstTwoImages = formattedImages.slice(0, 2);
-
-            article.images = firstTwoImages;
-
-            // Récupération des tailles de l'article
-            const sizes = await Article.getSizesForArticle(articleID);
-            const sizesWithQuantities = {};
-            sizes.forEach(size => {
-                sizesWithQuantities[size.size] = size.quantity;
-            });
-            article.sizes = sizesWithQuantities;
-
-            // Récupération des couleurs
-            article.colors = await Article.getColorsForArticle(articleID);
-
-            // Récupération des catégaries
-            article.categorys = await Article.getCategorysForArticle(articleID);
-        }
-
-        return res.status(200).json({
-            message: "Articles found successfully",
-            articles
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: "Internal server error"
+    } catch (err) {
+        return res.status(500).json({
+            message: `Error retrieving articles: ${err.message}`,
+            status: 500
         });
     }
-}
+};
 exports.getArticleFemme = async (req, res) => {
     try {
-        const sex = false; // false pour femme
-        const articles = await Article.getArticlesBySex(sex);
+        const articles = await Article.getArticleFemme(req.query);
 
         if (!articles || articles.length === 0) {
             return res.status(404).json({
-                message: "No articles found for men"
+                message: `Articles not found`,
+                status: 404
+            });
+        } else {
+            const articlesWithDetails = await Promise.all(articles.map(async article => {
+                const [images, colors, category, materials] = await Promise.all([
+                    Article.getImages(article.id_article),
+                    Article.getColors(article.id_article),
+                    Article.getCategory(article.id_article),
+                    Article.getMaterial(article.id_article)
+                ]);
+
+                article.images = {
+                    img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
+                    img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
+                };
+                article.materials = materials.map(material => material.material);
+                article.colors = colors.map(color => color.color);
+                article.category = category.length > 0 ? category[0].category : null;
+                return article;
+            }));
+
+            const offset = parseInt(req.query.offset) || 0;
+            const limit = parseInt(req.query.limit) || 6;
+            const href = baseUrl + "/mode-femme/";
+
+            return res.status(200).json({
+                message: `Articles successfully found`,
+                status: 200,
+                articles: {
+                    href,
+                    offset,
+                    limit,
+                    next: `${href}?limit=${limit}&offset=${offset + limit}`,
+                    previous: `${href}?limit=${limit}&offset=${Math.max(0, offset - limit)}`,
+                    total: articlesWithDetails.length,
+                    items: articlesWithDetails
+                }
             });
         }
-
-        const link = process.env.BASE_URL;
-
-        // Récupération des images et des tailles pour chaque article
-        for (let i = 0; i < articles.length; i++) {
-            const article = articles[i];
-
-            const articleID = article.id;
-
-            // Récupération des images de l'article
-            const images = await Article.getImagesForArticle(articleID);
-            const formattedImages = images.map(image => `${link}${image.URL}.jpg`);
-
-            // Récupération uniquement des deux premières images
-            const firstTwoImages = formattedImages.slice(0, 2);
-
-            article.images = firstTwoImages;
-
-            // Récupération des tailles de l'article
-            const sizes = await Article.getSizesForArticle(articleID);
-            const sizesWithQuantities = {};
-            sizes.forEach(size => {
-                sizesWithQuantities[size.size] = size.quantity;
-            });
-            article.sizes = sizesWithQuantities;
-
-            article.colors = await Article.getColorsForArticle(articleID);
-            article.categorys = await Article.getCategorysForArticle(articleID);
-        }
-
-        return res.status(200).json({
-            message: "Articles found successfully",
-            articles
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: "Internal server error"
+    } catch (err) {
+        return res.status(500).json({
+            message: `Error retrieving articles: ${err.message}`,
+            status: 500
         });
     }
-}
+};
