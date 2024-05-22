@@ -2,22 +2,27 @@
     font-family: 'Gothic_Regular';
     src: '../font/fonts_global/Regular.otf' format("opentype");
 }
+
 @font-face {
     font-family: 'Gothic_Bold';
     src: '../font/fonts_global/Bold.otf' format("opentype");
 }
+
 @font-face {
     font-family: 'Font-logo_Bold';
     src: '../font/fonts_Logo/EBGaramond-Bold.ttf' format("truetype");
 }
+
 @font-face {
     font-family: 'Font-logo_Regular';
     src: '../font/fonts_Logo/EBGaramond-Regular.ttf' format("truetype");
 }
 
 * {
-    padding : 0;
+    padding: 0;
     margin: 0;
+    text-decoration: none;
+    list-style: none;
 }
 
 body {
@@ -25,6 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 :root {
@@ -33,15 +39,15 @@ body {
     --font-Logo-Bold: 'Font-logo_Bold';
     --font-Logo-Regular: 'Font-logo_Regular';
     --noir-text: #000;
-    --gris-placehorder : #747474;
-    --gris-roid : #909090;
-    --gris-background : #F2F2F4;
-    --gris-footer-link : #BDBDBD;
-    --gris-Non_Utilisable : #E5E5E5;
-    --gris-descriptionProduit : #7C7C7C;
-    --font-size-placehorder : 14px;
-    --font-size-logo : 36px;
-    --font-size-titre : 20px;
-    --font-size-description : 12px;
+    --gris-placehorder: #747474;
+    --gris-roid: #909090;
+    --gris-background: #F2F2F4;
+    --gris-footer-link: #BDBDBD;
+    --gris-Non_Utilisable: #E5E5E5;
+    --gris-descriptionProduit: #7C7C7C;
+    --font-size-placehorder: 14px;
+    --font-size-logo: 36px;
+    --font-size-titre: 20px;
+    --font-size-description: 12px;
     --font-menu-burger: 13px;
 }

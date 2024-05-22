@@ -3,45 +3,23 @@ footer {
     padding-bottom: 50px;
 }
 
- /* Enlever les puces */
-ul, ul ul {
-    list-style-type: none;
-    padding: 0;
+.option-service-nav {
+    padding-top: 15px;
+    gap: 20px;
+}
+.option-service-nav a {
+    color: var(--noir-text);
 }
 
-/* Styles de base des liens */
-ul li a {
-    display: flex; /* Utilisation de Flexbox pour aligner le texte et le SVG */
-    align-items: center;
-    padding: 10px;
-    text-decoration: none;
-    color: var(--gris-footer-link);
-}
-
-.toggleSubMenu {
-    color: black;
-}
-
-/* Styles de fond des sous-menus */
-ul ul {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-}
-
-/* Sous-menus visibles lorsque la classe active est appliquée */
-ul ul.active {
-    max-height: 500px; /* Hauteur maximale des sous-menus */
-}
-
-/* Styles pour l'élément SVG */
-.arrow-svg {
-    width: 12px;
-    margin-left: 5px; /* Marge entre le texte et le SVG */
-    transition: transform 0.3s ease-out;
-}
-
-/* Rotation du SVG lorsqu'il est cliqué */
-.rotate {
-    transform: rotate(180deg);
+@media screen and (min-width: 1024px) {
+    footer {
+        display: flex;
+        flex-direction: row;
+    }
+    .service-nav {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

@@ -1,40 +1,89 @@
-.mode-homme-link img,
-.mode-femme-link img {
-    width: 100%;
+.gender-selection {
+    z-index: 1;
 }
 
-.mode-homme-link,
-.mode-femme-link {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media screen and (max-width: 1024px) {
+    .gender-selection {
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #000;
+    }
+    #homme-img-selection {
+        background-image: url('/public/images/mode-homme.jpg');
+    }
+    #femme-img-selection {
+        background-image: url('/public/images/mode-femme.jpg');
+    }
+    #homme-img-selection,
+    #femme-img-selection {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .gender-mode {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gender-mode p {
+        color: #fff;
+        font-family: var(--font-regular), sans-serif;
+        font-size: 30px;
+        text-shadow: 2px 2px 4px rgb(0, 0, 0), 0 0 1.5em rgb(0, 0, 0), 0 0 0.3em rgb(0, 0, 0);
+    }
+
+    .img-genders {
+        width: 100%;
+        height: 50%;
+    }
 }
 
-.select-mode a,
-.select-mode a {
-    height: 50%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+@media screen and (min-width: 1024px) {
+    .gender-selection {
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+        flex-direction: row;
+        background-color: #000;
+    }
 
-.select-mode {
-    height: 667px;
-    display: flex;
-    flex-direction: column;
-}
+    #homme-img-selection {
+        background-image: url('/public/images/mode-homme.jpg');
+    }
+    #femme-img-selection {
+        background-image: url('/public/images/mode-femme.jpg');
+    }
+    #homme-img-selection,
+    #femme-img-selection {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-.title-mode {
-    position: absolute;
-    font-size: var(--font-size-titre);
-    color: #fff;
-    font-family: var(--font-regular), sans-serif;
-    font-weight: bold;
-}
+    .gender-mode {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.no-scroll {
-    overflow: hidden;
+    .gender-mode p {
+        color: #fff;
+        font-family: var(--font-regular), sans-serif;
+        font-size: 30px;
+        text-shadow: 2px 2px 4px rgb(0, 0, 0), 0 0 1.5em rgb(0, 0, 0), 0 0 0.3em rgb(0, 0, 0);
+    }
+
+    .img-genders {
+        width: 100%;
+    }
 }

@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
     <%- include('../components/head'); %>
-    <title>Riod</title>
+    <title>Roid</title>
 </head>
-<body id="body">
+<body>
     <%- include('../components/header'); %>
-    <div class="select-mode">
-        <a href="/mode-homme">
-            <div class="mode-homme-link">
-                <p class="title-mode">MODE HOMME</p>
-                <img src="/public/images/mode-homme.jpg" alt="image mode homme">
+    <section class="gender-selection">
+        <a class="img-genders" href="">
+            <div class="gender-mode" id="homme-img-selection">
+                <p>MODE HOMME</p>
             </div>
         </a>
-        <a href="/mode-femme">
-            <div class="mode-femme-link">
-                <p class="title-mode">MODE FEMME</p>
-                <img src="/public/images/mode-femme.jpg" alt="image mode homme">
+        <a class="img-genders" href="">
+            <div class="gender-mode" id="femme-img-selection">
+                <p>MODE FEMME</p>
             </div>
         </a>
-    </div>
+    </section>
     <%- include('../components/footer'); %>
-    <%- include('../components/nav-burger'); %>
-    <script src="/public/js/main.js"></script>
 </body>
+<script src="/public/js/menu-burger.js"></script>
 </html>
