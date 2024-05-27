@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../components/head'); %>
+  <title>Roid</title>
+</head>
+
+<body>
+  <%- include('../components/header'); %>
+  <section class="container">
+    <% lst.forEach(function (article) { %>
+      <div class="article">
+        <img class="img-article" src="<%= article.images.img_1 %>" alt="">
+        <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
+        <div class="name-price">
+          <p class="name"><%= article.name %></p>
+          <p class="price"><%= article.price %> €</p>
+        </div>
+        <div class="article-detail">
+          <p><%= article.detail %></p>
+        </div>
+      </div>
+      <% }); %>
+  </section>
+  <%- include('../components/footer'); %>
+</body>
+
+</html>
