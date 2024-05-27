@@ -8,6 +8,7 @@
     box-sizing: border-box;
     position: relative;
 }
+
 .article .img-article {
     width: 100%;
 }
@@ -16,6 +17,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+
 .name-price {
     display: flex;
     justify-content: space-between;
@@ -25,11 +27,12 @@
 .name {
     padding-left: 20px;
 }
+
 .price {
     padding-right: 20px;
 }
 
-.article .img-article-2{
+.article .img-article-2 {
     position: absolute;
     opacity: 0;
     width: 100%;
@@ -37,7 +40,8 @@
     left: 0;
     transition: all 0.5s;
 }
-.article .article-detail{
+
+.article .article-detail {
     position: absolute;
     opacity: 0;
     width: 100%;
@@ -54,17 +58,44 @@
 .article:hover .article-detail {
     opacity: 1;
 }
-.article:hover .img-article{
+
+.article:hover .img-article {
     opacity: 0;
     transition: all 0.5s;
 }
 
+.collection-global {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.collection-titre {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-regular), sans-serif;
+    padding-bottom: 15px;
+}
+
+.collection-texte p {
+    font-size: .8125rem;
+    line-height: 1.25rem;
+    font-family: var(--font-regular), sans-serif;
+    text-align: center;
+    padding-bottom: 50px;
+}
 
 @media screen and (max-width: 1024px) {
     .container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
+
     .gender-selection {
         width: 100vw;
         height: 90vh;
@@ -109,6 +140,9 @@
         height: 50%;
     }
 
+    .collection-texte {
+        width: 25rem;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -154,4 +188,130 @@
     .img-genders {
         width: 100%;
     }
+
+    .collection-texte {
+        width: 35%;
+    }
+}
+
+.filter-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-regular), sans-serif;
+    padding-bottom: 25px;
+}
+
+.breadcrumbs {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.breadcrumbs li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.breadcrumbs li a:hover {
+    text-decoration: underline;
+}
+
+.dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    max-height: 0; /* Hauteur maximale initiale à zéro pour le cacher */
+    width: 100%;
+    left: 0;
+    overflow-y: auto;
+    white-space: nowrap;
+    opacity: 0; /* Opacité initiale à zéro pour le cacher */
+    visibility: hidden; /* Cacher complètement l'élément */
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Ajouter une transition douce */
+}
+
+.dropdown:hover .dropdown-menu {
+    max-height: 300px; /* Hauteur maximale lorsque le menu est survolé */
+    opacity: 1; /* Afficher lorsque le menu est survolé */
+    visibility: visible; /* Afficher lorsque le menu est survolé */
+}
+
+.dropdown-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-menu li a {
+    color: #000;
+    text-decoration: none;
+}
+
+.dropdown-menu li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    padding-right: 20px;
+}
+
+#sort-options {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.selected-count {
+    color: rgb(133, 133, 133);
+    display: none;
+}
+
+#available-online {
+    margin-left: 5px;
+}
+
+.selected::before {
+    content: "\2713";
+    margin-right: 5px;
+}
+
+.selected {
+    text-decoration: underline;
+}
+.svg-arrow {
+    width: 20px;
+    transition: all 0.2s;
+}
+
+.dropdown:hover .svg-arrow {
+    transform: rotate(-180deg);
+    transition: all 0.2s;
+}
+
+.dropdown .titre-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar-sepp {
+    width: 1px;
+    height: 50%;
+    background: var(--gris-roid);
 }

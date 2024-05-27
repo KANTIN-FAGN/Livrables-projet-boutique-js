@@ -3,27 +3,44 @@
 
 <head>
   <%- include('../components/head'); %>
-  <title>Roid</title>
+    <title>Roid</title>
 </head>
 
 <body>
   <%- include('../components/header'); %>
-  <section class="container">
-    <% lst.forEach(function (article) { %>
-      <div class="article">
-        <img class="img-article" src="<%= article.images.img_1 %>" alt="">
-        <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
-        <div class="name-price">
-          <p class="name"><%= article.name %></p>
-          <p class="price"><%= article.price %> €</p>
-        </div>
-        <div class="article-detail">
-          <p><%= article.detail %></p>
-        </div>
+    <section class="collection-global">
+      <p class="collection-titre">COLLECTION ÉTÉ 2024</p>
+      <div class="collection-texte">
+        <p>Pensée tel un hommage pluriel au style Dior, au gré des époques et des Directeurs Artistiques de la Maison,
+          la
+          collection Dior Été 2024 convoque à la fois les silhouettes d’Yves Saint Laurent, de Gianfranco Ferré et de
+          Marc
+          Bohan, réinterprétées, métamorphosées, le tout infusé d’un sentiment de modernité, vif et ludique.</p>
       </div>
-      <% }); %>
-  </section>
-  <%- include('../components/footer'); %>
+    </section>
+    <%- include('../components/filtre-nav'); %>
+    <section class="container">
+      <% lst.forEach(function (article) { %>
+        <div class="article">
+          <img class="img-article" src="<%= article.images.img_1 %>" alt="">
+          <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
+          <div class="name-price">
+            <p class="name">
+              <%= article.name %>
+            </p>
+            <p class="price">
+              <%= article.price %> €
+            </p>
+          </div>
+          <div class="article-detail">
+            <p>
+              <%= article.detail %>
+            </p>
+          </div>
+        </div>
+        <% }); %>
+    </section>
+    <%- include('../components/footer'); %>
 </body>
 
 </html>
