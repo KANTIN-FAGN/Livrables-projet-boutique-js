@@ -10,8 +10,8 @@ exports.getArticleById = async (req, res) => {
         // Exécuter les trois requêtes en parallèle
         const [images, colors, category] = await Promise.all([
             Article.getImages(articleById.id_article),
-            Article.getColors(articleById.id_article),
-            Article.getCategory(articleById.id_article)
+            Article.getColorsById(articleById.id_article),
+            Article.getCategoryById(articleById.id_article)
         ]);
 
         // Formater les URLs des images
@@ -46,9 +46,9 @@ exports.getArticleHomme = async (req, res) => {
             const articlesWithDetails = await Promise.all(articles.map(async article => {
                 const [images, colors, category, materials] = await Promise.all([
                     Article.getImages(article.id_article),
-                    Article.getColors(article.id_article),
-                    Article.getCategory(article.id_article),
-                    Article.getMaterial(article.id_article)
+                    Article.getColorsById(article.id_article),
+                    Article.getCategoryById(article.id_article),
+                    Article.getMaterialById(article.id_article)
                 ]);
 
                 article.images = {
@@ -99,9 +99,9 @@ exports.getArticleFemme = async (req, res) => {
             const articlesWithDetails = await Promise.all(articles.map(async article => {
                 const [images, colors, category, materials] = await Promise.all([
                     Article.getImages(article.id_article),
-                    Article.getColors(article.id_article),
-                    Article.getCategory(article.id_article),
-                    Article.getMaterial(article.id_article)
+                    Article.getColorsById(article.id_article),
+                    Article.getCategoryById(article.id_article),
+                    Article.getMaterialById(article.id_article)
                 ]);
 
                 article.images = {
@@ -135,6 +135,73 @@ exports.getArticleFemme = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             message: `Error retrieving articles: ${err.message}`,
+            status: 500
+        });
+    }
+};
+
+exports.getColors = async (req, res) => {
+    try {
+        const colors = await Article.getColors(req.query);
+        if (!colors || colors.length === 0) {
+            return res.status(404).json({
+                message: `Colors not found`,
+                status: 404
+            });
+        } else {
+            return res.status(200).json({
+                message: `Colors successfully found`,
+                status: 200,
+                colors: colors
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({
+            message: `Error retrieving colors: ${err.message}`,
+            status: 500
+        });
+    }
+};
+exports.getMaterials = async (req, res) => {
+    try {
+        const materials = await Article.getMaterials(req.query);
+        if (!materials || materials.length === 0) {
+            return res.status(404).json({
+                message: `Materials not found`,
+                status: 404
+            });
+        } else {
+            return res.status(200).json({
+                message: `Materials successfully found`,
+                status: 200,
+                materials: materials
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({
+            message: `Error retrieving materials: ${err.message}`,
+            status: 500
+        });
+    }
+};
+exports.getCategories = async (req, res) => {
+    try {
+        const categories = await Article.getCategories(req.query);
+        if (!categories || categories.length === 0) {
+            return res.status(404).json({
+                message: `Categories not found`,
+                status: 404
+            });
+        } else {
+            return res.status(200).json({
+                message: `Categories successfully found`,
+                status: 200,
+                categories: categories
+            });
+        }
+    } catch (err) {
+        return res.status(500).json({
+            message: `Error retrieving categories: ${err.message}`,
             status: 500
         });
     }

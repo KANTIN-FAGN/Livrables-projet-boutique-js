@@ -9,34 +9,13 @@
                         stroke-linejoin="round" />
                 </svg> <span class="selected-count" id="cat-count"></span></a>
             <ul class="dropdown-menu" id="cat-menu">
-                <li><a href="#">Bagues</a></li>
-                <li><a href="#">Bandoulières</a></li>
-                <li><a href="#">Blousons</a></li>
-                <li><a href="#">Boucles d'oreilles</a></li>
-                <li><a href="#">Bracelets</a></li>
-                <li><a href="#">Broches</a></li>
-                <li><a href="#">Casquettes</a></li>
-                <li><a href="#">Ceintures</a></li>
-                <li><a href="#">Chemises</a></li>
-                <li><a href="#">Colliers</a></li>
-                <li><a href="#">Cravates</a></li>
-                <li><a href="#">Écharpes</a></li>
-                <li><a href="#">Jeans</a></li>
-                <li><a href="#">Lunettes</a></li>
-                <li><a href="#">Manteaux</a></li>
-                <li><a href="#">Mocassins</a></li>
-                <li><a href="#">Pantalons</a></li>
-                <li><a href="#">Pochettes</a></li>
-                <li><a href="#">Polos</a></li>
-                <li><a href="#">Portefeuilles</a></li>
-                <li><a href="#">Pulls</a></li>
-                <li><a href="#">Sacs à dos</a></li>
-                <li><a href="#">Sacs bandoulière</a></li>
-                <li><a href="#">Sacs de voyage</a></li>
-                <li><a href="#">Sneakers</a></li>
-                <li><a href="#">Sweatshirts</a></li>
-                <li><a href="#">T-shirts</a></li>
-                <li><a href="#">Vestes</a></li>
+                <% if (Array.isArray(lst_categorys)) { %>
+                    <% lst_categorys.forEach(categoryObj => { %>
+                        <li><%= categoryObj.category %></li>
+                    <% }); %>
+                <% } else { %>
+                    <p>No categories available</p>
+                <% } %>
             </ul>
         </li>
         <li class="dropdown">
@@ -47,10 +26,13 @@
                 </svg>
                 <span class="selected-count" id="mat-count"></span></a>
             <ul class="dropdown-menu" id="mat-menu">
-                <li><a href="#">Coton</a></li>
-                <li><a href="#">Laine</a></li>
-                <li><a href="#">Soie</a></li>
-                <li><a href="#">Lin</a></li>
+                <% if (Array.isArray(lst_materials)) { %>
+                    <% lst_materials.forEach(materialObj => { %>
+                        <li><%= materialObj.material %></li>
+                    <% }); %>
+                <% } else { %>
+                    <p>No materials available</p>
+                <% } %>
             </ul>
         </li>
         <li class="dropdown">
@@ -61,10 +43,14 @@
                 </svg>
                 <span class="selected-count" id="col-count"></span></a>
             <ul class="dropdown-menu" id="col-menu">
-                <li><a href="#">Rouge</a></li>
-                <li><a href="#">Bleu</a></li>
-                <li><a href="#">Vert</a></li>
-                <li><a href="#">Jaune</a></li>
+                <% if (Array.isArray(lst_color)) { %>
+                    <% lst_color.forEach(colorObj => { %>
+                        <li><%= colorObj.color %></li>
+                    <% }); %>
+                <% } else { %>
+                    <p>No colors available</p>
+                <% } %>
+                </section>
             </ul>
         </li>
         <li>
@@ -77,6 +63,7 @@
         <div class="sort">
             <label for="sort-options">Trier par</label>
             <select id="sort-options">
+                <option value="price-new">Nouvautés</option>
                 <option value="price-low-high">Prix croissant</option>
                 <option value="price-high-low">Prix décroissant</option>
             </select>

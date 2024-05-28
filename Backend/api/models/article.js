@@ -99,22 +99,40 @@ class Article {
             connection.query(sql, [id], (err, result) => err ? reject(err) : resolve(result));
         })
     }
-    static getColors(id) {
+    static getColorsById(id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT color.color FROM have_colors LEFT JOIN color ON have_colors.id_color = color.id_color WHERE have_colors.id_article = ?;`;
             connection.query(sql, [id], (err, result) => err ? reject(err) : resolve(result));
         });
     }
-    static getCategory(id) {
+    static getCategoryById(id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT category.category FROM article LEFT JOIN category ON article.id_category = category.id_category WHERE article.id_article = ?;`;
             connection.query(sql, [id], (err, result) => err ? reject(err) : resolve(result));
         });
     }
-    static getMaterial(id) {
+    static getMaterialById(id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT material.material FROM have_materials LEFT JOIN material ON have_materials.id_material = material.id_material WHERE have_materials.id_article = ?;`;
             connection.query(sql, [id], (err, result) => err ? reject(err) : resolve(result));
+        });
+    }
+    static getColors() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT DISTINCT * FROM color;`;
+            connection.query(sql, (err, result) => err ? reject(err) : resolve(result));
+        });
+    }
+    static getCategories() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT DISTINCT * FROM category;`;
+            connection.query(sql, (err, result) => err ? reject(err) : resolve(result));
+        });
+    }
+    static getMaterials() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT DISTINCT * FROM material;`;
+            connection.query(sql, (err, result) => err ? reject(err) : resolve(result));
         });
     }
 }

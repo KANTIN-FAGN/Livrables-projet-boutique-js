@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const resetFilters = document.getElementById("reset-filters");
-    const resetFiltersBar = document.getElementById("reset-filters-bar"); // Ajout de cette ligne
+    const resetFiltersBar = document.getElementById("reset-filters-bar");
     const dropdownMenus = {
         cat: document.getElementById("cat-menu"),
         mat: document.getElementById("mat-menu"),
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         resetFilters.style.display = totalSelected > 0 ? 'inline' : 'none';
-        resetFiltersBar.style.display = totalSelected > 0 ? 'block' : 'none'; // Ajout de cette ligne
+        resetFiltersBar.style.display = totalSelected > 0 ? 'block' : 'none';
     };
 
     const handleItemClick = (e, menuId) => {

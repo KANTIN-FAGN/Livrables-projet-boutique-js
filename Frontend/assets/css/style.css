@@ -232,20 +232,20 @@
     list-style: none;
     padding: 10px;
     margin: 0;
-    max-height: 0; /* Hauteur maximale initiale à zéro pour le cacher */
+    max-height: 0;
     width: 100%;
     left: 0;
     overflow-y: auto;
     white-space: nowrap;
-    opacity: 0; /* Opacité initiale à zéro pour le cacher */
-    visibility: hidden; /* Cacher complètement l'élément */
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Ajouter une transition douce */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
 .dropdown:hover .dropdown-menu {
-    max-height: 300px; /* Hauteur maximale lorsque le menu est survolé */
-    opacity: 1; /* Afficher lorsque le menu est survolé */
-    visibility: visible; /* Afficher lorsque le menu est survolé */
+    max-height: 300px;
+    opacity: 1;
+    visibility: visible;
 }
 
 .dropdown-menu li {
