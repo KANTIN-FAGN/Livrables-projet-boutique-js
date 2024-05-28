@@ -56,6 +56,7 @@ header {
     height: 1px;
     background-color: var(--gris-footer-link);
 }
+
 .service-nav {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -64,16 +65,19 @@ header {
     flex-direction: column;
     justify-content: space-between;
 }
+
 .option-service-nav {
     height: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .service-nav .titre {
     font-family: var(--font-regular), sans-serif;
     font-weight: bold;
 }
+
 .option-service-nav a {
     font-family: var(--font-regular), sans-serif;
 }
@@ -208,12 +212,42 @@ header {
     .active-overlay {
         background-color: #00000086;
     }
+
     .overflow {
         overflow: hidden;
     }
+
     #list-homme li,
     #list-femme li {
         padding-left: 30px;
+    }
+
+    .icon-global {
+        position: absolute;
+        display: flex;
+    }
+
+    .icon-global {
+        position: absolute;
+        top: 30px;
+        right: 68px;
+    }
+    .icon button{
+        border: none;
+        background: transparent;
+    }
+    .ui-input-container {
+        display: none;
+    }
+    .mode-select-laptop {
+        display: none;
+    }
+    .bar-header-sep {
+        position: absolute;
+        top: 80px;
+        width: 100%;
+        height: 1px;
+        background: var(--gris-Non_Utilisable);
     }
 }
 
@@ -280,6 +314,135 @@ header {
         justify-content: center;
         align-items: center;
     }
+
+    .mode-select-laptop {
+        position: absolute;
+        left: 25px;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        font-size: var(--font-size-titre);
+    }
+
+    .icon-global {
+        position: absolute;
+        right: 25px;
+        display: flex;
+        flex-direction: row;
+        width: 25%;
+        height: 99%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: var(--font-size-titre);
+    }
+
+    .icon {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .icon-global button::after {
+        content: "";
+        width: 0;
+        height: 1px;
+        background: #000;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transition: all 0.5s;
+    }
+
+    .icon-global button {
+        position: relative;
+        background: transparent;
+        border: none;
+        height: 100%;
+        border-bottom: 1px solid transparent;
+    }
+
+    .icon-global button:hover::after {
+        width: 100%;
+    }
+
+    .icon-global button:hover {
+        cursor: pointer;
+    }
+
+    .bar-header-sep {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--gris-Non_Utilisable);
+    }
+
+    .ui-input-container {
+        position: relative;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .ui-input {
+        width: 100%;
+        padding: 10px 10px 10px 40px;
+        font-size: var(--font-size-placehorder);
+        border: none;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        background-color: transparent;
+        transition: border-color 0.3s;
+    }
+
+    .ui-input-underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        transform: scaleX(0);
+        transition: transform 0.3s;
+    }
+
+    .ui-input:focus+.ui-input-underline {
+        transform: scaleX(1);
+    }
+
+    .ui-input-highlight {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        transition: width 0.3s;
+    }
+
+    .ui-input:focus~.ui-input-highlight {
+        width: 100%;
+    }
+
+    .ui-input-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        transition: color 0.3s;
+    }
+
+    .ui-input-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    #searchIcon {
+        display: none;
+    }
+
 }
 
 .menu-hamburger .ligne:nth-child(1) .ligne:nth-child(3) {
