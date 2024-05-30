@@ -1,6 +1,7 @@
 header {
     height: 10vh;
     width: 100vw;
+    background-color: #fff;
 }
 
 .navbar {
@@ -89,6 +90,7 @@ header {
 
     .navbar {
         padding: 0;
+        height: 80px;
     }
 
     .navbar .logo {
@@ -98,12 +100,12 @@ header {
     }
 
     .nav-links {
+        position: absolute;
         top: 0;
         right: 0;
-        position: absolute;
         background-color: rgb(255, 255, 255);
         backdrop-filter: blur(7px);
-        width: 85%;
+        width: 100%;
         height: 100vh;
         display: flex;
         flex-direction: column;
@@ -113,6 +115,8 @@ header {
 
     .nav-links.mobile-menu {
         margin-right: 0;
+        box-shadow: -50px 0px 33px 48px rgba(0,0,0,0.5);
+        z-index: 1000; /* Valeur de z-index plus élevée */
     }
 
     .nav-links ul {
@@ -158,7 +162,7 @@ header {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        margin-top: 100px;
+        margin-top: 70px;
     }
 
     .gender {
@@ -204,15 +208,6 @@ header {
         color: var(--gris-footer-link);
     }
 
-    .overlay {
-        width: 100vw;
-        height: 100vh;
-    }
-
-    .active-overlay {
-        background-color: #00000086;
-    }
-
     .overflow {
         overflow: hidden;
     }
@@ -243,11 +238,7 @@ header {
         display: none;
     }
     .bar-header-sep {
-        position: absolute;
-        top: 80px;
-        width: 100%;
-        height: 1px;
-        background: var(--gris-Non_Utilisable);
+        display: none;
     }
 }
 
@@ -471,4 +462,8 @@ header {
     transition:
         top 0.4s 0.4s ease-in-out,
         transform 0.4s ease-in-out;
+}
+
+.menu-hamburger.active {
+    z-index: 2000;
 }

@@ -50,3 +50,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     updateSelectedCount();
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const filterButton = document.getElementById("filter-button");
+    const filtersContainer = document.getElementById("filters-container");
+    const filterCloseButton = document.getElementById("close-nav-filtre");
+
+    filterButton.addEventListener("click", function() {
+        filtersContainer.classList.add("active");
+    });
+    filterCloseButton.addEventListener("click", function() {
+        filtersContainer.classList.remove("active");
+    });
+});

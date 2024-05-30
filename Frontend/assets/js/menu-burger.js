@@ -1,13 +1,17 @@
 const menuHamburger = document.querySelector(".menu-hamburger");
 const navLinks = document.querySelector(".nav-links");
-const Overlay = document.querySelector(".overlay");
-const html = document.querySelector("html")
+const closeHeaderSlider = document.getElementById("close-nav-header");
+const html = document.querySelector("html");
 
 menuHamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('mobile-menu');
-  menuHamburger.classList.toggle('active');
-  Overlay.classList.toggle('active-overlay');
-  html.classList.toggle('overflow')
+  navLinks.classList.add('mobile-menu');
+  menuHamburger.classList.add('active');
+  html.classList.add('overflow')
+});
+closeHeaderSlider.addEventListener('click', () => {
+  navLinks.classList.remove('mobile-menu');
+  menuHamburger.classList.remove('active');
+  html.classList.remove('overflow')
 });
 
 // fonction changement de sexe menu burger

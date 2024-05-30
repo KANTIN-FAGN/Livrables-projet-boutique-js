@@ -1,64 +1,93 @@
 <nav class="filter-nav">
-    <ul class="breadcrumbs">
-        <li><a href="#">Collection Été 2024</a></li>
-        <div class="nav-bar-sepp"></div>
-        <li class="dropdown">
-            <a href="#" class="titre-nav">Catégorie <svg class="svg-arrow" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg> <span class="selected-count" id="cat-count"></span></a>
-            <ul class="dropdown-menu" id="cat-menu">
-                <% if (Array.isArray(lst_categorys)) { %>
-                    <% lst_categorys.forEach(categoryObj => { %>
-                        <li><%= categoryObj.category %></li>
-                    <% }); %>
-                <% } else { %>
-                    <p>No categories available</p>
-                <% } %>
+    <section class="section-global-nav">
+        <ul class="breadcrumbs">
+            <li class="collection-filtre"><a href="#">Collection Été 2024</a></li>
+            <div class="nav-bar-sepp"></div>
+        </ul>
+
+        <!-- Button for mobile filters -->
+        <button id="filter-button" class="filter-button">Filtrer</button>
+
+        <!-- Container for the filters -->
+        <div id="filters-container" class="filters-container">
+            <div class="close-nav-filtres">
+                <div class="close-filtres">
+                    <p class="titre-filtre">FILTRER</p>
+                    <p id="close-nav-filtre">&#10005;</p>
+                </div>
+                <div class="bar-nav"></div>
+            </div>
+            <ul class="filters">
+                <li class="dropdown">
+                    <a href="#" class="titre-nav">Catégorie
+                        <svg class="svg-arrow" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="selected-count" id="cat-count"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="cat-menu">
+                        <% if (Array.isArray(lst_categorys)) { %>
+                            <% lst_categorys.forEach(categoryObj=> { %>
+                                <li>
+                                    <%= categoryObj.category %>
+                                </li>
+                                <% }); %>
+                                    <% } else { %>
+                                        <p>No categories available</p>
+                                        <% } %>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="titre-nav">Matière
+                        <svg class="svg-arrow" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="selected-count" id="mat-count"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="mat-menu">
+                        <% if (Array.isArray(lst_materials)) { %>
+                            <% lst_materials.forEach(materialObj=> { %>
+                                <li>
+                                    <%= materialObj.material %>
+                                </li>
+                                <% }); %>
+                                    <% } else { %>
+                                        <p>No materials available</p>
+                                        <% } %>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="titre-nav">Couleur
+                        <svg class="svg-arrow" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <span class="selected-count" id="col-count"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="col-menu">
+                        <% if (Array.isArray(lst_color)) { %>
+                            <% lst_color.forEach(colorObj=> { %>
+                                <li>
+                                    <%= colorObj.color %>
+                                </li>
+                                <% }); %>
+                                    <% } else { %>
+                                        <p>No colors available</p>
+                                        <% } %>
+                    </ul>
+                </li>
+                <li><a href="#" id="reset-filters">| Effacer tous les filtres</a></li>
             </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="titre-nav">Matière <svg class="svg-arrow" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-                <span class="selected-count" id="mat-count"></span></a>
-            <ul class="dropdown-menu" id="mat-menu">
-                <% if (Array.isArray(lst_materials)) { %>
-                    <% lst_materials.forEach(materialObj => { %>
-                        <li><%= materialObj.material %></li>
-                    <% }); %>
-                <% } else { %>
-                    <p>No materials available</p>
-                <% } %>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="titre-nav" >Couleur <svg class="svg-arrow" width="100%" height="100%" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                </svg>
-                <span class="selected-count" id="col-count"></span></a>
-            <ul class="dropdown-menu" id="col-menu">
-                <% if (Array.isArray(lst_color)) { %>
-                    <% lst_color.forEach(colorObj => { %>
-                        <li><%= colorObj.color %></li>
-                    <% }); %>
-                <% } else { %>
-                    <p>No colors available</p>
-                <% } %>
-                </section>
-            </ul>
-        </li>
-        <li>
-            <label><input type="checkbox" id="available-online"> Disponible en ligne</label>
-        </li>
-        <div id="reset-filters-bar" class="nav-bar-sepp"></div>
-        <li><a href="#" id="reset-filters">Effacer tous les filtres</a></li>
-    </ul>
+        </div>
+    </section>
+
     <div class="results">
         <div class="sort">
             <label for="sort-options">Trier par</label>

@@ -8,38 +8,41 @@
 
 <body>
   <%- include('../components/header'); %>
-    <section class="collection-global">
-      <p class="collection-titre">COLLECTION ÉTÉ 2024</p>
-      <div class="collection-texte">
-        <p>Pensée tel un hommage pluriel au style Dior, au gré des époques et des Directeurs Artistiques de la Maison,
-          la
-          collection Dior Été 2024 convoque à la fois les silhouettes d’Yves Saint Laurent, de Gianfranco Ferré et de
-          Marc
-          Bohan, réinterprétées, métamorphosées, le tout infusé d’un sentiment de modernité, vif et ludique.</p>
-      </div>
-    </section>
-    <%- include('../components/filtre-nav'); %>
-    <section class="container">
-      <% lst_article.forEach(function (article) { %>
-        <div class="article">
-          <img class="img-article" src="<%= article.images.img_1 %>" alt="">
-          <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
-          <div class="name-price">
-            <p class="name">
-              <%= article.name %>
-            </p>
-            <p class="price">
-              <%= article.price %> €
-            </p>
-          </div>
-          <div class="article-detail">
-            <p>
-              <%= article.detail %>
-            </p>
-          </div>
+    <div class="main">
+      <section class="collection-global">
+        <p class="collection-titre">COLLECTION ÉTÉ 2024</p>
+        <div class="collection-texte">
+          <p>Pensée tel un hommage pluriel au style Dior, au gré des époques et des Directeurs Artistiques de la Maison,
+            la
+            collection Dior Été 2024 convoque à la fois les silhouettes d’Yves Saint Laurent, de Gianfranco Ferré et de
+            Marc
+            Bohan, réinterprétées, métamorphosées, le tout infusé d’un sentiment de modernité, vif et ludique.</p>
         </div>
-        <% }); %>
-    </section>
+      </section>
+      <%- include('../components/filtre-nav'); %>
+        <section class="container">
+          <% lst_article.forEach(function (article) { %>
+            <div class="article">
+              <img class="img-article" src="<%= article.images.img_1 %>" alt="">
+              <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
+              <div class="name-price">
+                <p class="name">
+                  <%= article.name %>
+                </p>
+                <p class="price">
+                  <%= article.price %> €
+                </p>
+              </div>
+              <div class="article-detail">
+                <p>
+                  <%= article.detail %>
+                </p>
+              </div>
+            </div>
+            <% }); %>
+        </section>
+    </div>
+    <%- include('../components/nav-bar-slider'); %>
     <%- include('../components/footer'); %>
 </body>
 
