@@ -110,6 +110,7 @@ header {
         display: flex;
         flex-direction: column;
         transition: all 0.7s ease;
+        overflow: hidden;
     }
 
     .nav-links.mobile-menu {
@@ -161,7 +162,6 @@ header {
         width: 100%;
         display: flex;
         justify-content: space-between;
-        margin-top: 70px;
     }
 
     .gender {

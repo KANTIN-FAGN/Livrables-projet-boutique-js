@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('../components/head'); %>
-    <title>Roid</title>
+        <title>Roid</title>
 </head>
+
 <body>
     <%- include('../components/header'); %>
-    <section class="gender-selection">
-        <a class="img-genders" href="/Roid/mode-homme">
-            <div class="gender-mode" id="homme-img-selection">
-                <p>MODE HOMME</p>
-            </div>
-        </a>
-        <a class="img-genders" href="/Roid/mode-femme">
-            <div class="gender-mode" id="femme-img-selection">
-                <p>MODE FEMME</p>
-            </div>
-        </a>
-    </section>
-    <%- include('../components/nav-bar-slider'); %>
+    <div class="main-ctn">
+        <div class="main">
+            <section class="gender-selection">
+                <a class="img-genders" href="/Roid/mode-homme">
+                    <div class="gender-mode" id="homme-img-selection">
+                        <p>MODE HOMME</p>
+                    </div>
+                </a>
+                <a class="img-genders" href="/Roid/mode-femme">
+                    <div class="gender-mode" id="femme-img-selection">
+                        <p>MODE FEMME</p>
+                    </div>
+                </a>
+            </section>
+        </div>
+        <%- include('../components/nav-bar-slider'); %>
+    </div>
     <%- include('../components/footer'); %>
 </body>
+
 </html>
