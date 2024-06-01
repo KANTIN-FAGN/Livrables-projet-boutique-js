@@ -3,11 +3,12 @@
 
 <head>
   <%- include('../components/head'); %>
-    <title>Roid</title>
+  <title>Roid</title>
 </head>
 
 <body>
   <%- include('../components/header'); %>
+  <div class="main-ctn">
     <div class="main">
       <section class="collection-global">
         <p class="collection-titre">COLLECTION ÉTÉ 2024</p>
@@ -20,8 +21,9 @@
         </div>
       </section>
       <%- include('../components/filtre-nav'); %>
-        <section class="container">
-          <% lst_article.forEach(function (article) { %>
+      <section class="container">
+        <% lst_article.forEach(function (article) { %>
+          <a href="/Roid/article/<%= article.id_article %>">
             <div class="article">
               <img class="img-article" src="<%= article.images.img_1 %>" alt="">
               <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
@@ -39,11 +41,14 @@
                 </p>
               </div>
             </div>
-            <% }); %>
-        </section>
+          </a>
+        <% }); %>
+      </section>
     </div>
     <%- include('../components/nav-bar-slider'); %>
-    <%- include('../components/footer'); %>
+  </div>
+
+  <%- include('../components/footer'); %>
 </body>
 
 </html>

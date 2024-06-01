@@ -2,6 +2,12 @@
     z-index: 1;
 }
 
+.main-ctn{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
 .main {
     width: 100%;
 }
