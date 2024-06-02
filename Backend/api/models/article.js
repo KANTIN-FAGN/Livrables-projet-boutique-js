@@ -117,6 +117,17 @@ class Article {
             connection.query(sql, [id], (err, result) => err ? reject(err) : resolve(result));
         });
     }
+    static getSizesById(id) {
+        return new Promise((resolve, reject) => {
+            const sql = `
+                SELECT size.size, have_sizes.stock 
+                FROM have_sizes 
+                LEFT JOIN size ON have_sizes.id_size = size.id_size 
+                WHERE have_sizes.id_article = ?;
+            `;
+            connection.query(sql, [id], (err, result) => err ? reject(err) : resolve(result));
+        });
+    }
     static getColors() {
         return new Promise((resolve, reject) => {
             const sql = `SELECT DISTINCT * FROM color;`;

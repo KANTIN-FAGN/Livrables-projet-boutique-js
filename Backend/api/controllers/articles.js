@@ -7,11 +7,12 @@ const baseUrl = process.env.BASE_URL;
 exports.getArticleById = async (req, res) => {
     const articleById = req.article;
     try {
-        // Exécuter les trois requêtes en parallèle
-        const [images, colors, category] = await Promise.all([
+        // Exécuter les quatre requêtes en parallèle
+        const [images, colors, category, sizes] = await Promise.all([
             Article.getImages(articleById.id_article),
             Article.getColorsById(articleById.id_article),
-            Article.getCategoryById(articleById.id_article)
+            Article.getCategoryById(articleById.id_article),
+            Article.getSizesById(articleById.id_article)
         ]);
 
         // Formater les URLs des images
@@ -20,6 +21,12 @@ exports.getArticleById = async (req, res) => {
         articleById.colors = colors.map(color => color.color);
         // Ajouter la catégorie à l'article
         articleById.category = category.length > 0 ? category[0].category : null;
+        // Ajouter les tailles à l'article
+        articleById.sizes = sizes.map(size => ({ size: size.size, stock: size.stock }));
+
+        // Calculer le stock total
+        const totalStock = sizes.reduce((total, size) => total + size.stock, 0);
+        articleById.totalStock = totalStock;
 
         return res.status(200).json({
             message: `Article with id ${req.params.id} was successfully retrieved`,
@@ -33,6 +40,7 @@ exports.getArticleById = async (req, res) => {
         });
     }
 };
+
 exports.getArticleHomme = async (req, res) => {
     try {
         const articles = await Article.getArticleHomme(req.query);
