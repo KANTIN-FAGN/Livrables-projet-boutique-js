@@ -67,7 +67,8 @@ exports.getArticleById = (req, res) => {
         .then((article) => {
             console.log(article);
             res.render("../views/pages/single-article", {
-                article: article,
+                article: article.article,
+                articlesWithDifferentColors: article.articlesWithDifferentColors 
             });
         })
         .catch((err) => {

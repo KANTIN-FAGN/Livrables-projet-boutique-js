@@ -146,6 +146,27 @@ class Article {
             connection.query(sql, (err, result) => err ? reject(err) : resolve(result));
         });
     }
+    static async getArticlesByNameWithDifferentColors(name, excludeArticleId) {
+        const query = `
+            SELECT article.id_article, article.name, color.color
+            FROM article
+            JOIN have_colors ON article.id_article = have_colors.id_article
+            JOIN color ON have_colors.id_color = color.id_color
+            WHERE article.name = ? AND article.id_article != ?;
+        `;
+
+        const [rows] = await connection.promise().query(query, [name, excludeArticleId]);
+        return rows;
+    }
+
+    static async getFirstImageByArticleId(articleId) {
+        const query = `
+            SELECT img FROM image WHERE id_article = ? LIMIT 1;
+        `;
+
+        const [rows] = await connection.promise().query(query, [articleId]);
+        return rows.length > 0 ? rows[0].img : null;
+    }
 }
 
 module.exports = Article;

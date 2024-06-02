@@ -90,29 +90,30 @@ function toggleTabSlider(index, contentId) {
 $(".text-wrapper").each(function() {
     var $wrapper = $(this);
     var $paragraph = $wrapper.find("p");
-    var text = $paragraph.text();
+    var text = $paragraph.text().trim();
     var words = text.split(" ");
     var visibleText = words.slice(0, 50).join(" ");
-    var hiddenText = words.slice(50).join(" ");
-    var $ul = $wrapper.find("ul");
-    var ulContent = $ul.length > 0 ? "<ul>" + $ul.html() + "</ul>" : "";
 
-    $paragraph.html(visibleText + '<span class="dots">...</span> <span class="full-text">' + hiddenText + '</span>');
-    $wrapper.append(ulContent);
+    // Vérifier si le texte a plus de 50 mots
+    if (words.length > 50) {
+        var hiddenText = words.slice(50).join(" ");
+        // Mettre à jour le contenu de la balise <p> avec le texte visible et caché
+        $paragraph.html(visibleText + '<span class="dots">...</span> <span class="full-text" style="display:none;">' + hiddenText + '</span>');
+    }
 });
-
-$('.full-text').hide();
 
 $('.readmore-btn').click(function(event) {
     event.preventDefault();
-    var dots = $(this).prev().find('.dots');
-    dots.toggle();
     var fullText = $(this).prev().find('.full-text');
     fullText.slideToggle('100');
     $(this).text(function(i, text) {
         return text === 'Voir plus' ? 'Voir moins' : 'Voir plus';
     });
+    // Supprimer les points de suspension uniquement lorsque "Voir moins" est cliqué
+    var dots = $wrapper.find('.dots');
+    dots.toggleClass('hidden');
 });
+
 
 // Swipper
 var swiperThumbs = new Swiper(".mySwiper", {
