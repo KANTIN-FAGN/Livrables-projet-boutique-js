@@ -158,7 +158,6 @@ class Article {
         const [rows] = await connection.promise().query(query, [name, excludeArticleId]);
         return rows;
     }
-
     static async getFirstImageByArticleId(articleId) {
         const query = `
             SELECT img FROM image WHERE id_article = ? LIMIT 1;

@@ -1,12 +1,18 @@
 require("dotenv").config()
-const api_key = process.env.API_KEY;
+const jwt = require('jsonwebtoken')
+const jwtkey = process.env.JWT_KEY;
 
 function validateToken(req, res, next) {
     const token = req.get('Authorization');
 
     if (!token) return res.status(401).send("Unauthorized")
-    else if (token !== api_key) return res.status(403).send("Forbidden")
-    else return next();
+    jwt.verify(token, jwtkey, (err, user) => {
+        if (err) {
+            return res.status(403).send("Forbidden")
+        }
+        req.user = user;
+        next();
+    })
 }
 
 module.exports = validateToken;

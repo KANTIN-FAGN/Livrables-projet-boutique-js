@@ -65,7 +65,6 @@ exports.getArticleById = (req, res) => {
     const articleId = req.params.id;
     getArticle(articleId)
         .then((article) => {
-            console.log(article);
             res.render("../views/pages/single-article", {
                 article: article.article,
                 articlesWithDifferentColors: article.articlesWithDifferentColors 
