@@ -1,6 +1,108 @@
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 1024px) {
+    .container-carousel {
+        display: flex;
+        width: 100vw;
+        height: auto;
+        position: relative;
+    }
+
+    .caroussel-phone {
+        display: block;
+    }
+
+    .caroussel-desktop {
+        display: none;
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mySwiper2 {
+        position: relative;
+    }
+
+    .carousel-display {
+        width: 100vw;
+        height: auto;
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+
+    .close-button-carousel {
+        display: none !important;
+    }
+
+    .tel-none {
+        display: none !important;
+    }
+
+    .swiper-pagination {
+        position: absolute;
+        bottom: 0px !important;
+        /* Ajuster si nécessaire */
+        left: 50px !important;
+        /* Ajuster si nécessaire */
+        height: 25px;
+        z-index: 100000 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #000 !important;
+        /* Couleur des points de pagination */
+    }
+
+    .section-images-article {
+        display: none;
+    }
+    .autre-coloris {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        column-gap: .125rem;
+        row-gap: .125rem;
+        margin: .25rem 0;
+    }
+    .global-coloris-article .different-color-article img {
+        width: 90px;
+        height: auto;
+        cursor: pointer;
+    }
+    .global-coloris-article p {
+        font-size: .6875rem;
+        line-height: 1.1875rem;
+        font-family: sans-serif;
+    }
+}
 
 @media screen and (min-width: 1024px) {
+    .caroussel-phone {
+        display: none;
+    }
 
     .close-button-carousel {
         position: absolute;
@@ -21,6 +123,7 @@
         display: flex;
         width: 90%;
         height: 90vh;
+        padding-top: 5vh;
     }
 
     .mySwiper2 {
@@ -70,11 +173,6 @@
         cursor: pointer;
     }
 
-    .swiper-button-next,
-    .swiper-button-prev {
-        color: black;
-    }
-
     /* New styles for the main image swiper */
     .mySwiper2 .swiper-slide {
         display: flex;
@@ -89,6 +187,16 @@
     }
 
     .none-carousel {
+        overflow: hidden;
+    }
+
+    body.no-scroll {
+        overflow: hidden;
+    }
+
+    header.none-display,
+    footer.none-display,
+    section.none-display {
         display: none;
     }
 
@@ -97,7 +205,7 @@
     }
 
     .carousel-display {
-        display: block;
+        display: block !important;
         position: absolute;
         top: 0;
         right: 0;
@@ -485,4 +593,4 @@
         row-gap: .125rem;
         margin: .25rem 0;
     }
-} 
+}

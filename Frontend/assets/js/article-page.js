@@ -48,15 +48,43 @@ document.addEventListener('DOMContentLoaded', function () {
 function displayCaroussel() {
     const caroussel = document.querySelector(".caroussel-desktop");
     const mainCtn = document.querySelector(".main-ctn");
-    mainCtn.classList.toggle("none-carousel")
-    caroussel.classList.toggle("carousel-display");
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const sections = document.querySelectorAll("section");
+
+    mainCtn.classList.add("none-carousel");
+    caroussel.classList.add("carousel-display");
+    document.body.classList.add("no-scroll"); // Prevent scrolling
+    
+    if (header) {
+        header.classList.add("none-display");
+    }
+    if (footer) {
+        footer.classList.add("none-display");
+    }
+    sections.forEach(section => section.classList.add("none-display"));
 }
+
 function closeCaroussel() {
     const caroussel = document.querySelector(".caroussel-desktop");
     const mainCtn = document.querySelector(".main-ctn");
-    mainCtn.classList.toggle("none-carousel")
-    caroussel.classList.toggle("carousel-display");
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const sections = document.querySelectorAll("section");
+    
+    mainCtn.classList.remove("none-carousel");
+    caroussel.classList.remove("carousel-display");
+    document.body.classList.remove("no-scroll"); // Allow scrolling
+    
+    if (header) {
+        header.classList.remove("none-display");
+    }
+    if (footer) {
+        footer.classList.remove("none-display");
+    }
+    sections.forEach(section => section.classList.remove("none-display"));
 }
+
 
 toggleTabSlider(0, 'description-tab-content');
 
@@ -87,7 +115,7 @@ function toggleTabSlider(index, contentId) {
     selectedTabContent.style.display = 'block'; // Afficher le contenu de l'onglet sélectionné
 }
 
-$(".text-wrapper").each(function() {
+$(".text-wrapper").each(function () {
     var $wrapper = $(this);
     var $paragraph = $wrapper.find("p");
     var text = $paragraph.text().trim();
@@ -102,11 +130,11 @@ $(".text-wrapper").each(function() {
     }
 });
 
-$('.readmore-btn').click(function(event) {
+$('.readmore-btn').click(function (event) {
     event.preventDefault();
     var fullText = $(this).prev().find('.full-text');
     fullText.slideToggle('100');
-    $(this).text(function(i, text) {
+    $(this).text(function (i, text) {
         return text === 'Voir plus' ? 'Voir moins' : 'Voir plus';
     });
     // Supprimer les points de suspension uniquement lorsque "Voir moins" est cliqué
@@ -122,15 +150,20 @@ var swiperThumbs = new Swiper(".mySwiper", {
     direction: 'vertical',
     freeMode: true,
     watchSlidesProgress: true,
-    loop: true
+    loop: true,
 });
 
+// Initialize the main swiper with pagination
 var swiperMain = new Swiper(".mySwiper2", {
     spaceBetween: 10,
     loop: true,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true,
     },
     thumbs: {
         swiper: swiperThumbs,
