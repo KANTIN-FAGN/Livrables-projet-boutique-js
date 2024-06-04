@@ -1,5 +1,8 @@
 const iconCloseHeaderSlider = document.getElementById('closeheaderIcon');
 
+const iconSearch = document.getElementById('searchIcon');
+const iconSilderSearch = document.getElementById('sectionSearch');
+
 const iconCompte = document.getElementById('accountIcon');
 const iconSilderCompte = document.getElementById('sectionCompte');
 
@@ -14,6 +17,7 @@ iconCompte.addEventListener('click', () => {
     iconCloseHeaderSlider.classList.add('active');
     iconSilderPanier.classList.remove('active');
     iconSilderFav.classList.remove('active');
+    iconSilderSearch.classList.remove('active');
     document.body.classList.add("no-scroll");
 });
 
@@ -22,6 +26,7 @@ iconPanier.addEventListener('click', () => {
     iconCloseHeaderSlider.classList.add('active');
     iconSilderCompte.classList.remove('active');
     iconSilderFav.classList.remove('active');
+    iconSilderSearch.classList.remove('active');
     document.body.classList.add("no-scroll");
 });
 
@@ -30,6 +35,7 @@ iconFav.addEventListener('click', () => {
     iconCloseHeaderSlider.classList.add('active');
     iconSilderCompte.classList.remove('active');
     iconSilderPanier.classList.remove('active');
+    iconSilderSearch.classList.remove('active');
     document.body.classList.add("no-scroll");
 });
 
@@ -38,7 +44,17 @@ iconCloseHeaderSlider.addEventListener('click', () => {
     iconSilderFav.classList.remove('active');
     iconSilderPanier.classList.remove('active');
     iconSilderCompte.classList.remove('active');
+    iconSilderSearch.classList.remove('active');
     document.body.classList.remove("no-scroll");
+});
+
+iconSearch.addEventListener('click', () => {
+    iconSilderSearch.classList.add('active');
+    iconCloseHeaderSlider.classList.add('active');
+    iconSilderPanier.classList.remove('active');
+    iconSilderCompte.classList.remove('active');
+    iconSilderFav.classList.remove('active');
+    document.body.classList.add("no-scroll");
 });
 
 const backToConnect = document.querySelector('.backToConnect');

@@ -324,7 +324,7 @@ header {
         right: 25px;
         display: flex;
         flex-direction: row;
-        width: 30%;
+        width: auto;
         height: 99%;
         display: flex;
         flex-direction: row;
@@ -434,13 +434,10 @@ header {
         height: 20px;
     }
 
-    #searchIcon {
-        display: none;
-    }
-
     .global-log-section,
     .global-panier-section,
-    .global-fav-section {
+    .global-fav-section,
+    .global-search-section {
         position: absolute;
         width: 100vw;
         height: 100vh;
@@ -455,7 +452,8 @@ header {
 
     .log-section,
     .panier-section,
-    .fav-section {
+    .fav-section,
+    .search-section{
         width: 50%;
         height: 100vh;
         background: #fff;
@@ -464,7 +462,8 @@ header {
 
     .global-log-section.active,
     .global-panier-section.active,
-    .global-fav-section.active {
+    .global-fav-section.active,
+    .global-search-section.active {
         position: absolute;
         width: 100vw;
         height: 100vh;
