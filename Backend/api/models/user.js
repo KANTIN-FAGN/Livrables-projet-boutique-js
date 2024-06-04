@@ -28,4 +28,4 @@ class User {
     }
 }
 
-module.exports = logModel;
+module.exports = User;
