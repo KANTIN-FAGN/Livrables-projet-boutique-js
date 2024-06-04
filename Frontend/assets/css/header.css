@@ -489,15 +489,77 @@ header {
         pointer-events: all;
     }
 
-    .connexion {
-        padding: 64px 48px;
+    .connexion,
+    .inscription {
         display: flex;
         justify-content: space-between;
+        padding: 64px 48px;
+        border-bottom: 1px solid rgb(229, 229, 229);
     }
 
     .connexion-info,
-    .connexion-input-global {
+    .inscription-info,
+    .connexion-input-global,
+    .inscription-btn-global,
+    .forgot-pwd-global {
         width: 50%;
+        font-family: sans-serif;
+    }
+
+    .connexion-info,
+    .inscription-info {
+        gap: 10px;
+    }
+
+    .forgot-pwd-global {
+        display: none;
+    }
+    .forgot-pwd-global.active {
+        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .connexion-input-global.remove {
+        display: none;
+    }
+    .info-forgot {
+        padding-top: 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+    }
+    .backToConnect {
+        cursor: pointer;
+    }
+    .backToConnect:hover,
+    .forget-pwd:hover {
+        color: #757575;
+    }
+    .titre-forgot {
+        font-size: 16px;
+    }
+
+    .info-forgot-aide {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .connexion-info,
+    .inscription-info {
+        font-size: 13px;
+    }
+
+    .inscription-info p:first-child,
+    .connexion-info p:first-child {
+        color: #000;
+    }
+    .inscription-info p:last-child,
+    .connexion-info p:last-child {
+        color: #757575;
     }
 
     .group {
@@ -513,9 +575,9 @@ header {
         justify-content: flex-end;
         padding-bottom: 15px;
     }
-    .forget-pwd a {
-        text-decoration: none;
-        text-transform: none;
+
+    .forget-pwd p {
+        cursor: pointer;
         color: #000;
     }
 
@@ -609,19 +671,23 @@ header {
             background: transparent;
         }
     }
+
     .checkbox-container {
         width: 100%;
         padding-bottom: 15px;
     }
-    .checkbox-container label{
+
+    .checkbox-container label {
         display: flex;
         width: 100%;
         flex-direction: row;
         gap: 1rem;
     }
+
     .btn-connexion-global {
         width: 100%;
     }
+
     .btn-connexion {
         width: 100%;
         height: 52px;
@@ -631,8 +697,8 @@ header {
         background: #000;
         color: #ffffff;
     }
-    .bar-sep {
-        
+    .input-connexion {
+        width: 100%;
     }
 }
 
