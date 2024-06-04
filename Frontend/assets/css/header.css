@@ -115,8 +115,9 @@ header {
 
     .nav-links.mobile-menu {
         left: 0;
-        box-shadow: -50px 0px 33px 48px rgba(0,0,0,0.5);
-        z-index: 1000; /* Valeur de z-index plus élevée */  
+        box-shadow: -50px 0px 33px 48px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        /* Valeur de z-index plus élevée */
     }
 
     .nav-links ul {
@@ -218,7 +219,7 @@ header {
 
     .icon-global {
         position: absolute;
-        display: flex;
+
     }
 
     .icon-global {
@@ -226,16 +227,20 @@ header {
         top: 30px;
         right: 68px;
     }
-    .icon button{
+
+    .icon button {
         border: none;
         background: transparent;
     }
+
     .ui-input-container {
         display: none;
     }
+
     .mode-select-laptop {
         display: none;
     }
+
     .bar-header-sep {
         display: none;
     }
@@ -319,7 +324,7 @@ header {
         right: 25px;
         display: flex;
         flex-direction: row;
-        width: 25%;
+        width: 30%;
         height: 99%;
         display: flex;
         flex-direction: row;
@@ -433,6 +438,202 @@ header {
         display: none;
     }
 
+    .global-log-section,
+    .global-panier-section,
+    .global-fav-section {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: #00000065;
+        top: 0;
+        right: -150%;
+        display: flex;
+        justify-content: end;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .log-section,
+    .panier-section,
+    .fav-section {
+        width: 50%;
+        height: 100vh;
+        background: #fff;
+        transition: all 0.5s;
+    }
+
+    .global-log-section.active,
+    .global-panier-section.active,
+    .global-fav-section.active {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: #00000065;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: end;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+
+    .Menu_close {
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+    }
+
+    .Menu_close.active {
+        opacity: 1;
+        transition: opacity 0.5s;
+        pointer-events: all;
+    }
+
+    .connexion {
+        padding: 64px 48px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .connexion-info,
+    .connexion-input-global {
+        width: 50%;
+    }
+
+    .group {
+        position: relative;
+        width: 100%;
+        padding-bottom: 16px;
+    }
+
+    .forget-pwd {
+        font-size: 13px;
+        text-decoration: underline;
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 15px;
+    }
+    .forget-pwd a {
+        text-decoration: none;
+        text-transform: none;
+        color: #000;
+    }
+
+    .input {
+        font-size: 16px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #515151;
+        background: transparent;
+    }
+
+    .input:focus {
+        outline: none;
+    }
+
+    .label-titre {
+        color: var(--gris-footer-link);
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 10px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    .input:focus~label,
+    .input:valid~label {
+        top: -5px;
+        font-size: 14px;
+        color: var(--gris-footer-link);
+    }
+
+    .bar {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+
+    .bar:before,
+    .bar:after {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 1px;
+        position: absolute;
+        background: #969696;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    .bar:before {
+        left: 50%;
+    }
+
+    .bar:after {
+        right: 50%;
+    }
+
+    .input:focus~.bar:before,
+    .input:focus~.bar:after {
+        width: 50%;
+    }
+
+    .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100%;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .input:focus~.highlight {
+        animation: inputHighlighter 0.3s ease;
+    }
+
+    @keyframes inputHighlighter {
+        from {
+            background: #ffffff;
+        }
+
+        to {
+            width: 0;
+            background: transparent;
+        }
+    }
+    .checkbox-container {
+        width: 100%;
+        padding-bottom: 15px;
+    }
+    .checkbox-container label{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .btn-connexion-global {
+        width: 100%;
+    }
+    .btn-connexion {
+        width: 100%;
+        height: 52px;
+        border-radius: 50px;
+        cursor: pointer;
+        border: none;
+        background: #000;
+        color: #ffffff;
+    }
+    .bar-sep {
+        
+    }
 }
 
 .menu-hamburger .ligne:nth-child(1) .ligne:nth-child(3) {

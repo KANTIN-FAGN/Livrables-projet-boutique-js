@@ -17,9 +17,7 @@ exports.ArticlesHomme = async (req, res) => {
         const articles = url1.data.articles.items;
         const colors = url2.data.colors;
         const materials = url3.data.materials;
-        const categories = url4.data.categories;
-
-        console.log(articles);
+        const categories = url4.data.categories
 
         res.render('../views/pages/articles', {
             lst_article: articles,

@@ -2,30 +2,33 @@
 <html lang="en">
 
 <head>
-    <%- include('../components/head'); %>
-        <title>Roid</title>
+  <%- include('../components/head'); %>
+  <title>Roid</title>
 </head>
 
 <body>
-    <%- include('../components/header'); %>
-    <div class="main-ctn">
-        <div class="main">
-            <section class="gender-selection">
-                <a class="img-genders" href="/Roid/mode-homme">
-                    <div class="gender-mode" id="homme-img-selection">
-                        <p>MODE HOMME</p>
-                    </div>
-                </a>
-                <a class="img-genders" href="/Roid/mode-femme">
-                    <div class="gender-mode" id="femme-img-selection">
-                        <p>MODE FEMME</p>
-                    </div>
-                </a>
-            </section>
-        </div>
-        <%- include('../components/nav-bar-slider'); %>
+  <%- include('../components/header'); %>
+  <div class="main-ctn">
+    <div class="main">
+      <section class="gender-selection">
+        <a class="img-genders" href="/Roid/mode-homme">
+          <div class="gender-mode" id="homme-img-selection">
+            <p>MODE HOMME</p>
+          </div>
+        </a>
+        <a class="img-genders" href="/Roid/mode-femme">
+          <div class="gender-mode" id="femme-img-selection">
+            <p>MODE FEMME</p>
+          </div>
+        </a>
+      </section>
     </div>
-    <%- include('../components/footer'); %>
+    <%- include('../components/nav-bar-slider'); %>
+    <%- include('../components/log'); %>
+    <%- include('../components/panier'); %>
+    <%- include('../components/fav'); %>
+  </div>
+  <%- include('../components/footer'); %>
 </body>
 
 </html>
