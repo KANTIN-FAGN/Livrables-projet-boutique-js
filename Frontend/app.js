@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes/routes');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,10 @@ app.use("/public/", express.static('assets'));
 
 // Utiliser CORS pour gérer les requêtes cross-origin
 app.use(cors());
+
+// Lire le body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Utiliser les routes définies dans routes.js
 app.use(routes);

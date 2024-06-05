@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../components/head'); %>
+        <title>Roid</title>
+</head>
+
+<body>
+    <div class="main-ctn">
+        <div class="main">
+            <section class="header-inscription-global">
+                <div class="banner">
+                    <img src="/public/images/banner_inscription.avif" alt="bannière d'inscription">
+                </div>
+                <div class="titre-sousTitre">
+                    <a href="/Roid/">ROID</a>
+                    <p>Créer un compte Dior</p>
+                </div>
+            </section>
+            <section class="option-inscription-global spacing-container">
+                <form action="/Roid/treatment/inscription" method="POST">
+                    <input type="email" name="email" placeholder="Entrez votre e-mail">
+                    <input type="text" name="firstname" placeholder="Entrez votre Prénom">
+                    <input type="text" name="lastname" placeholder="Entrez votre nom">
+                    <input type="password" name="pswd" placeholder="Entrez votre mot de passe">
+                    <button type="submit">Créer votre compte</button>
+                </form>
+            </section>            
+        </div>
+    </div>
+</body>
+
+</html>
+

@@ -96,6 +96,13 @@
                     </svg>
                   </span>
                 </div>
+                <div>
+                  <% article.sizes.forEach(size=> { %>
+                    <p value="<%= size.size %>" name="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% } %>>
+                      <%= size.size %>
+                    </p>
+                    <% }); %>
+                </div>
               </div>
             </div>
             <div class="bar-article"></div>

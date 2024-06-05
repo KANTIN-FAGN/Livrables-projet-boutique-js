@@ -13,73 +13,89 @@ const hashPassword = (password, salt) => {
     return {salt, hashedPassword}
 }
 
-
 function isValidEmail(email) {
-    const emailRegex = '/^[^\s@]+@[^\s@]+\.[^\s@+$/';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
+function isValidPassword(password) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return passwordRegex.test(password);
+}
+
 class Log {
-    static async Register() {
+    static async Register(req, res) {
         const {firstname, lastname, email, pswd} = req.body;
+
         if (!isValidEmail(email)) {
-            res.status(401).send({
+            return res.status(401).send({
                 message: 'Email invalid',
                 status: 401
-            })
+            });
         }
-        const hashedPassword = hashPassword(pswd, cryp.randomBytes(16).toString('hex'))
+
+        if (!isValidPassword(pswd)) {
+            return res.status(401).send({
+                message: 'Mot de passe invalide',
+                status: 401
+            });
+        }
+
+        const hashedPassword = hashPassword(pswd, cryp.randomBytes(16).toString('hex'));
+        
         try {
-            await Log.Register({firstname, lastname, email, hashedPassword});
+            await log.Register({firstname, lastname, email, hashedPassword});
             res.status(201).send({
-                message: `User registered successfully !`,
+                message: 'User registered successfully!',
                 status: 201
-            })
+            });
         } catch (err) {
             res.status(500).send({
-                message: err,
+                message: err.message,
                 status: 500
-            })
+            });
         }
     }
 
-    static async Login() {
+    static async Login(req, res) {
         const {email, pswd, remember} = req.body;
+
         try {
             let user;
             if (isValidEmail(email)) {
-                user = await Log.Login(email);
+                user = await log.Login(email);
             } else {
                 return res.status(401).send({
-                    message: `Invalid email or password`,
+                    message: 'Invalid email or password',
                     status: 401
                 });
             }
+
             if (!user) {
                 return res.status(401).send({
-                    message: `Invalid email or password`,
+                    message: 'Invalid email or password',
                     status: 401
                 });
             }
+
             const hashedPassword = hashPassword(pswd, user.salt);
             if (hashedPassword.hashedPassword === user.pswd) {
-                const Token = jwt.sign({Sub: user.id_user}, jwtkey, {expiresIn: remember ? '365j':'24h'});
+                const Token = jwt.sign({Sub: user.id_user}, jwtkey, {expiresIn: remember ? '365d':'24h'});
                 res.status(201).json({Token});
             } else {
                 return res.status(401).send({
-                    message: `Invalid email or password`,
+                    message: 'Invalid email or password',
                     status: 401
                 });
             }
             
         } catch (err) {
             res.status(500).send({
-                message: err,
+                message: err.message,
                 status: 500
-            })
+            });
         }
     }
-    
 }
 
 module.exports = Log;

@@ -16,8 +16,8 @@ router.get('/article/:id', middleware.articleExist ,controllersArticle.getArticl
 router.get('/colors', controllersArticle.getColors);
 router.get('/materials', controllersArticle.getMaterials);
 router.get('/categories', controllersArticle.getCategories);
-router.get('/create-compte', controllersUser.Register);
-router.get('/connexion', controllersUser.Login);
+router.post('/create-compte', controllersUser.Register);
+router.post('/connexion', controllersUser.Login);
 
 
 //important pour le app.use dans le serveur
