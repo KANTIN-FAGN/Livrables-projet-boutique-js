@@ -115,8 +115,9 @@ header {
 
     .nav-links.mobile-menu {
         left: 0;
-        box-shadow: -50px 0px 33px 48px rgba(0,0,0,0.5);
-        z-index: 1000; /* Valeur de z-index plus élevée */  
+        box-shadow: -50px 0px 33px 48px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        /* Valeur de z-index plus élevée */
     }
 
     .nav-links ul {
@@ -218,7 +219,7 @@ header {
 
     .icon-global {
         position: absolute;
-        display: flex;
+
     }
 
     .icon-global {
@@ -226,16 +227,20 @@ header {
         top: 30px;
         right: 68px;
     }
-    .icon button{
+
+    .icon button {
         border: none;
         background: transparent;
     }
+
     .ui-input-container {
         display: none;
     }
+
     .mode-select-laptop {
         display: none;
     }
+
     .bar-header-sep {
         display: none;
     }
@@ -320,7 +325,7 @@ header {
         right: 25px;
         display: flex;
         flex-direction: row;
-        width: 25%;
+        width: auto;
         height: 99%;
         display: flex;
         flex-direction: row;
@@ -430,10 +435,344 @@ header {
         height: 20px;
     }
 
-    #searchIcon {
-        display: none;
+    .global-log-section,
+    .global-panier-section,
+    .global-fav-section,
+    .global-search-section {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: #00000065;
+        top: 0;
+        right: -150%;
+        display: flex;
+        justify-content: end;
+        opacity: 0;
+        transition: opacity 0.5s;
     }
 
+    .log-section,
+    .panier-section,
+    .fav-section,
+    .search-section{
+        width: 50%;
+        height: 100vh;
+        background: #fff;
+        transition: all 0.5s;
+    }
+
+    .global-log-section.active,
+    .global-panier-section.active,
+    .global-fav-section.active,
+    .global-search-section.active {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: #00000065;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: end;
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+
+    .Menu_close {
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+    }
+
+    .Menu_close.active {
+        opacity: 1;
+        transition: opacity 0.5s;
+        pointer-events: all;
+    }
+
+    .connexion,
+    .inscription {
+        display: flex;
+        justify-content: space-between;
+        padding: 64px 48px;
+        border-bottom: 1px solid rgb(229, 229, 229);
+    }
+
+    .connexion-info,
+    .inscription-info,
+    .connexion-input-global,
+    .inscription-btn-global,
+    .forgot-pwd-global {
+        width: 50%;
+        font-family: sans-serif;
+    }
+
+    .connexion-info,
+    .inscription-info {
+        gap: 10px;
+    }
+
+    .forgot-pwd-global {
+        display: none;
+    }
+    .forgot-pwd-global.active {
+        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .connexion-input-global.remove {
+        display: none;
+    }
+    .info-forgot {
+        padding-top: 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+    }
+    .backToConnect {
+        cursor: pointer;
+    }
+    .backToConnect:hover,
+    .forget-pwd:hover {
+        color: #757575;
+    }
+    .titre-forgot {
+        font-size: 16px;
+    }
+
+    .info-forgot-aide {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .connexion-info,
+    .inscription-info {
+        font-size: 13px;
+    }
+
+    .inscription-info p:first-child,
+    .connexion-info p:first-child {
+        color: #000;
+    }
+    .inscription-info p:last-child,
+    .connexion-info p:last-child {
+        color: #757575;
+    }
+
+    .group {
+        position: relative;
+        width: 100%;
+        padding-bottom: 16px;
+    }
+
+    .forget-pwd {
+        font-size: 13px;
+        text-decoration: underline;
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 15px;
+    }
+
+    .forget-pwd p {
+        cursor: pointer;
+        color: #000;
+    }
+
+    .input {
+        font-size: 16px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #515151;
+        background: transparent;
+    }
+
+    .input:focus {
+        outline: none;
+    }
+
+    .label-titre {
+        color: var(--gris-footer-link);
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 10px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    .input:focus~label,
+    .input:valid~label {
+        top: -5px;
+        font-size: 14px;
+        color: var(--gris-footer-link);
+    }
+
+    .bar {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+
+    .bar:before,
+    .bar:after {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 1px;
+        position: absolute;
+        background: #969696;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    .bar:before {
+        left: 50%;
+    }
+
+    .bar:after {
+        right: 50%;
+    }
+
+    .input:focus~.bar:before,
+    .input:focus~.bar:after {
+        width: 50%;
+    }
+
+    .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100%;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .input:focus~.highlight {
+        animation: inputHighlighter 0.3s ease;
+    }
+
+    @keyframes inputHighlighter {
+        from {
+            background: #ffffff;
+        }
+
+        to {
+            width: 0;
+            background: transparent;
+        }
+    }
+
+    .checkbox-container {
+        width: 100%;
+        padding-bottom: 15px;
+    }
+
+    .checkbox-container label {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .btn-connexion-global {
+        width: 100%;
+    }
+
+    .btn-connexion {
+        width: 100%;
+        height: 52px;
+        border-radius: 50px;
+        cursor: pointer;
+        border: none;
+        background: #000;
+        color: #ffffff;
+    }
+    .input-connexion {
+        width: 100%;
+    }
+    .SearchInput_searchbar__form__sAaH5 {
+        position: relative;
+        border-bottom: .0625rem solid #303030;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: 75%;
+    }
+    
+    .SearchInput_searchbar__form__input__icon__dI4e2 {
+        z-index: 1;
+        color: #757575;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+    .SearchInput_searchbar__form__input__field__8Gx4A {
+        width: 100%;
+        padding-left: .5rem;
+        margin: 0 !important;
+    }
+    .text-input .input {
+        display: inline-flex;
+        align-items: center;
+        height: 2.875rem;
+        box-sizing: border-box;
+        border-bottom: .0625rem solid #757575;
+        position: relative;
+    }
+    .SearchInput_searchbar__form__input__field__8Gx4A>* {
+        border-bottom: none !important;
+    }
+    .text-input .input input, .text-input .input textarea {
+        border: 0;
+        border-radius: .3125rem;
+        font-size: .8125rem;
+        line-height: 1.25rem;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+        outline: none;
+        height: 100%;
+        padding: 1.25rem 0 .375rem;
+    }
+    button, input {
+        position: relative;
+    }
+    .text-input .input .text-input__extra_options {
+        display: flex;
+        position: absolute;
+        right: 0;
+        padding: 1.25rem 0 .375rem;
+    }
+    .text-field-icon-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 1.25rem 0 .375rem .75rem;
+    }
+    .text-field-icon-button:disabled .icon {
+        color: #b3b3b3;
+    }
+    .SearchInput_searchbar__form__input__icon__cross__wHDmN {
+        right: 0;
+    }
+    .text-field-icon-button .icon {
+        display: block;
+        color: #000;
+        transition: color .32s cubic-bezier(1,0,0,1);
+    }
+    .input-search {
+        padding: 0 40px;
+    }
 }
 
 .menu-hamburger .ligne:nth-child(1) .ligne:nth-child(3) {

@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const resetFilters = document.getElementById("reset-filters");
-    const resetFiltersBar = document.getElementById("reset-filters-bar");
     const dropdownMenus = {
         cat: document.getElementById("cat-menu"),
         mat: document.getElementById("mat-menu"),
@@ -25,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         resetFilters.style.display = totalSelected > 0 ? 'inline' : 'none';
-        resetFiltersBar.style.display = totalSelected > 0 ? 'block' : 'none';
     };
 
     const handleItemClick = (e, menuId) => {
@@ -49,17 +47,24 @@ document.addEventListener("DOMContentLoaded", () => {
         updateSelectedCount();
     });
     updateSelectedCount();
-});
 
-document.addEventListener("DOMContentLoaded", function() {
     const filterButton = document.getElementById("filter-button");
     const filtersContainer = document.getElementById("filters-container");
     const filterCloseButton = document.getElementById("close-nav-filtre");
 
+    const navbar = document.querySelector("header");
+    const html = document.querySelector("body");
+
     filterButton.addEventListener("click", function() {
         filtersContainer.classList.add("active");
+        navbar.style.display = 'none';
+        html.classList.toggle('overflow')
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
     filterCloseButton.addEventListener("click", function() {
         filtersContainer.classList.remove("active");
+        navbar.style.display = 'flex';
+        html.classList.toggle('overflow')
     });
 });
