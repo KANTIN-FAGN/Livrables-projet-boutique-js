@@ -80,6 +80,7 @@
               </div>
               <div class="article-tailles">
                 <div class="dropdown-tailles">
+                  
                   <select class="drop-taille" id="sort-options-tailles" onchange="changeText(this)" onclick="toggleDropdown(this)">
                     <option disabled selected value="">Sélectionnez votre
                       taille
@@ -96,6 +97,17 @@
                     </svg>
                   </span>
                 </div>
+                <div class="dropdown-tailles-mobile">
+                  <ul>
+                    <% article.sizes.forEach(size=> { %>
+                      <li value="<%= size.size %>">
+                        <button <% if (size.stock===0) { %> class="unvailable-size" <% } %>>
+                        <%= size.size %>
+                        </button>
+                      </li>
+                      <% }); %>
+                  </ul>              
+              </div>  
               </div>
             </div>
             <div class="bar-article"></div>

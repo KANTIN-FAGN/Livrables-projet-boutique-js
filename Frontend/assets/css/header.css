@@ -239,6 +239,7 @@ header {
     .bar-header-sep {
         display: none;
     }
+    
 }
 
 @media screen and (min-width: 1024px) {
