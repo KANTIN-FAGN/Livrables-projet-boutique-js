@@ -59,6 +59,44 @@ class ArticleFunc {
             });
         }
     };
+    static async get4ArticlesAleatoire(req, res) {
+        try {
+            const articles = await Article.get4RandomArticles();
+    
+            if (!articles || articles.length === 0) {
+                return res.status(404).json({
+                    message: `Articles not found`,
+                    status: 404
+                });
+            } else {
+                const articlesWithDetails = await Promise.all(articles.map(async article => {
+                    const [images] = await Promise.all([
+                        Article.getImages(article.id_article),
+                    ]);
+    
+                    article.images = {
+                        img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
+                        img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
+                    };
+
+                    const { description, name, detail, manufacturing, price, reduction, genders, id_category,  ...articleWithoutDescriptionAndName } = article;
+                    return articleWithoutDescriptionAndName;
+                }));
+    
+                return res.status(200).json({
+                    message: `Articles successfully found`,
+                    status: 200,
+                    articles: articlesWithDetails
+                });
+            }
+        } catch (err) {
+            return res.status(500).json({
+                message: `Error retrieving articles: ${err.message}`,
+                status: 500
+            });
+        }
+    }
+    
     
     static async getArticleHomme(req, res) {
         try {
@@ -86,6 +124,7 @@ class ArticleFunc {
                     article.colors = colors.map(color => color.color);
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
+                    
                 }));
     
                 const offset = parseInt(req.query.offset) || 0;
@@ -166,7 +205,6 @@ class ArticleFunc {
             });
         }
     };
-    
     static async getColors(req, res) {
         try {
             const colors = await Article.getColors(req.query);

@@ -11,6 +11,7 @@ const middleware = {
 //Define article's routes
 router.get('/mode-homme/', controllersArticle.getArticleHomme);
 router.get('/mode-femme/', controllersArticle.getArticleFemme);
+router.get('/articles_aleatoire/', controllersArticle.get4ArticlesAleatoire)
 router.get('/article/:id', middleware.articleExist ,controllersArticle.getArticleById);
 router.get('/colors', controllersArticle.getColors);
 router.get('/materials', controllersArticle.getMaterials);

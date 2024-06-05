@@ -1,4 +1,4 @@
-const url = "http://192.168.1.88:4000/";
+const url = "http://localhost:4000/";
 const axios = require("axios");
 
 exports.Index = (req, res) => {

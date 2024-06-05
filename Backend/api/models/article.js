@@ -13,6 +13,30 @@ class Article {
             });
         });
     }
+    static getAllArticles() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM article`;
+            connection.query(sql, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    }
+    static get4RandomArticles() {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT * FROM \`article\` ORDER BY RAND() LIMIT 4`;
+            connection.query(sql, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    }
     static getArticleHomme(query) {
         return new Promise((resolve, reject) => {
             let sql = `SELECT article.* FROM article`;
