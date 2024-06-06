@@ -1,5 +1,7 @@
 const iconCloseHeaderSlider = document.getElementById('closeheaderIcon');
 
+const globalIcon = document.querySelector('.icon-global')
+
 const iconSearch = document.getElementById('searchIcon');
 const iconSilderSearch = document.getElementById('sectionSearch');
 
@@ -15,6 +17,7 @@ const iconSilderFav = document.getElementById('sectionFav');
 iconCompte.addEventListener('click', () => {
     iconSilderCompte.classList.add('active');
     iconCloseHeaderSlider.classList.add('active');
+    globalIcon.classList.add('active');
     iconSilderPanier.classList.remove('active');
     iconSilderFav.classList.remove('active');
     iconSilderSearch.classList.remove('active');
@@ -24,6 +27,7 @@ iconCompte.addEventListener('click', () => {
 iconPanier.addEventListener('click', () => {
     iconSilderPanier.classList.add('active');
     iconCloseHeaderSlider.classList.add('active');
+    globalIcon.classList.add('active');
     iconSilderCompte.classList.remove('active');
     iconSilderFav.classList.remove('active');
     iconSilderSearch.classList.remove('active');
@@ -33,6 +37,7 @@ iconPanier.addEventListener('click', () => {
 iconFav.addEventListener('click', () => {
     iconSilderFav.classList.add('active');
     iconCloseHeaderSlider.classList.add('active');
+    globalIcon.classList.add('active');
     iconSilderCompte.classList.remove('active');
     iconSilderPanier.classList.remove('active');
     iconSilderSearch.classList.remove('active');
@@ -45,12 +50,14 @@ iconCloseHeaderSlider.addEventListener('click', () => {
     iconSilderPanier.classList.remove('active');
     iconSilderCompte.classList.remove('active');
     iconSilderSearch.classList.remove('active');
+    globalIcon.classList.remove('active');
     document.body.classList.remove("no-scroll");
 });
 
 iconSearch.addEventListener('click', () => {
     iconSilderSearch.classList.add('active');
     iconCloseHeaderSlider.classList.add('active');
+    globalIcon.classList.add('active');
     iconSilderPanier.classList.remove('active');
     iconSilderCompte.classList.remove('active');
     iconSilderFav.classList.remove('active');

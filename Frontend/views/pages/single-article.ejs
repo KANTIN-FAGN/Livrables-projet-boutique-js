@@ -13,21 +13,21 @@
   <%- include('../components/header'); %>
   <div class="main-ctn">
     <div class="main-article">
-        <section class="caroussel-phone">
-            <!-- Swiper -->
-            <div class="container-carousel">
-              <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-                <div class="swiper-wrapper">
-                  <% article.img.forEach(imgUrl=> { %>
-                  <div class="swiper-slide">
-                    <img src="<%= imgUrl %>" alt="<%= article.name %>">
-                  </div>
-                  <% }); %>
-                </div>
-                <div class="swiper-pagination"></div>
+      <section class="caroussel-phone">
+        <!-- Swiper -->
+        <div class="container-carousel">
+          <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+              <% article.img.forEach(imgUrl=> { %>
+              <div class="swiper-slide">
+                <img src="<%= imgUrl %>" alt="<%= article.name %>">
               </div>
+              <% }); %>
             </div>
-          </section>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
       <section class="section-images-article <%= article.img.length > 4 ? 'many-images' : 'few-images' %>">
         <% article.img.forEach(imgUrl=> { %>
         <button onclick="displayCaroussel()">
@@ -53,7 +53,7 @@
                 </button>
               </div>
               <div class="info-article-detail">
-                <p>
+                <p class="article-detail">
                   <%= article.detail %>
                 </p>
               </div>
@@ -61,154 +61,155 @@
             <% if (article.articlesWithDifferentColors.length> 0) { %>
             <div class="bar-article"></div>
             <div class="global-coloris-article">
-              <p>AUTRES COLORIS</p>
+              <p class="header_sizes_product">AUTRES COLORIS</p>
               <div class="autre-coloris">
-                <% article.articlesWithDifferentColors.forEach(differentColorArticle=> { %>
-                <div class="different-color-article">
-                  <a href="/Roid/article/<%= differentColorArticle.id %>">
-                    <img src="<%= differentColorArticle.img %>" alt="<%= differentColorArticle.name %>">
-                  </a>
-                </div>
-                <% }) %>
-              </div>
-            </div>
-            <% } %>
-            <div class="bar-article"></div>
-            <div class="global-info-article-taille">
-              <div class="article-titre-taille">
-                <p>TAILLES (EU)</p>
-              </div>
-              <div class="article-tailles">
-                <div class="dropdown-tailles">
-                  
-                  <select class="drop-taille" id="sort-options-tailles" onchange="changeText(this)" onclick="toggleDropdown(this)">
-                    <option disabled selected value="">Sélectionnez votre
-                      taille
-                    </option>
-                    <% article.sizes.forEach(size=> { %>
-                    <option value="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% } %>>
-                      <%= size.size %>
-                    </option>
-                    <% }); %>
-                  </select>
-                  <span class="dropdown-arrow">
-                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-                <div class="dropdown-tailles-mobile">
-                  <ul>
-                    <% article.sizes.forEach(size=> { %>
-                      <li value="<%= size.size %>">
-                        <button <% if (size.stock===0) { %> class="unvailable-size" <% } %>>
-                        <%= size.size %>
-                        </button>
-                      </li>
-                      <% }); %>
-                  </ul>              
-              </div>  
-              </div>
-            </div>
-            <div class="bar-article"></div>
-            <div class="global-btn-article-panier">
-              <% if (article.totalStock> 0) { %>
-              <button class="btn-article-panier">
-                <span>
-                  <p>Ajouter au panier</p>
-                  <p>
-                    <% if (article.reduction> 0) { %>
-                    <%= article.price - (article.price * article.reduction / 100) %> €
-                    <% } else { %>
-                    <%= article.price %> €
-                    <% } %>
-                  </p>
-                </span>
-              </button>
-              <% } else { %>
-              <button class="btn-article-panier-out-of-stock">
-                <span>
-                  <p class="rupture">Rupture de stock</p>
-                </span>
-              </button>
-              <% } %>
-            </div>
-            <div class="global-description-article">
-              <div class="ProductDetailsTabs_container">
-                <ul class="tab-list">
-                  <li>
-                    <span class="tab-label" onclick="toggleTabSlider(0, 'description-tab-content')">DESCRIPTION</span>
+                <ul class="ColorDeclinations_list__VI7la">
+                  <% article.articlesWithDifferentColors.forEach(differentColorArticle=> { %>
+                  <li class="different-color-article">
+                    <a href="/Roid/article/<%= differentColorArticle.id %>">
+                      <img src="<%= differentColorArticle.img %>" alt="<%= differentColorArticle.name %>">
+                    </a>
                   </li>
-                  <li>
-                    <span class="tab-label" onclick="toggleTabSlider(1, 'livraison-retours-tab-content')">LIVRAISON
-                      & RETOURS</span>
-                  </li>
+                  <% }) %>
                 </ul>
-                <div class="tab-list-slider">
-                  <div class="tab-list-slider__indicator" aria-hidden="true">
-                  </div>
-                </div>
-              </div>
             </div>
-            <div id="description-tab-content" class="tab-panel">
-              <div class="description-tab-content">
-                <div class="text-wrapper">
-                  <p>
-                    <%= article.description %>
-                  </p>
-                  <ul class="manufacturing-list">
-                    <li>
-                      <%= article.manufacturing %>
-                    </li>
-                  </ul>
-                </div>
-                <div class="readmore-btn">Voir plus</div>
-              </div>
+          </div>
+          <% } %>
+          <div class="bar-article"></div>
+          <div class="global-info-article-taille">
+            <div class="article-titre-taille">
+              <p class="header_sizes_product">TAILLES (EU)</p>
             </div>
-            <div id="livraison-retours-tab-content" class="tab-panel">
-              <div class="livraison-detail">
-                <p>Retours et échanges offerts</p>
-                <p>Vous avez la possibilité de nous retourner ou échanger – dans
-                  son
-                  état d’origine – tout produit commandé (hors articles
-                  personnalisés)
-                  – dans un délai de 30 jours à compter de sa date de
-                  réception.
-                  Pour plus d'informations consultez notre FAQ.</p>
+            <div class="article-tailles">
+              <div class="dropdown-tailles">
+                <select class="drop-taille" id="sort-options-tailles" onchange="changeText(this)" onclick="toggleDropdown(this)">
+                  <option disabled selected value="">Sélectionnez votre
+                    taille
+                  </option>
+                  <% article.sizes.forEach(size=> { %>
+                  <option value="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% } %>>
+                    <%= size.size %>
+                  </option>
+                  <% }); %>
+                </select>
+                <span class="dropdown-arrow">
+                  <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
               </div>
-              <div class="livraison-detail">
-                <p>Livraison standard offerte</p>
-                <p>Dior vous propose plusieurs modes de livraison rapides et
-                  sécurisés :
-                  Livraison standard (3 à 4 jours ouvrés): offerte
-                  Livraison express (1 à 2jours ouvrés) : 9,95€ (offerte pour
-                  toute
-                  commande supérieure à 1300€)
-                  Livraison Sur-Mesure (jour et créneau de votre choix selon
-                  codes
-                  postaux éligibles) : 18€
-                  Les délais de livraison sont estimés à partir de
-                  l'expédition de
-                  votre commande.</p>
-              </div>
-              <div class="livraison-detail">
-                <p>Expédition sous 24h</p>
-                <p>Les commandes effectuées avant midi sont préparées et
-                  envoyées le
-                  même jour ; celles effectuées après midi sont envoyées dans
-                  les 24
-                  heures</p>
+              <div class="dropdown-tailles-mobile animation-active">
+                <ul class="SizeSpots_size-spots__MMEzM">
+                  <% article.sizes.forEach(size=> { %>
+                  <li value="<%= size.size %>">
+                    <button class="SizeSpot_button__dZsg8 SizeSpot_button--unavailable__yaxPv" <% if (size.stock===0) { %> class="SizeSpot_button__dZsg8 SizeSpot_button--unavailable__yaxPv unvailable-size" <% } %>>
+                      <%= size.size %>
+                    </button>
+                  </li>
+                  <% }); %>
+                </ul>
               </div>
             </div>
           </div>
+          <div class="bar-article"></div>
+          <div class="global-btn-article-panier">
+            <% if (article.totalStock> 0) { %>
+            <button class="btn-article-panier">
+              <span>
+                <p>Ajouter au panier</p>
+                <p>
+                  <% if (article.reduction> 0) { %>
+                  <%= article.price - (article.price * article.reduction / 100) %> €
+                  <% } else { %>
+                  <%= article.price %> €
+                  <% } %>
+                </p>
+              </span>
+            </button>
+            <% } else { %>
+            <button class="btn-article-panier-out-of-stock">
+              <span>
+                <p class="rupture">Rupture de stock</p>
+              </span>
+            </button>
+            <% } %>
+          </div>
+          <div class="global-description-article">
+            <div class="ProductDetailsTabs_container">
+              <ul class="tab-list">
+                <li>
+                  <span class="tab-label" onclick="toggleTabSlider(0, 'description-tab-content')">DESCRIPTION</span>
+                </li>
+                <li>
+                  <span class="tab-label" onclick="toggleTabSlider(1, 'livraison-retours-tab-content')">LIVRAISON
+                    & RETOURS</span>
+                </li>
+              </ul>
+              <div class="tab-list-slider">
+                <div class="tab-list-slider__indicator" aria-hidden="true">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="description-tab-content" class="tab-panel">
+            <div class="description-tab-content">
+              <div class="text-wrapper">
+                <p>
+                  <%= article.description %>
+                </p>
+                <ul class="manufacturing-list">
+                  <li>
+                    <%= article.manufacturing %>
+                  </li>
+                </ul>
+              </div>
+              <div class="readmore-btn">Voir plus</div>
+            </div>
+          </div>
+          <div id="livraison-retours-tab-content" class="tab-panel">
+            <div class="livraison-detail">
+              <p>Retours et échanges offerts</p>
+              <p>Vous avez la possibilité de nous retourner ou échanger – dans
+                son
+                état d’origine – tout produit commandé (hors articles
+                personnalisés)
+                – dans un délai de 30 jours à compter de sa date de
+                réception.
+                Pour plus d'informations consultez notre FAQ.</p>
+            </div>
+            <div class="livraison-detail">
+              <p>Livraison standard offerte</p>
+              <p>Dior vous propose plusieurs modes de livraison rapides et
+                sécurisés :
+                Livraison standard (3 à 4 jours ouvrés): offerte
+                Livraison express (1 à 2jours ouvrés) : 9,95€ (offerte pour
+                toute
+                commande supérieure à 1300€)
+                Livraison Sur-Mesure (jour et créneau de votre choix selon
+                codes
+                postaux éligibles) : 18€
+                Les délais de livraison sont estimés à partir de
+                l'expédition de
+                votre commande.</p>
+            </div>
+            <div class="livraison-detail">
+              <p>Expédition sous 24h</p>
+              <p>Les commandes effectuées avant midi sont préparées et
+                envoyées le
+                même jour ; celles effectuées après midi sont envoyées dans
+                les 24
+                heures</p>
+            </div>
+          </div>
         </div>
-      </section>
     </div>
-    <%- include('../components/nav-bar-slider'); %>
-    <%- include('../components/logSlide'); %>
-    <%- include('../components/panierSlide'); %>
-    <%- include('../components/favSlide'); %>
-    <%- include('../components/searchSlide'); %>
+    </section>
+  </div>
+  <%- include('../components/nav-bar-slider'); %>
+  <%- include('../components/logSlide'); %>
+  <%- include('../components/panierSlide'); %>
+  <%- include('../components/favSlide'); %>
+  <%- include('../components/searchSlide'); %>
   </div>
   <%- include('../components/footer'); %>
   <section class="caroussel-desktop">
