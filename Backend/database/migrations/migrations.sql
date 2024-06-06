@@ -76,7 +76,7 @@ CREATE TABLE have_sizes (
 
 CREATE TABLE users(
    id_user INT AUTO_INCREMENT,
-   fristname VARCHAR(200) NOT NULL,
+   firstname VARCHAR(200) NOT NULL,
    lastname VARCHAR(200) NOT NULL,
    email VARCHAR(250) NOT NULL,
    pswd VARCHAR(250) NOT NULL,

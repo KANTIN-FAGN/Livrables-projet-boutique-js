@@ -3,245 +3,353 @@
 
 <head>
   <%- include('../components/head'); %>
-  <title>
-    <%= article.name %> | <%= article.colors.join(', ') %></title>
+    <title>
+      <%= article.name %> | <%= article.colors.join(', ') %></title>
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
   <%- include('../components/header'); %>
-  <div class="main-ctn">
-    <div class="main-article">
-      <section class="caroussel-phone">
-        <!-- Swiper -->
-        <div class="container-carousel">
-          <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-            <div class="swiper-wrapper">
-              <% article.img.forEach(imgUrl=> { %>
-              <div class="swiper-slide">
-                <img src="<%= imgUrl %>" alt="<%= article.name %>">
-              </div>
-              <% }); %>
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </section>
-      <section class="section-images-article <%= article.img.length > 4 ? 'many-images' : 'few-images' %>">
-        <% article.img.forEach(imgUrl=> { %>
-        <button onclick="displayCaroussel()">
-          <img src="<%= imgUrl %>" alt="<%= article.name %>">
-        </button>
-        <% }); %>
-      </section>
-      <section class="section-infos-article-ctn">
-        <div class="description-global-article">
-          <div class="section-infos-article">
-            <div class="global-info-article-name">
-              <div class="info-article-name">
-                <p class="article-name">
-                  <%= article.name %>
-                </p>
-                <button class="btn-fav-article" id="wishListIconArticle" aria-label="Favoris">
-                  <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
-                      <path fill="currentColor" d="M6.48 3.91a3.25 3.25 0 0 1 2.68 1.62L10 6.85l.83-1.33a3.12 3.12 0 0 1 2.63-1.61 2.8 2.8 0 0 1 2.08.93c1.48 1.59 1.33 3.78-.37 5.57L10 15.66l-5.22-5.3c-1.67-1.85-1.8-4-.36-5.53a2.8 2.8 0 0 1 2.06-.92m0-1a3.8 3.8 0 0 0-2.79 1.24C1.94 6 2 8.73 4 11l6 6.06 5.9-6c2.16-2.27 2.15-5.06.4-6.95a3.87 3.87 0 0 0-2.82-1.25A4.1 4.1 0 0 0 10 5a4.23 4.23 0 0 0-3.52-2.09">
-                      </path>
-                    </svg>
-                  </span>
-                </button>
-              </div>
-              <div class="info-article-detail">
-                <p class="article-detail">
-                  <%= article.detail %>
-                </p>
-              </div>
-            </div>
-            <% if (article.articlesWithDifferentColors.length> 0) { %>
-            <div class="bar-article"></div>
-            <div class="global-coloris-article">
-              <p class="header_sizes_product">AUTRES COLORIS</p>
-              <div class="autre-coloris">
-                <ul class="ColorDeclinations_list__VI7la">
-                  <% article.articlesWithDifferentColors.forEach(differentColorArticle=> { %>
-                  <li class="different-color-article">
-                    <a href="/Roid/article/<%= differentColorArticle.id %>">
-                      <img src="<%= differentColorArticle.img %>" alt="<%= differentColorArticle.name %>">
-                    </a>
-                  </li>
-                  <% }) %>
-                </ul>
-            </div>
-          </div>
-          <% } %>
-          <div class="bar-article"></div>
-          <div class="global-info-article-taille">
-            <div class="article-titre-taille">
-              <p class="header_sizes_product">TAILLES (EU)</p>
-            </div>
-            <div class="article-tailles">
-              <div class="dropdown-tailles">
-                <select class="drop-taille" id="sort-options-tailles" onchange="changeText(this)" onclick="toggleDropdown(this)">
-                  <option disabled selected value="">Sélectionnez votre
-                    taille
-                  </option>
-                  <% article.sizes.forEach(size=> { %>
-                  <option value="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% } %>>
-                    <%= size.size %>
-                  </option>
+          <div class="main-ctn">
+            <div class="main-article">
+              <section class="caroussel-phone">
+                <!-- Swiper -->
+                <div class="container-carousel">
+                  <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                    class="swiper mySwiper2">
+                    <div class="swiper-wrapper">
+                      <% article.img.forEach(imgUrl=> { %>
+                        <div class="swiper-slide">
+                          <img src="<%= imgUrl %>" alt="<%= article.name %>">
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                </div>
+              </section>
+              <section class="section-images-article <%= article.img.length > 4 ? 'many-images' : 'few-images' %>">
+                <% article.img.forEach(imgUrl=> { %>
+                  <button onclick="displayCaroussel()">
+                    <img src="<%= imgUrl %>" alt="<%= article.name %>">
+                  </button>
                   <% }); %>
-                </select>
-                <span class="dropdown-arrow">
-                  <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </span>
-              </div>
-              <div class="dropdown-tailles-mobile animation-active">
-                <ul class="SizeSpots_size-spots__MMEzM">
-                  <% article.sizes.forEach(size=> { %>
-                  <li value="<%= size.size %>">
-                    <button class="SizeSpot_button__dZsg8 SizeSpot_button--unavailable__yaxPv" <% if (size.stock===0) { %> class="SizeSpot_button__dZsg8 SizeSpot_button--unavailable__yaxPv unvailable-size" <% } %>>
-                      <%= size.size %>
-                    </button>
-                  </li>
-                  <% }); %>
-                </ul>
-              </div>
+              </section>
+              <section class="section-infos-article-ctn">
+                <div class="description-global-article">
+                  <div class="section-infos-article">
+                    <div class="global-info-article-name">
+                      <div class="info-article-name">
+                        <p class="article-name">
+                          <%= article.name %>
+                        </p>
+                        <button class="btn-fav-article" id="wishListIconArticle" aria-label="Favoris">
+                          <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                              viewBox="0 0 20 20">
+                              <path fill="currentColor"
+                                d="M6.48 3.91a3.25 3.25 0 0 1 2.68 1.62L10 6.85l.83-1.33a3.12 3.12 0 0 1 2.63-1.61 2.8 2.8 0 0 1 2.08.93c1.48 1.59 1.33 3.78-.37 5.57L10 15.66l-5.22-5.3c-1.67-1.85-1.8-4-.36-5.53a2.8 2.8 0 0 1 2.06-.92m0-1a3.8 3.8 0 0 0-2.79 1.24C1.94 6 2 8.73 4 11l6 6.06 5.9-6c2.16-2.27 2.15-5.06.4-6.95a3.87 3.87 0 0 0-2.82-1.25A4.1 4.1 0 0 0 10 5a4.23 4.23 0 0 0-3.52-2.09">
+                              </path>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                      <div class="info-article-detail">
+                        <p class="article-detail">
+                          <%= article.detail %>
+                        </p>
+                      </div>
+                    </div>
+                    <% if (article.articlesWithDifferentColors.length> 0) { %>
+                      <div class="bar-article"></div>
+                      <div class="global-coloris-article">
+                        <p class="header_sizes_product">AUTRES COLORIS</p>
+                        <div class="autre-coloris">
+                          <ul class="ColorDeclinations_list__VI7la">
+                            <% article.articlesWithDifferentColors.forEach(differentColorArticle=> { %>
+                              <li class="different-color-article">
+                                <a href="/Roid/article/<%= differentColorArticle.id %>">
+                                  <img src="<%= differentColorArticle.img %>" alt="<%= differentColorArticle.name %>">
+                                </a>
+                              </li>
+                              <% }) %>
+                          </ul>
+                        </div>
+                      </div>
+                      <% } %>
+                        <div class="bar-article"></div>
+                        <div class="global-info-article-taille">
+                          <div class="article-titre-taille">
+                            <p class="header_sizes_product">TAILLES (EU)</p>
+                          </div>
+                          <div class="article-tailles">
+                            <div class="dropdown-tailles">
+                              <select class="drop-taille" id="sort-options-tailles" onchange="changeText(this)"
+                                onclick="toggleDropdown(this)">
+                                <option disabled selected value="">Sélectionnez votre
+                                  taille
+                                </option>
+                                <% article.sizes.forEach(size=> { %>
+                                  <option value="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% }
+                                      %>>
+                                      <%= size.size %>
+                                  </option>
+                                  <% }); %>
+                              </select>
+                              <span class="dropdown-arrow">
+                                <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none"
+                                  xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                              </span>
+                            </div>
+                            <div class="dropdown-tailles-mobile animation-active">
+                              <ul class="SizeSpots_size-spots__MMEzM">
+                                <% article.sizes.forEach(size=> { %>
+                                  <li value="<%= size.size %>">
+                                    <button
+                                      class="SizeSpot_button__dZsg8 <%= size.stock === 0 ? 'SizeSpot_button--unavailable__yaxPv' : '' %>">
+                                      <%= size.size %>
+                                    </button>
+                                  </li>
+                                  <% }); %>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="bar-article"></div>
+                        <div class="global-btn-article-panier">
+                          <% if (article.totalStock> 0) { %>
+                            <button class="btn-article-panier">
+                              <span>
+                                <p>Ajouter au panier</p>
+                                <p>
+                                  <% if (article.reduction> 0) { %>
+                                    <%= article.price - (article.price * article.reduction / 100) %> €
+                                      <% } else { %>
+                                        <%= article.price %> €
+                                          <% } %>
+                                </p>
+                              </span>
+                            </button>
+                            <% } else { %>
+                              <button class="btn-article-panier-out-of-stock">
+                                <span>
+                                  <p class="rupture">Rupture de stock</p>
+                                </span>
+                              </button>
+                              <% } %>
+                        </div>
+                        <div class="global-description-article">
+                          <section class="ProductDetailsTabs_container">
+                            <ul class="tab-list">
+                              <li>
+                                <span class="tab-label"
+                                  onclick="toggleTabSlider(0, 'description-tab-content')">DESCRIPTION</span>
+                              </li>
+                              <li>
+                                <span class="tab-label"
+                                  onclick="toggleTabSlider(1, 'livraison-retours-tab-content')">LIVRAISON
+                                  & RETOURS</span>
+                              </li>
+                            </ul>
+                            <div class="tab-list-slider">
+                              <div class="tab-list-slider__indicator" aria-hidden="true">
+                              </div>
+                            </div>
+                          </section>
+                          <section class="ProductDetailsTabs_container_mobile">
+                            <section class="Description_mobile">
+                              <div class="titre_desciption" id="titre_desciption">
+                                <span>
+                                  Description
+                                </span>
+                                <span>
+                                  <svg id="svgDesciption" class="svgDescription" xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20" fill="none" viewBox="0 0 20 20"
+                                    style="height: 20px; width: 20px;">
+                                    <path fill="black"
+                                      d="M15.39 7.6a.54.54 0 0 0-.78 0L10 12.21 5.39 7.6a.54.54 0 0 0-.78 0 .55.55 0 0 0 0 .77L10 13.76l5.39-5.39a.55.55 0 0 0 0-.77">
+                                    </path>
+                                  </svg>
+                                </span>
+                              </div>
+                              <div class="Description_mobile_global" id="Description_mobile_global">
+                                <div class="description-detail" id="descriptionDetail">
+                                  <div>
+                                    <%= article.description %>
+                                  </div>
+                                  <div>
+                                    <ul>
+                                      <li>
+                                        <%= article.manufacturing %>
+                                      </li>
+                                      <li>
+                                        <%= article.detail %>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="voirPlusDescription">
+                                  <button class="btnVoirPlusDescription" id="btnVoirPlusDescription">
+                                    Voir plus
+                                  </button>
+                                </div>
+                              </div>
+                            </section>
+                            <section class="Livraison_mobile">
+                              <div class="titre_livraison">
+                                <span>
+                                  Livraison & Retours
+                                </span>
+                                <span>
+                                  <svg id="svgLivraison" class="svgLivraison" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                    viewBox="0 0 20 20" style="height: 20px; width: 20px;">
+                                    <path fill="black"
+                                      d="M15.39 7.6a.54.54 0 0 0-.78 0L10 12.21 5.39 7.6a.54.54 0 0 0-.78 0 .55.55 0 0 0 0 .77L10 13.76l5.39-5.39a.55.55 0 0 0 0-.77">
+                                    </path>
+                                  </svg>
+                                </span>
+                              </div>
+                              <div class="Livraison_mobile_global" id="Livraison_mobile_global">
+                                <div class="livraison-detail-global" id="livraisonDetail">
+                                  <div class="livraison-detail">
+                                    <p>Retours et échanges offerts</p>
+                                    <p>Vous avez la possibilité de nous retourner ou échanger – dans
+                                      son
+                                      état d’origine – tout produit commandé (hors articles
+                                      personnalisés)
+                                      – dans un délai de 30 jours à compter de sa date de
+                                      réception.
+                                      Pour plus d'informations consultez notre FAQ.</p>
+                                  </div>
+                                  <div class="livraison-detail">
+                                    <p>Livraison standard offerte</p>
+                                    <p>Dior vous propose plusieurs modes de livraison rapides et
+                                      sécurisés :
+                                      Livraison standard (3 à 4 jours ouvrés): offerte
+                                      Livraison express (1 à 2jours ouvrés) : 9,95€ (offerte pour
+                                      toute
+                                      commande supérieure à 1300€)
+                                      Livraison Sur-Mesure (jour et créneau de votre choix selon
+                                      codes
+                                      postaux éligibles) : 18€
+                                      Les délais de livraison sont estimés à partir de
+                                      l'expédition de
+                                      votre commande.</p>
+                                  </div>
+                                  <div class="livraison-detail">
+                                    <p>Expédition sous 24h</p>
+                                    <p>Les commandes effectuées avant midi sont préparées et
+                                      envoyées le
+                                      même jour ; celles effectuées après midi sont envoyées dans
+                                      les 24
+                                      heures</p>
+                                  </div>
+                                </div>
+                                <div class="voirPlusDescription">
+                                  <button class="btnVoirPlusDescription" id="btnVoirPlusLivraison">
+                                    Voir plus
+                                  </button>
+                                </div>
+                              </div>
+                            </section>
+                          </section>
+                        </div>
+                        <div id="description-tab-content" class="tab-panel">
+                          <div class="description-tab-content">
+                            <div class="text-wrapper">
+                              <p>
+                                <%= article.description %>
+                              </p>
+                              <ul class="manufacturing-list">
+                                <li>
+                                  <%= article.manufacturing %>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="readmore-btn">Voir plus</div>
+                          </div>
+                        </div>
+                        <div id="livraison-retours-tab-content" class="tab-panel">
+                          <div class="livraison-detail">
+                            <p>Retours et échanges offerts</p>
+                            <p>Vous avez la possibilité de nous retourner ou échanger – dans
+                              son
+                              état d’origine – tout produit commandé (hors articles
+                              personnalisés)
+                              – dans un délai de 30 jours à compter de sa date de
+                              réception.
+                              Pour plus d'informations consultez notre FAQ.</p>
+                          </div>
+                          <div class="livraison-detail">
+                            <p>Livraison standard offerte</p>
+                            <p>Dior vous propose plusieurs modes de livraison rapides et
+                              sécurisés :
+                              Livraison standard (3 à 4 jours ouvrés): offerte
+                              Livraison express (1 à 2jours ouvrés) : 9,95€ (offerte pour
+                              toute
+                              commande supérieure à 1300€)
+                              Livraison Sur-Mesure (jour et créneau de votre choix selon
+                              codes
+                              postaux éligibles) : 18€
+                              Les délais de livraison sont estimés à partir de
+                              l'expédition de
+                              votre commande.</p>
+                          </div>
+                          <div class="livraison-detail">
+                            <p>Expédition sous 24h</p>
+                            <p>Les commandes effectuées avant midi sont préparées et
+                              envoyées le
+                              même jour ; celles effectuées après midi sont envoyées dans
+                              les 24
+                              heures</p>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </section>
             </div>
+            <%- include('../components/nav-bar-slider'); %>
+              <%- include('../components/logSlide'); %>
+                <%- include('../components/panierSlide'); %>
+                  <%- include('../components/favSlide'); %>
+                    <%- include('../components/searchSlide'); %>
           </div>
-          <div class="bar-article"></div>
-          <div class="global-btn-article-panier">
-            <% if (article.totalStock> 0) { %>
-            <button class="btn-article-panier">
-              <span>
-                <p>Ajouter au panier</p>
-                <p>
-                  <% if (article.reduction> 0) { %>
-                  <%= article.price - (article.price * article.reduction / 100) %> €
-                  <% } else { %>
-                  <%= article.price %> €
-                  <% } %>
-                </p>
-              </span>
-            </button>
-            <% } else { %>
-            <button class="btn-article-panier-out-of-stock">
-              <span>
-                <p class="rupture">Rupture de stock</p>
-              </span>
-            </button>
-            <% } %>
-          </div>
-          <div class="global-description-article">
-            <div class="ProductDetailsTabs_container">
-              <ul class="tab-list">
-                <li>
-                  <span class="tab-label" onclick="toggleTabSlider(0, 'description-tab-content')">DESCRIPTION</span>
-                </li>
-                <li>
-                  <span class="tab-label" onclick="toggleTabSlider(1, 'livraison-retours-tab-content')">LIVRAISON
-                    & RETOURS</span>
-                </li>
-              </ul>
-              <div class="tab-list-slider">
-                <div class="tab-list-slider__indicator" aria-hidden="true">
+          <%- include('../components/footer'); %>
+            <section class="caroussel-desktop">
+              <!-- Swiper -->
+              <div class="container-carousel">
+                <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+                  <div class="swiper-wrapper">
+                    <% article.img.forEach(imgUrl=> { %>
+                      <div class="swiper-slide">
+                        <img src="<%= imgUrl %>" alt="<%= article.name %>">
+                      </div>
+                      <% }); %>
+                  </div>
+                  <div class="swiper-button-next" style="color: black;"></div>
+                  <div class="swiper-button-prev" style="color: black;"></div>
+                  <div class="swiper-pagination"></div>
+                </div>
+                <div thumbsSlider="" class="swiper mySwiper tel-none">
+                  <div class="swiper-wrapper swipper-verticale-perso">
+                    <% article.img.forEach(imgUrl=> { %>
+                      <div class="swiper-slide">
+                        <img src="<%= imgUrl %>" alt="<%= article.name %>">
+                      </div>
+                      <% }); %>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div id="description-tab-content" class="tab-panel">
-            <div class="description-tab-content">
-              <div class="text-wrapper">
-                <p>
-                  <%= article.description %>
-                </p>
-                <ul class="manufacturing-list">
-                  <li>
-                    <%= article.manufacturing %>
-                  </li>
-                </ul>
-              </div>
-              <div class="readmore-btn">Voir plus</div>
-            </div>
-          </div>
-          <div id="livraison-retours-tab-content" class="tab-panel">
-            <div class="livraison-detail">
-              <p>Retours et échanges offerts</p>
-              <p>Vous avez la possibilité de nous retourner ou échanger – dans
-                son
-                état d’origine – tout produit commandé (hors articles
-                personnalisés)
-                – dans un délai de 30 jours à compter de sa date de
-                réception.
-                Pour plus d'informations consultez notre FAQ.</p>
-            </div>
-            <div class="livraison-detail">
-              <p>Livraison standard offerte</p>
-              <p>Dior vous propose plusieurs modes de livraison rapides et
-                sécurisés :
-                Livraison standard (3 à 4 jours ouvrés): offerte
-                Livraison express (1 à 2jours ouvrés) : 9,95€ (offerte pour
-                toute
-                commande supérieure à 1300€)
-                Livraison Sur-Mesure (jour et créneau de votre choix selon
-                codes
-                postaux éligibles) : 18€
-                Les délais de livraison sont estimés à partir de
-                l'expédition de
-                votre commande.</p>
-            </div>
-            <div class="livraison-detail">
-              <p>Expédition sous 24h</p>
-              <p>Les commandes effectuées avant midi sont préparées et
-                envoyées le
-                même jour ; celles effectuées après midi sont envoyées dans
-                les 24
-                heures</p>
-            </div>
-          </div>
-        </div>
-    </div>
-    </section>
-  </div>
-  <%- include('../components/nav-bar-slider'); %>
-  <%- include('../components/logSlide'); %>
-  <%- include('../components/panierSlide'); %>
-  <%- include('../components/favSlide'); %>
-  <%- include('../components/searchSlide'); %>
-  </div>
-  <%- include('../components/footer'); %>
-  <section class="caroussel-desktop">
-    <!-- Swiper -->
-    <div class="container-carousel">
-      <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-        <div class="swiper-wrapper">
-          <% article.img.forEach(imgUrl=> { %>
-          <div class="swiper-slide">
-            <img src="<%= imgUrl %>" alt="<%= article.name %>">
-          </div>
-          <% }); %>
-        </div>
-        <div class="swiper-button-next" style="color: black;"></div>
-        <div class="swiper-button-prev" style="color: black;"></div>
-        <div class="swiper-pagination"></div>
-      </div>
-      <div thumbsSlider="" class="swiper mySwiper tel-none">
-        <div class="swiper-wrapper swipper-verticale-perso">
-          <% article.img.forEach(imgUrl=> { %>
-          <div class="swiper-slide">
-            <img src="<%= imgUrl %>" alt="<%= article.name %>">
-          </div>
-          <% }); %>
-        </div>
-      </div>
-    </div>
-    <button class="close-button-carousel" onclick="closeCaroussel()">&#10005;</button>
-  </section>
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-</body>
+              <button class="close-button-carousel" onclick="closeCaroussel()">&#10005;</button>
+            </section>
+            <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+              integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+            </body>
 
 </html>

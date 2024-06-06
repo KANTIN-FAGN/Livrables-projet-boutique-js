@@ -186,7 +186,6 @@
         margin: 0 1.5rem;
         margin-left: -1.5rem;
         margin-right: -1.5rem;
-        margin-bottom: 1rem;
     }
 
     .btn-article-panier span {
@@ -352,9 +351,129 @@
     .header_sizes_product {
         margin: 0 0 0 1.5rem;
     }
+
+    .ProductDetailsTabs_container,
+    .tab-panel {
+        display: none !important;
+    }
+
+    .ProductDetailsTabs_container_mobile {
+        width: 100%;
+    }
+
+    .ProductDetailsTabs_container_mobile>section::after {
+        display: block;
+        content: "";
+        border-bottom: .0625rem solid #e5e5e5;
+    }
+
+    .ProductDetailsTabs_container_mobile .titre_desciption,
+    .ProductDetailsTabs_container_mobile .titre_livraison {
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Description_mobile_global,
+    .Livraison_mobile_global {
+        padding: 0 40px;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    }
+
+    .Description_mobile_global.active,
+    .Livraison_mobile_global.active {
+        overflow: hidden;
+    }
+
+    .description-detail,
+    .livraison-detail-global {
+        height: 50px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        transition: height 0.5s ease-in-out;
+    }
+
+    .description-detail ul {
+        padding-left: 15px; 
+        margin: 1em 0;
+    }
+    .description-detail div,
+    .livraison-detail-global div {
+        color: #757575;
+    }
+
+    .livraison-detail p:first-child {
+        color: #000;
+        margin-bottom: 5px;
+    }
+    .livraison-detail p:last-child {
+        margin-bottom: 10px;
+    }
+    
+    .description-detail ul li {
+        margin-bottom: 10px;
+        list-style: none;
+        padding-left: 10px;
+        position: relative;
+    }
+    
+    .description-detail ul li::marker {
+        content: '•';
+        font-size: 1em;
+        color: #757575;
+    }
+    
+    .description-detail ul li::before {
+        content: '•';
+        position: absolute;
+        left: -20px;
+        font-size: 1em;
+        color: #757575;
+    }
+    
+
+    .description-detail.active,
+    .livraison-detail-global.active {
+        transition: height 0.5s ease-in-out;
+    }
+
+    .svgDescription,
+    .svgLivraison {
+        transform: rotate(0deg);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .svgDescription.active,
+    .svgLivraison.active {
+        transform: rotate(-180deg);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btnVoirPlusDescription,
+    .btnVoirPlusLivraison {
+        border: none;
+        background: transparent;
+        text-decoration: underline;
+        margin-bottom: 16px;
+    }
+
+    .btnVoirPlusDescription.active,
+    .btnVoirPlusLivraison.active {
+        content: 'Voir moins';
+        border: none;
+        background: transparent;
+        text-decoration: underline;
+    }
 }
 
 @media screen and (min-width: 1024px) {
+    .ProductDetailsTabs_container_mobile {
+        display: none;
+    }
+
     .dropdown-tailles-mobile {
         display: none;
     }
