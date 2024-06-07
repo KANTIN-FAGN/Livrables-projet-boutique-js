@@ -7,7 +7,7 @@ const baseUrl = process.env.BASE_URL;
 class ArticleFunc {
     static async getArticleById(req, res) {
         const articleById = req.article;
-    
+
         try {
             // Execute the queries in parallel
             const [images, colors, category, sizes, articlesWithDifferentColors] = await Promise.all([
@@ -17,7 +17,7 @@ class ArticleFunc {
                 Article.getSizesById(articleById.id_article),
                 Article.getArticlesByNameWithDifferentColors(articleById.name, articleById.id_article)
             ]);
-    
+
             // Format the image URLs
             articleById.img = images.map(image => `${baseUrl}/asset${image.img}.jpg`);
             // Add colors to the article
@@ -26,11 +26,11 @@ class ArticleFunc {
             articleById.category = category.length > 0 ? category[0].category : null;
             // Add sizes to the article
             articleById.sizes = sizes.map(size => ({ size: size.size, stock: size.stock }));
-    
+
             // Calculate the total stock
             const totalStock = sizes.reduce((total, size) => total + size.stock, 0);
             articleById.totalStock = totalStock;
-    
+
             // Fetch and format the first image URL for each article with different colors
             const formattedArticlesWithDifferentColors = await Promise.all(
                 articlesWithDifferentColors.map(async article => {
@@ -44,9 +44,9 @@ class ArticleFunc {
                     };
                 })
             );
-    
+
             articleById.articlesWithDifferentColors = formattedArticlesWithDifferentColors;
-    
+
             return res.status(200).json({
                 message: `Article with id ${req.params.id} was successfully retrieved`,
                 status: 200,
@@ -62,7 +62,7 @@ class ArticleFunc {
     static async get4ArticlesAleatoire(req, res) {
         try {
             const articles = await Article.get4RandomArticles();
-    
+
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -73,16 +73,16 @@ class ArticleFunc {
                     const [images] = await Promise.all([
                         Article.getImages(article.id_article),
                     ]);
-    
+
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
                     };
 
-                    const { description, name, detail, manufacturing, price, reduction, genders, id_category,  ...articleWithoutDescriptionAndName } = article;
+                    const { description, name, detail, manufacturing, price, reduction, genders, id_category, ...articleWithoutDescriptionAndName } = article;
                     return articleWithoutDescriptionAndName;
                 }));
-    
+
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,
@@ -96,12 +96,10 @@ class ArticleFunc {
             });
         }
     }
-    
-    
     static async getArticleHomme(req, res) {
         try {
             const articles = await Article.getArticleHomme(req.query);
-    
+
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -115,7 +113,7 @@ class ArticleFunc {
                         Article.getCategoryById(article.id_article),
                         Article.getMaterialById(article.id_article)
                     ]);
-    
+
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
@@ -124,13 +122,13 @@ class ArticleFunc {
                     article.colors = colors.map(color => color.color);
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
-                    
+
                 }));
-    
+
                 const offset = parseInt(req.query.offset) || 0;
                 const limit = parseInt(req.query.limit) || 6;
                 const href = baseUrl + "/mode-homme/";
-    
+
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,
@@ -155,7 +153,7 @@ class ArticleFunc {
     static async getArticleFemme(req, res) {
         try {
             const articles = await Article.getArticleFemme(req.query);
-    
+
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -169,7 +167,7 @@ class ArticleFunc {
                         Article.getCategoryById(article.id_article),
                         Article.getMaterialById(article.id_article)
                     ]);
-    
+
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
@@ -179,11 +177,11 @@ class ArticleFunc {
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
                 }));
-    
+
                 const offset = parseInt(req.query.offset) || 0;
                 const limit = parseInt(req.query.limit) || 6;
                 const href = baseUrl + "/mode-femme/";
-    
+
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,
@@ -271,6 +269,29 @@ class ArticleFunc {
             });
         }
     };
+    static async searchArticles(req, res) {
+        const searchTerm = req.query.term;
+    
+        if (!searchTerm) {
+            return res.status(400).json({
+                error: 'Search term is required'
+            });
+        }
+    
+        try {
+            const articles = await Article.searchArticles(searchTerm);
+            if (articles.length === 0) {
+                return res.status(200).json({
+                    message: 'Désolé, aucun résultat ne correspond à votre recherche'
+                });
+            }
+            return res.status(200).json(articles);
+        } catch (error) {
+            return res.status(500).json({
+                error: 'An error occurred while searching for articles'
+            });
+        }
+    }
 }
 
 module.exports = ArticleFunc;

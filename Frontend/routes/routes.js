@@ -10,6 +10,7 @@ router.get('/Roid/article/:id', controllerArticle.getArticleById);
 router.get('/Roid/inscription', controllerLog.PageInscription);
 router.post('/Roid/treatment/inscription', controllerLog.Register);
 router.post('/Roid/treatment/connnexion', controllerLog.Login);
+router.post('/Roid/treatment/search-homme', controllerLog.Login);
 
 module.exports = router;
  

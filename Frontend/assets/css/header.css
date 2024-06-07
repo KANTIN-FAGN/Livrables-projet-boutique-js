@@ -23,6 +23,7 @@ header {
 
 .navbar .logo {
     font-size: 2em;
+    font-family: var(--font-Logo-Regular) !important;
 }
 
 .navbar .nav-links ul {
@@ -287,7 +288,7 @@ header {
     .fav-section,
     .search-section {
         width: 100vw;
-        max-height: 28.75rem;
+        max-height: 33.75rem;
         /* Hauteur maximale */
         background: #fff;
         transition: all 0.5s;
@@ -316,6 +317,326 @@ header {
         background: #00000057;
     }
 
+    .connnexion-infotitre,
+    .inscription-infotitre {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .connexion-info,
+    .inscription-info {
+        display: flex;
+        height: 50px;
+        justify-content: space-between;
+        padding: 1rem 0;
+    }
+
+    .forgot-pwd-global {
+        display: none;
+    }
+
+    .connexion,
+    .inscription {
+        border-top: .0625rem solid #e5e5e5;
+        padding: 0 1.25rem;
+    }
+
+    .svgMobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(0deg);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .svgMobile.active {
+        transform: rotate(-180deg);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .connexion-input-global,
+    .inscription-btn-global {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease-in-out;
+    }
+
+    .connexion-input-global.active,
+    .inscription-input-global.active {
+        height: auto;
+        transition: height 0.5s ease-in-out;
+    }
+
+    .group {
+        position: relative;
+        width: 100%;
+        padding-bottom: 16px;
+    }
+
+    .forget-pwd {
+        font-size: 13px;
+        text-decoration: underline;
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 15px;
+    }
+
+    .forget-pwd p {
+        cursor: pointer;
+        color: #000;
+    }
+
+    .input {
+        font-size: 16px;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #515151;
+        background: transparent;
+    }
+
+    .input:focus {
+        outline: none;
+    }
+
+    .label-titre {
+        color: var(--gris-footer-link);
+        font-size: 18px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        top: 15px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    .input:focus~label,
+    .input:valid~label {
+        top: -5px;
+        font-size: 14px;
+        color: var(--gris-footer-link);
+    }
+
+    .bar {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+
+    .bar:before,
+    .bar:after {
+        content: '';
+        height: 2px;
+        width: 0;
+        bottom: 1px;
+        position: absolute;
+        background: #969696;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    .bar:before {
+        left: 50%;
+    }
+
+    .bar:after {
+        right: 50%;
+    }
+
+    .input:focus~.bar:before,
+    .input:focus~.bar:after {
+        width: 50%;
+    }
+
+    .highlight {
+        position: absolute;
+        height: 60%;
+        width: 100%;
+        top: 25%;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .input:focus~.highlight {
+        animation: inputHighlighter 0.3s ease;
+    }
+    
+    .connnexion-infotitre p:first-child {
+        font-weight: bold;
+    }
+
+    @keyframes inputHighlighter {
+        from {
+            background: #ffffff;
+        }
+
+        to {
+            width: 0;
+            background: transparent;
+        }
+    }
+
+    .checkbox-container {
+        width: 100%;
+        padding-bottom: 15px;
+    }
+
+    .checkbox-container label {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .btn-connexion-global {
+        width: 100%;
+    }
+
+    .btn-connexion {
+        width: 100%;
+        height: 52px;
+        border-radius: 50px;
+        cursor: pointer;
+        border: none;
+        background: #000;
+        color: #ffffff;
+        margin-bottom: 16px;
+    }
+
+    .input-connexion {
+        width: 100%;
+    }
+
+    .SearchInput_searchbar__form__sAaH5 {
+        position: relative;
+        border-bottom: .0625rem solid #303030;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: 75%;
+    }
+
+    .SearchInput_searchbar__form__input__icon__dI4e2 {
+        z-index: 1;
+        color: #757575;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+
+    .SearchInput_searchbar__form__input__field__8Gx4A {
+        width: 100%;
+        padding-left: .5rem;
+        margin: 0 !important;
+    }
+
+    .text-input .input {
+        display: inline-flex;
+        align-items: center;
+        height: 2.875rem;
+        box-sizing: border-box;
+        border-bottom: .0625rem solid #757575;
+        position: relative;
+    }
+
+    .SearchInput_searchbar__form__input__field__8Gx4A>* {
+        border-bottom: none !important;
+    }
+
+    .text-input .input input,
+    .text-input .input textarea {
+        border: 0;
+        border-radius: .3125rem;
+        font-size: .8125rem;
+        line-height: 1.25rem;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+        outline: none;
+        height: 100%;
+        padding: 1.25rem 0 .375rem;
+    }
+
+    button,
+    input {
+        position: relative;
+    }
+
+    .text-input .input .text-input__extra_options {
+        display: flex;
+        position: absolute;
+        right: 0;
+        padding: 1.25rem 0 .375rem;
+    }
+
+    .text-field-icon-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 1.25rem 0 .375rem .75rem;
+    }
+    
+    .input-search {
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-section {
+        height: auto !important;
+    }
+
+    .global-search-section {
+        overflow: hidden;
+    }
+
+    .like_also {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .articles-like_also {
+        padding: 0 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        width: auto;
+    }
+
+    .article-like_also{
+        padding: 0 1.25rem;
+    }
+    
+    .articles_like_also a img{
+        width: 49.42%;
+    }
+    #inscription-mobile .svgMobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(0deg);
+        transition: all 0.2s ease-in-out;
+    }
+    
+    #inscription-mobile .svgMobile.active {
+        transform: rotate(-180deg);
+        transition: all 0.2s ease-in-out;
+    }
+    
+    #inscription-btn-global {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease-in-out;
+    }
+    
+    #inscription-btn-global.active {
+        height: auto;
+        transition: height 0.5s ease-in-out;
+    }
+    
 }
 
 @media screen and (min-width: 1024px) {

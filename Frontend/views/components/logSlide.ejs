@@ -1,77 +1,97 @@
 <section id="sectionCompte" class="global-log-section">
-    <div class="overlay-slider"></div>
-    <div class="log-section">
-        <section class="connexion">
-            <div class="connexion-info">
-                <p>SE CONNECTER</p>
-                <p>Pour accéder à votre compte</p>
+  <div class="overlay-slider"></div>
+  <div class="log-section">
+    <section class="connexion">
+      <div class="connexion-info" id="connexion-mobile">
+        <div class="connnexion-infotitre">
+          <p>SE CONNECTER</p>
+          <p>Pour accéder à votre compte</p>
+        </div>
+        <div class="svgMobile" id="svg-connexion-mobile">
+          <span>
+            <svg id="svgLivraison" class="svgLivraison" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" style="height: 20px; width: 20px;">
+              <path fill="black" d="M15.39 7.6a.54.54 0 0 0-.78 0L10 12.21 5.39 7.6a.54.54 0 0 0-.78 0 .55.55 0 0 0 0 .77L10 13.76l5.39-5.39a.55.55 0 0 0 0-.77">
+              </path>
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div class="connexion-input-global" id="connexion-input-global">
+        <form action="/Roid/treatment/connnexion" method="POST">
+          <div class="input-connexion">
+            <div class="group">
+              <input required="" type="text" name="email" class="input">
+              <label class="label-titre">*E-mail</label>
             </div>
-            <div class="connexion-input-global">
-                <form action="/Roid/treatment/connnexion" method="POST">
-                    <div class="input-connexion">
-                        <div class="group">
-                            <input required="" type="text" name="email" class="input">
-                            <label class="label-titre">*E-mail</label>
-                        </div>
-                        <div class="group">
-                            <input required="" name="pswd" type="text" class="input">
-                            <label class="label-titre">*Mot de passe</label>
-                        </div>
-                    </div>
-                    <div class="forget-pwd-remember">
-                        <div class="forget-pwd">
-                            <p>Mot de passe oublié ?</p>
-                        </div>
-                        <div class="checkbox-container">
-                            <label for="">
-                                <input type="checkbox" name="remember">
-                                <p>Se souvenir de moi</p>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="btn-connexion-global">
-                        <button class="btn-connexion">Continuer</button>
-                    </div>
-                </form>
+            <div class="group">
+              <input required="" name="pswd" type="text" class="input">
+              <label class="label-titre">*Mot de passe</label>
             </div>
-            <div class="forgot-pwd-global">
-                <div class="titre-forgot">
-                    <p>MOT DE PASSE OUBLIÉ ?</p>
-                </div>
-                <section class="info-forgot">
-                    <div class="info-forgot-aide">
-                        <p>Veuillez saisir l'adresse e-mail utilisée lors de votre inscription. Vous recevrez un lien
-                            pour
-                            modifier votre mot de passe.</p>
-                    </div>
-                    <div class="input-connexion">
-                        <div class="group">
-                            <input required="" type="text" class="input">
-                            <label class="label-titre">*E-mail</label>
-                        </div>
-                    </div>
-                    <div class="btn-connexion-global">
-                        <button class="btn-connexion">Continuer</button>
-                    </div>
-                    <div class="backToConnect">
-                        <p>Retour à connexion</p>
-                    </div>
-                </section>
+          </div>
+          <div class="forget-pwd-remember">
+            <div class="forget-pwd">
+              <p>Mot de passe oublié ?</p>
+            </div>
+            <div class="checkbox-container">
+              <label for="">
+                <input type="checkbox" name="remember">
+                <p>Se souvenir de moi</p>
+              </label>
+            </div>
+          </div>
+          <div class="btn-connexion-global">
+            <button class="btn-connexion">Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="forgot-pwd-global">
+        <div class="titre-forgot">
+          <p>MOT DE PASSE OUBLIÉ ?</p>
+        </div>
+        <section class="info-forgot">
+          <div class="info-forgot-aide">
+            <p>Veuillez saisir l'adresse e-mail utilisée lors de votre inscription. Vous recevrez un lien
+              pour
+              modifier votre mot de passe.</p>
+          </div>
+          <div class="input-connexion">
+            <div class="group">
+              <input required="" type="text" class="input">
+              <label class="label-titre">*E-mail</label>
+            </div>
+          </div>
+          <div class="btn-connexion-global">
+            <button class="btn-connexion">Continuer</button>
+          </div>
+          <div class="backToConnect">
+            <p>Retour à connexion</p>
+          </div>
+        </section>
 
-            </div>
-        </section>
-        <section class="inscription">
-            <div class="inscription-info">
-                <p>S'INSCRIRE</p>
-                <p>Vous n'avez pas de compte ?</p>
-            </div>
-            <div class="inscription-btn-global">
-                <div class="btn-connexion-global">
-                    <a href="/Roid/inscription">
-                        <button class="btn-connexion">Créer un compte</button>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </div>
+      </div>
+    </section>
+    <section class="inscription">
+      <div class="inscription-info" id="inscription-mobile">
+        <div class="connnexion-infotitre">
+          <p>S'INSCRIRE</p>
+          <p>Vous n'avez pas de compte ?</p>
+        </div>
+        <div class="svgMobile" id="svg-inscription-mobile">
+          <span>
+            <svg id="svgLivraison" class="svgLivraison" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20" style="height: 20px; width: 20px;">
+              <path fill="black" d="M15.39 7.6a.54.54 0 0 0-.78 0L10 12.21 5.39 7.6a.54.54 0 0 0-.78 0 .55.55 0 0 0 0 .77L10 13.76l5.39-5.39a.55.55 0 0 0 0-.77">
+              </path>
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div class="inscription-btn-global" id="inscription-btn-global">
+        <div class="btn-connexion-global">
+          <a href="/Roid/inscription">
+            <button class="btn-connexion">Créer un compte</button>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 </section>

@@ -2,34 +2,65 @@
 <html lang="en">
 
 <head>
-    <%- include('../components/head'); %>
-        <title>Roid</title>
+  <%- include('../components/head'); %>
+  <title>Roid</title>
 </head>
 
 <body>
-    <div class="main-ctn">
-        <div class="main">
-            <section class="header-inscription-global">
-                <div class="banner">
-                    <img src="/public/images/banner_inscription.avif" alt="bannière d'inscription">
-                </div>
-                <div class="titre-sousTitre">
-                    <a href="/Roid/">ROID</a>
-                    <p>Créer un compte Dior</p>
-                </div>
-            </section>
-            <section class="option-inscription-global spacing-container">
-                <form action="/Roid/treatment/inscription" method="POST">
-                    <input type="email" name="email" placeholder="Entrez votre e-mail">
-                    <input type="text" name="firstname" placeholder="Entrez votre Prénom">
-                    <input type="text" name="lastname" placeholder="Entrez votre nom">
-                    <input type="password" name="pswd" placeholder="Entrez votre mot de passe">
-                    <button type="submit">Créer votre compte</button>
-                </form>
-            </section>            
+  <div class="main-ctn">
+    <div class="main">
+      <section class="header-inscription-global">
+        <div class="banner">
+          <img src="/public/images/banner_inscription.avif" alt="bannière d'inscription">
         </div>
+        <div class="titre-sousTitre">
+          <a href="/Roid/">ROID</a>
+          <p>Créer un compte Dior</p>
+        </div>
+      </section>
+      <section class="option-inscription-global spacing-container">
+        <form action="/Roid/treatment/inscription" method="POST">
+          <div class="input-inscription">
+            <div class="info-inscription">
+              <div class="info-inscription-titre">
+                <p>INFORMATIONS DE CONNEXION</p>
+              </div>
+              <div class="group-global">
+                <div class="group">
+                  <input required="" type="text" name="email" class="input">
+                  <label class="label-titre">*E-mail</label>
+                </div>
+                <div class="group">
+                  <input required="" name="pswd" type="text" class="input">
+                  <label class="label-titre">*Mot de passe</label>
+                </div>
+              </div>
+            </div>
+            <div class="PageSectionSeparator_separator__C8eiR"></div>
+            <div class="info-inscription">
+              <div class="info-inscription-titre">
+                <p>INFORMATIONS PERSONNELLES</p>
+              </div>
+              <div class="group-global">
+                <div class="group">
+                  <input required="" name="firstname" type="text" class="input">
+                  <label class="label-titre">*Prénom</label>
+                </div>
+                <div class="group">
+                  <input required="" name="lastname" type="text" class="input">
+                  <label class="label-titre">*Nom</label>
+                </div>
+              </div>
+            </div>
+            <div class="PageSectionSeparator_separator__C8eiR"></div>
+          </div>
+          <div class="btn-inscription-global">
+            <button type="submit" class="btn-inscription">Créer votre compte</button>
+          </div>
+        </form>
+      </section>
     </div>
+  </div>
 </body>
 
 </html>
-

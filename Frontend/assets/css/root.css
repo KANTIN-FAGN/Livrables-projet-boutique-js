@@ -1,21 +1,11 @@
 @font-face {
-    font-family: 'Gothic_Regular';
-    src: '../font/fonts_global/Regular.otf' format("opentype");
+    font-family: 'Century Gothic Std';
+    src: '/public/font/fonts_global/Regular.otf' format("opentype");
 }
 
 @font-face {
-    font-family: 'Gothic_Bold';
-    src: '../font/fonts_global/Bold.otf' format("opentype");
-}
-
-@font-face {
-    font-family: 'Font-logo_Bold';
-    src: '../font/fonts_Logo/EBGaramond-Bold.ttf' format("truetype");
-}
-
-@font-face {
-    font-family: 'Font-logo_Regular';
-    src: '../font/fonts_Logo/EBGaramond-Regular.ttf' format("truetype");
+    font-family: 'EB Garamond';
+    src: '/public/font/fonts_Logo/EBGaramond-Regular.ttf' format("truetype");
 }
 
 * {
@@ -23,6 +13,7 @@
     margin: 0;
     text-decoration: none;
     list-style: none;
+    font-family: var(--font-regular) !important;
 }
 
 body {
@@ -34,10 +25,8 @@ body {
 }
 
 :root {
-    --font-regular: 'Gothic_Regular';
-    --font-Bold: 'Gothic_Bold';
-    --font-Logo-Bold: 'Font-logo_Bold';
-    --font-Logo-Regular: 'Font-logo_Regular';
+    --font-regular: 'Century Gothic Std';
+    --font-Logo-Regular: 'EB Garamond';
     --noir-text: #000;
     --gris-placehorder: #747474;
     --gris-roid: #909090;

@@ -32,13 +32,13 @@ class Articles {
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
             const materials = url3.data.materials;
-            const categories = url4.data.categories
+            const categories = url4.data.categories;
 
             res.render('../views/pages/articles', {
                 lst_article: articles,
                 lst_color: colors,
                 lst_materials: materials,
-                lst_categorys: categories
+                lst_categorys: categories,
             });
 
         } catch (err) {
@@ -49,7 +49,7 @@ class Articles {
 
     static async ArticlesFemme(req, res) {
         try {
-            const [url1, url2, url3, url4] = await Promise.all([
+            const [url1, url2, url3, url4, url5] = await Promise.all([
                 axios.get(`${url}mode-femme/`),
                 axios.get(`${url}colors/`),
                 axios.get(`${url}materials/`),
@@ -65,7 +65,8 @@ class Articles {
                 lst_article: articles,
                 lst_color: colors,
                 lst_materials: materials,
-                lst_categorys: categories
+                lst_categorys: categories,
+                lst_articles_also: articleLikeAlso
             });
 
         } catch (err) {
