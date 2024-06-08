@@ -168,3 +168,14 @@ var swiperMain = new Swiper(".mySwiper2", {
         swiper: swiperThumbs,
     },
 });
+
+document.getElementById('sort-options-tailles').addEventListener('change', function () {
+    document.getElementById('product_size').value = this.value;
+});
+
+// Pour la version mobile
+document.querySelectorAll('.SizeSpot_button__dZsg8').forEach(button => {
+    button.addEventListener('click', function () {
+        document.getElementById('product_size').value = this.value;
+    });
+});

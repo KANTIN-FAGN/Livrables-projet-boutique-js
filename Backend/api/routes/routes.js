@@ -18,7 +18,7 @@ router.get('/categories', controllersArticle.getCategories);
 router.post('/create-compte', controllersUser.Register);
 router.post('/connexion', controllersUser.Login);
 router.get('/search', controllersArticle.searchArticles);
-router.get('/4Articles', controllersArticle.get4ArticlesAleatoire)
+router.get('/4Articles', controllersArticle.get4ArticlesAleatoire);
 
 // Important for the app.use in the server
 module.exports = router;

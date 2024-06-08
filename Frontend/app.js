@@ -17,7 +17,7 @@ app.use(cors());
 
 // Lire le body
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Utiliser les routes définies dans routes.js
 app.use(routes);
