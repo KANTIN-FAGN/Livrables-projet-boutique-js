@@ -26,6 +26,19 @@ class User {
             });
         });
     }
+
+    static getUser(id) {
+        const query = `SELECT * FROM users WHERE id_user = ?;`;
+        return new Promise((resolve, reject) => {
+            connection.query(query, [id], (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results[0]);
+                }
+            });
+        });
+    }
 }
 
 module.exports = User;

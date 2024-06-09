@@ -20,7 +20,8 @@ router.get('/search', controllersArticle.searchArticles);
 router.get('/4Articles', controllersArticle.get4ArticlesAleatoire);
 
 router.post('/create-compte', controllersUser.Register);
-router.post('/connexion', middleware.validateToken, controllersUser.Login);
+router.post('/connexion', controllersUser.Login);
+router.get('/getUser', middleware.validateToken, controllersUser.getUser);
 
 router.post('/cart/add', CartFunc.addItemToCart);
 router.get('/cart', CartFunc.getUserCart);
