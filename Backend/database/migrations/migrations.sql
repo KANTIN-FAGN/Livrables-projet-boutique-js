@@ -103,5 +103,3 @@ CREATE TABLE have_fav(
    FOREIGN KEY(id_article) REFERENCES article(id_article),
    FOREIGN KEY(id_user) REFERENCES users(id_user)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-

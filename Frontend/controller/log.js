@@ -26,7 +26,7 @@ class Log {
         try {
             const {email, pswd, remember} = req.body;
             await axios.post(`${url}connexion/`, {email, pswd, remember});
-            res.redirect('/Roid')
+            res.redirect('back')
         } catch (err) {
             console.error(err);
             res.status(500).send("Internal Server Error");
