@@ -87,10 +87,13 @@ class Articles {
             const article = await Articles.getArticle(articleId);
             const dataUser = await controllerLog.getUser(req, res);
 
+            const active = true
+    
             res.render("../views/pages/single-article", {
                 article: article.article,
                 articlesWithDifferentColors: article.articlesWithDifferentColors,
-                dataUser
+                dataUser,
+                active
             });
         } catch (err) {
             console.error("Error retrieving article:", err);

@@ -1,4 +1,4 @@
-const log = require('../models/user');
+const log = require('../models/userModel');
 const cryp = require('crypto');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();

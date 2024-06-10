@@ -1,4 +1,4 @@
-const Article = require('../models/article');
+const Article = require('../models/articleModel');
 const dotenv = require('dotenv');
 dotenv.config();
 const baseUrl = process.env.BASE_URL;

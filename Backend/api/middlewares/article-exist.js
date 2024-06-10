@@ -1,4 +1,4 @@
-const Article = require("../models/article");
+const Article = require("../models/articleModel");
 
 const ArticleExists = async (req, res, next) => {
     const id = req.params.id;
