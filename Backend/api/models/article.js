@@ -195,7 +195,7 @@ class Article {
             const searchTerms = searchTerm.split(' ').map(term => `%${term}%`);
             const placeholders = searchTerms.map(() => `(a.name LIKE ? OR a.detail LIKE ? OR a.description LIKE ? OR a.genders LIKE ? OR m.material LIKE ? OR c.color LIKE ? OR cat.category LIKE ?)`).join(' AND ');
     
-            const sql = `SELECT DISTINCT a.id_article, a.name, a.detail, a.description, a.genders, a.id_category
+            const sql = `SELECT DISTINCT a.id_article, a.name, a.detail, a.description, a.genders, a.id_category, a.price
                 FROM article a
                 LEFT JOIN have_materials hm ON a.id_article = hm.id_article
                 LEFT JOIN material m ON hm.id_material = m.id_material

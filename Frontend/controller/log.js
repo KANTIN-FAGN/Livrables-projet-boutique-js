@@ -10,7 +10,6 @@ class Log {
             res.status(500).send("Internal Server Error");
         }
     }
-
     static async Register(req, res) {
         try {
             const { firstname, lastname, email, pswd } = req.body;
@@ -26,7 +25,6 @@ class Log {
             res.status(500).send("Internal Server Error");
         }
     }
-
     static async Login(req, res) {
         try {
             const { email, pswd, remember } = req.body;
@@ -49,25 +47,32 @@ class Log {
             res.status(500).send("Internal Server Error");
         }
     }
-
     static async getUser(req, res) {
         try {
             const token = req.cookies.Token;
+
+            if (!token) {
+                return undefined;
+            }
+
             const response = await axios.get(`${url}getUser/`, {
                 headers: {
                     "Authorization": token,
                     "Content-Type": "application/json"
                 }
             });
+
             if (response.status === 200) {
-                res.json(response.data);
+                return response.data;
             } else {
                 console.error("Unexpected response status when fetching user data:", response.status);
                 res.status(401).send("Failed to fetch user data");
+                return undefined;
             }
         } catch (err) {
             console.error("Error fetching user data:", err);
             res.status(500).send("Internal Server Error");
+            return undefined;
         }
     }
 }

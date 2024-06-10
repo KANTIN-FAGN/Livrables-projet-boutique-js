@@ -10,10 +10,9 @@ router.get('/Roid/article/:id', controllerArticle.getArticleById);
 router.get('/Roid/inscription', controllerLog.PageInscription);
 router.post('/Roid/treatment/inscription', controllerLog.Register);
 router.post('/Roid/treatment/connexion', controllerLog.Login);
-router.post('/Roid/treatment/search-homme', controllerLog.Login);
+router.post('/Roid/treatment/search', controllerArticle.searchArticle);
 
 router.post('/Roid/treatment/addToCart');
 router.post('/Roid/treatment/removeFromCart');
-router.get('/Roid/panier');
 
 module.exports = router;

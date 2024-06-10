@@ -271,21 +271,48 @@ class ArticleFunc {
     };
     static async searchArticles(req, res) {
         const searchTerm = req.query.term;
-    
+
         if (!searchTerm) {
             return res.status(400).json({
                 error: 'Search term is required'
             });
         }
-    
+
         try {
             const articles = await Article.searchArticles(searchTerm);
             if (articles.length === 0) {
                 return res.status(200).json({
                     message: 'Désolé, aucun résultat ne correspond à votre recherche'
                 });
+            } else {
+                const articlesWithDetails = await Promise.all(articles.map(async article => {
+                    const [images, colors, category, materials] = await Promise.all([
+                        Article.getImages(article.id_article),
+                        Article.getColorsById(article.id_article),
+                        Article.getCategoryById(article.id_article),
+                        Article.getMaterialById(article.id_article)
+                    ]);
+
+                    article.images = {
+                        img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
+                        img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
+                    };
+                    article.materials = materials.map(material => material.material);
+                    article.colors = colors.map(color => color.color);
+                    article.category = category.length > 0 ? category[0].category : null;
+                    return article;
+
+                }));
+
+                return res.status(200).json({
+                    message: `Articles successfully found`,
+                    status: 200,
+                    articles: {
+                        total: articlesWithDetails.length,
+                        items: articlesWithDetails
+                    }
+                });
             }
-            return res.status(200).json(articles);
         } catch (error) {
             return res.status(500).json({
                 error: 'An error occurred while searching for articles'

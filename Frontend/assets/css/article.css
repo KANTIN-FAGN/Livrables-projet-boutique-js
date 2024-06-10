@@ -234,7 +234,7 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     .dropdown-tailles-mobile ul {
         display: flex;
         gap: .5rem;
@@ -246,11 +246,11 @@
         font-size: .8125rem;
         line-height: 1.25rem;
     }
-    
+
     .dropdown-tailles-mobile ul::-webkit-scrollbar {
         display: none;
     }
-    
+
     .dropdown-tailles-mobile ul li button {
         border-radius: 3.75rem;
         padding: .25rem .75rem;
@@ -261,12 +261,12 @@
         border: none;
         transition: background-color 0.3s, color 0.3s, width 0.3s;
     }
-    
+
     .SizeSpot_button--selected {
         background-color: black !important;
         color: white;
     }
-    
+
     .unvailable-size {
         text-decoration: line-through;
         pointer-events: none;
@@ -274,7 +274,7 @@
         width: auto;
         padding: .25rem 1.25rem;
     }
-    
+
     .dropdown-open .dropdown-arrow {
         transform: translateY(-50%) rotate(180deg);
     }
@@ -402,6 +402,11 @@
         overflow: hidden;
         margin-bottom: 16px;
         transition: height 0.5s ease-in-out;
+        background: linear-gradient(to bottom, rgba(2,0,36,1) 0%, rgba(255,255,255,0) 100%, rgba(0,212,255,1) 100%);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
 
     .description-detail ul {
@@ -448,6 +453,9 @@
     .description-detail.active,
     .livraison-detail-global.active {
         transition: height 0.5s ease-in-out;
+        background: linear-gradient(to bottom, rgba(2,0,36,1) 0%, rgba(255,255,255,0) 0%, rgb(0, 0, 0) 0%);
+        -webkit-text-fill-color: back;
+        background-clip: text;
     }
 
     .svgDescription,
