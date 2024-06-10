@@ -8,6 +8,11 @@
 
 <body>
   <%- include('../components/header'); %>
+  <% if (err) {%>
+    <div class="err-div">
+        <p><%- message %></p>
+    </div>
+  <% } else { %>
   <div class="main-ctn">
     <div class="main">
       <section class="collection-global">
@@ -23,25 +28,25 @@
       <%- include('../components/filtre-nav'); %>
       <section class="container">
         <% lst_article.forEach(function (article) { %>
-          <a href="/Roid/article/<%= article.id_article %>">
-            <div class="article">
-              <img class="img-article" src="<%= article.images.img_1 %>" alt="">
-              <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
-              <div class="name-price">
-                <p class="name">
-                  <%= article.name %>
-                </p>
-                <p class="price">
-                  <%= article.price %> €
-                </p>
-              </div>
-              <div class="article-detail">
-                <p>
-                  <%= article.detail %>
-                </p>
-              </div>
+        <a href="/Roid/article/<%= article.id_article %>">
+          <div class="article">
+            <img class="img-article" src="<%= article.images.img_1 %>" alt="">
+            <img class="img-article-2" src="<%= article.images.img_2 %>" alt="">
+            <div class="name-price">
+              <p class="name">
+                <%= article.name %>
+              </p>
+              <p class="price">
+                <%= article.price %> €
+              </p>
             </div>
-          </a>
+            <div class="article-detail">
+              <p>
+                <%= article.detail %>
+              </p>
+            </div>
+          </div>
+        </a>
         <% }); %>
       </section>
     </div>
@@ -51,8 +56,8 @@
     <%- include('../components/favSlide'); %>
     <%- include('../components/searchSlide'); %>
   </div>
-
   <%- include('../components/footer'); %>
+  <% } %>
 </body>
 
 </html>

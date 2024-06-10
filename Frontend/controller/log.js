@@ -75,6 +75,20 @@ class Log {
             return undefined;
         }
     }
+    static async disconnect(req, res) {
+        try {
+            const token = req.cookies.Token;
+            if (!token) {
+                return res.status(400).send("No token found");
+            }
+            res.clearCookie('Token');
+            res.redirect('back');
+        } catch (err) {
+            console.error("Erreur deconnexion:", err);
+            res.status(500).send("Internal Server Error");
+        }
+    }
+    
 }
 
 module.exports = Log;

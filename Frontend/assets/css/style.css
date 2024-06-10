@@ -380,12 +380,15 @@
     .input-inscription {
         padding: 16px 40px;
     }
+
     .info-inscription {
         padding: 36px 0;
     }
+
     .info-inscription-titre {
         padding-bottom: 15px;
     }
+
     .PageSectionSeparator_separator__C8eiR {
         height: .0625rem;
         background-color: #e5e5e5;
@@ -394,7 +397,50 @@
     }
 }
 
+.Bold-err {
+    font-weight: bold;
+}
+
+.err-div {
+    width: 100vw;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (min-width: 1024px) {
+    .info-compte {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .info-compte p:last-child {
+        text-transform: uppercase;
+    }
+
+    .info-compte p:nth-child(2) {
+        text-transform: capitalize;
+    }
+
+    .btn-deconnexion {
+        width: 0;
+    }
+    .btn-deconnexion button:hover {
+        font-weight: bold;
+    }
+
+    .btn-deconnexion button{
+        text-decoration: underline;
+        color: #757575;
+        margin: .375rem 0 0;
+        background: transparent;
+        display: inline-block;
+    }
+
     .article .img-article-2 {
         position: absolute;
         opacity: 0;
@@ -718,6 +764,7 @@
         padding-left: 2.5rem;
         padding-right: 2.5rem;
     }
+
     .option-inscription-global {
         font-family: sans-serif;
     }
@@ -751,19 +798,23 @@
     .input-inscription {
         padding: 16px 40px;
     }
+
     .info-inscription {
         padding: 36px 0;
         display: flex;
     }
+
     .info-inscription-titre {
         padding-bottom: 15px;
     }
+
     .PageSectionSeparator_separator__C8eiR {
         height: .0625rem;
         background-color: #e5e5e5;
         width: 100vw;
         margin-left: -5rem;
     }
+
     .group-global {
         width: 50%;
         margin-left: 40px;
@@ -776,6 +827,7 @@
         justify-content: center;
         align-items: center;
     }
+
     .btn-inscription {
         width: 30%;
         height: 52px;
@@ -786,7 +838,8 @@
         color: #ffffff;
         margin: 36px 0;
     }
-    .btn-inscription button{
+
+    .btn-inscription button {
         width: 50%;
     }
 }

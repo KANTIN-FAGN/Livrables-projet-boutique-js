@@ -42,7 +42,8 @@ class Articles {
                 lst_color: colors,
                 lst_materials: materials,
                 lst_categorys: categories,
-                dataUser
+                dataUser,
+                err: null
             });
 
         } catch (err) {
@@ -71,7 +72,8 @@ class Articles {
                 lst_color: colors,
                 lst_materials: materials,
                 lst_categorys: categories,
-                dataUser
+                dataUser,
+                err: null
             });
 
         } catch (err) {
@@ -96,32 +98,36 @@ class Articles {
         }
     }
     static async searchArticle(req, res) {
+        const { term } = req.body;
         try {
-            const { term } = req.body;
             const [url1, url2, url3, url4] = await Promise.all([
                 axios.get(`${url}search?term=${term}`),
                 axios.get(`${url}colors/`),
                 axios.get(`${url}materials/`),
                 axios.get(`${url}categories/`)
             ]);
-
+    
             const dataUser = await controllerLog.getUser(req, res);
-
+    
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
             const materials = url3.data.materials;
             const categories = url4.data.categories;
-
+    
             res.render('../views/pages/articles', {
                 lst_article: articles,
                 lst_color: colors,
                 lst_materials: materials,
                 lst_categorys: categories,
-                dataUser
+                dataUser,
+                err: null // Assurez-vous de définir err comme null lorsqu'aucune erreur n'est survenue
             });
         } catch (err) {
-            console.error(err);
-            res.status(500).send("Internal Server Error");
+            res.status(404).render('../views/pages/articles', {
+                message: `Désolé, aucun résultat ne correspond à votre recherche <span class="Bold-err">"${term}"</span>`,
+                status: 404,
+                err: err // Transmettez l'erreur à votre modèle pour qu'elle puisse être affichée
+            });
         }
     }
 }

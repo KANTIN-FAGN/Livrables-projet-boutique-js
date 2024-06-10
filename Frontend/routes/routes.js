@@ -8,9 +8,12 @@ router.get('/Roid/mode-homme', controllerArticle.ArticlesHomme);
 router.get('/Roid/mode-femme', controllerArticle.ArticlesFemme);
 router.get('/Roid/article/:id', controllerArticle.getArticleById);
 router.get('/Roid/inscription', controllerLog.PageInscription);
+
+// route Traitement
 router.post('/Roid/treatment/inscription', controllerLog.Register);
 router.post('/Roid/treatment/connexion', controllerLog.Login);
 router.post('/Roid/treatment/search', controllerArticle.searchArticle);
+router.get('/Roid/treatment/disconnect', controllerLog.disconnect);
 
 router.post('/Roid/treatment/addToCart');
 router.post('/Roid/treatment/removeFromCart');
