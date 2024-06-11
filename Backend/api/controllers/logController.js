@@ -102,9 +102,9 @@ class Log {
             const IdUser = req.user.Sub;
             const user = await log.getUser(IdUser);
             if (!user) {
-                res.status(401).send({
+                res.status(404).send({
                     message: "User not found !",
-                    status: 401
+                    status: 404
                 });
             } else {
                 return res.status(200).json({

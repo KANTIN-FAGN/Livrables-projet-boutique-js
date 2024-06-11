@@ -26,6 +26,20 @@ class ArticleFav {
             });
         });
     }
+    static async getFav(user) {
+        const query = `SELECT article.* FROM article 
+                       JOIN have_fav ON article.id_article = have_fav.id_article 
+                       WHERE have_fav.id_user = ?`;
+        return new Promise((resolve, reject) => {
+            connection.query(query, [user], (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    }
 }
 
 module.exports = ArticleFav;

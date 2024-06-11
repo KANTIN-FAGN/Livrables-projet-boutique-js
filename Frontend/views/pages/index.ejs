@@ -24,10 +24,10 @@
       </section>
     </div>
     <%- include('../components/nav-bar-slider'); %>
-    <%- include('../components/logSlide', {dataUser} ); %>
-    <%- include('../components/panierSlide'); %>
-    <%- include('../components/favSlide'); %>
     <%- include('../components/searchSlide'); %>
+    <%- include('../components/panierSlide'); %>
+    <%- include('../components/logSlide', {dataUser}); %>
+    <%- include('../components/favSlide', {dataFav}); %>
   </div>
   <%- include('../components/footer'); %>
 </body>

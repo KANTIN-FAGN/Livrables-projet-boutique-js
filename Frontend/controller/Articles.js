@@ -1,12 +1,20 @@
 const url = "http://localhost:4000/";
 const axios = require("axios");
 const controllerLog = require('./log');
+const controllerFav = require('./fav');
 
 class Articles {
     static async Index(req, res) {
         try {
+            
             const dataUser = await controllerLog.getUser(req, res);
-            res.render('../views/pages/index', { dataUser });
+            const dataFav = await controllerFav.getFav(req, res);
+
+            res.render('../views/pages/index', {
+                dataUser,
+                dataFav
+            });
+
         } catch (err) {
             console.error(err);
             res.status(500).send("Internal Server Error");
@@ -31,6 +39,7 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
+            const dataFav = await controllerFav.getFav(req, res);
 
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
@@ -43,6 +52,7 @@ class Articles {
                 lst_materials: materials,
                 lst_categorys: categories,
                 dataUser,
+                dataFav,
                 err: null
             });
 
@@ -61,6 +71,7 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
+            const dataFav = await controllerFav.getFav(req, res);
 
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
@@ -73,6 +84,7 @@ class Articles {
                 lst_materials: materials,
                 lst_categorys: categories,
                 dataUser,
+                dataFav,
                 err: null
             });
 
@@ -85,15 +97,15 @@ class Articles {
         try {
             const articleId = req.params.id;
             const article = await Articles.getArticle(articleId);
-            const dataUser = await controllerLog.getUser(req, res);
 
-            const active = true
-    
+            const dataUser = await controllerLog.getUser(req, res);
+            const dataFav = await controllerFav.getFav(req, res);
+
             res.render("../views/pages/single-article", {
                 article: article.article,
                 articlesWithDifferentColors: article.articlesWithDifferentColors,
                 dataUser,
-                active
+                dataFav
             });
         } catch (err) {
             console.error("Error retrieving article:", err);
@@ -109,27 +121,29 @@ class Articles {
                 axios.get(`${url}materials/`),
                 axios.get(`${url}categories/`)
             ]);
-    
+
             const dataUser = await controllerLog.getUser(req, res);
-    
+            const dataFav = await controllerFav.getFav(req, res);
+
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
             const materials = url3.data.materials;
             const categories = url4.data.categories;
-    
+
             res.render('../views/pages/articles', {
                 lst_article: articles,
                 lst_color: colors,
                 lst_materials: materials,
                 lst_categorys: categories,
                 dataUser,
-                err: null // Assurez-vous de définir err comme null lorsqu'aucune erreur n'est survenue
+                dataFav,
+                err: null
             });
         } catch (err) {
             res.status(404).render('../views/pages/articles', {
                 message: `Désolé, aucun résultat ne correspond à votre recherche <span class="Bold-err">"${term}"</span>`,
                 status: 404,
-                err: err // Transmettez l'erreur à votre modèle pour qu'elle puisse être affichée
+                err: err
             });
         }
     }

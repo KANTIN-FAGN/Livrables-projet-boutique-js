@@ -19,8 +19,9 @@ router.get('/categories', controllersArticle.getCategories);
 router.get('/search', controllersArticle.searchArticles);
 router.get('/4Articles', controllersArticle.get4ArticlesAleatoire);
 
-router.post('/add-to-fav', controllersFav.AddToFav);
-router.post('/remove-from-fav', controllersFav.RemoveFromFav);
+router.post('/add-to-fav', middleware.validateToken, controllersFav.AddToFav);
+router.post('/remove-from-fav', middleware.validateToken, controllersFav.RemoveFromFav);
+router.get('/get-fav', middleware.validateToken, controllersFav.getUserFav);
 
 router.post('/create-compte', controllersUser.Register);
 router.post('/connexion', controllersUser.Login);

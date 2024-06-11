@@ -1,6 +1,14 @@
 <section id="sectionFav" class="global-fav-section">
     <div class="overlay-slider"></div>
-    <div class="fav-section">
+    <% if (dataFav) {%>
+        <div class="fav-section">
+            <% dataFav.favArticles.forEach(article=> { %>
+            <p><%= article.name %></p>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <div class="fav-section">
 
-    </div>
+        </div>
+    <% } %>
 </section>
