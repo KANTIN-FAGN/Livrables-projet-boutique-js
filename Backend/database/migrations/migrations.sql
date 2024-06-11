@@ -86,16 +86,6 @@ CREATE TABLE users(
    UNIQUE(email)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE have_order(
-   id_article SMALLINT,
-   id_user INT,
-   id_order INT AUTO_INCREMENT,
-   currentdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   PRIMARY KEY(id_order),
-   FOREIGN KEY(id_article) REFERENCES article(id_article),
-   FOREIGN KEY(id_user) REFERENCES users(id_user)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE have_fav(
    id_article SMALLINT, 
    id_user INT,
@@ -103,12 +93,3 @@ CREATE TABLE have_fav(
    FOREIGN KEY(id_article) REFERENCES article(id_article),
    FOREIGN KEY(id_user) REFERENCES users(id_user)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE cart(
-   id_article_size INT,
-   id_user INT,
-   quantity INT NOT NULL,
-   PRIMARY KEY(id_article_size, id_user),
-   FOREIGN KEY(id_article_size) REFERENCES article_size(id_article_size),
-   FOREIGN KEY(id_user) REFERENCES users(id_user)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

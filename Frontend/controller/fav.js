@@ -1,64 +1,60 @@
 const url = "http://localhost:4000/";
 const axios = require("axios");
 
+async function getFavID(token, id) {
+    try {
+        const response = await axios.get(`${url}get-fav/`, {
+            headers: {
+                "Authorization": token,
+                "Content-Type": "application/json"
+            }
+        });
+        for (const fav of response.data.articles) {
+            if (fav.id_article == id) {
+                return true;
+            }
+        }
+        return false;
+    } catch (err) {
+        console.error("Error fetching favorite IDs:", err);
+        return false;
+    }
+}
+
 class Fav {
     static async AddToFav(req, res) {
-        try {
-            const { id_article, id_user } = req.body;
-            const token = req.cookies.Token;
+        const { id_article, id_user } = req.body;
+        const token = req.cookies.Token;
 
-            if (!token) {
-                return undefined;
-            }
+        if (!token) {
+            return res.status(401).send('Unauthorized: No token provided');
+        }
 
-            if (!id_article || !id_user) {
-                res.redirect('back'), {
-                    message: 'Les champs id_article et id_user sont requis.'
-                }
-            }
-            const response = await axios.post(`${url}add-to-fav`, { id_article, id_user }, {
-                headers: {
-                    "Authorization": token,
-                    "Content-Type": "application/json"
-                }
+        if (!id_article || !id_user) {
+            return res.redirect('back').json({
+                message: 'Les champs id_article et id_user sont requis.'
             });
-            if (response.status === 200) {
-                res.redirect('back')
+        }
+
+        const header = {
+            "Authorization": token,
+            "Content-Type": "application/json"
+        };
+
+        try {
+            const isFav = await getFavID(token, id_article);
+            if (isFav) {
+                await axios.post(`${url}remove-from-fav`, { id_article, id_user }, { headers: header },);
             } else {
-                throw new Error("Erreur lors de la récupération de l'article");
+                await axios.post(`${url}add-to-fav`, { id_article, id_user }, { headers: header });
             }
+            res.redirect('back');
         } catch (err) {
-            console.error(err);
-            res.status(500).json({ message: 'Erreur lors de l\'ajout de l\'article aux favoris.', error: err.message });
+            console.error("Error adding/removing favorite:", err);
+            res.status(500).send('Internal Server Error');
         }
     }
-    static async RemoveFromFav(req, res) {
-        try {
-            const { id_article, id_user } = req.body;
-            const token = req.cookies.Token;
 
-            if (!token) {
-                return undefined;
-            }
-
-            if (!id_article || !id_user) {
-                return res.status(400).json({ message: 'Les champs id_article et id_user sont requis.' });
-            }
-            const response = await axios.post(`${url}remove-from-fav`, { id_article, id_user }, {
-                headers: {
-                    "Authorization": token,
-                    "Content-Type": "application/json"
-                }
-            });
-            if (response.status === 200) {
-                res.redirect('back')
-            } else {
-                throw new Error("Erreur lors de la récupération de l'article");
-            }
-        } catch (err) {
-            res.redirect('back')
-        }
-    }
     static async getFav(token) {
         try {
             return await axios.get(`${url}get-fav/`, {
@@ -68,9 +64,14 @@ class Fav {
                 }
             });
         } catch (err) {
+            console.error("Error getting favorites:", err);
             return false;
         }
     }
 }
 
-module.exports = Fav;
+module.exports = {
+    Fav,
+    getFavID
+};
+

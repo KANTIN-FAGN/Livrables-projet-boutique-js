@@ -19,8 +19,8 @@ router.get('/Roid/treatment/disconnect', controllerLog.disconnect);
 router.post('/Roid/treatment/search', controllerArticle.searchArticle);
 
 // route treatment fav
-router.post('/Roid/treatment/add-to-fav', controllerFav.AddToFav);
-router.post('/Roid/treatment/remove-from-fav', controllerFav.RemoveFromFav);
+router.post('/Roid/treatment/add-to-fav', controllerFav.Fav.AddToFav);
+router.post('/Roid/treatment/remove-from-fav', controllerFav.Fav.AddToFav);
 
 router.post('/Roid/treatment/addToCart');
 router.post('/Roid/treatment/removeFromCart');

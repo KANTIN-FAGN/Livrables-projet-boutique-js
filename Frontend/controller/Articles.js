@@ -8,7 +8,7 @@ class Articles {
         try {
             const token = req.cookies.Token;
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFavResponse = await controllerFav.Fav.getFav(token);
             const dataFav = dataFavResponse.data;
 
             res.render('../views/pages/index', {
@@ -41,7 +41,7 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFavResponse = await controllerFav.Fav.getFav(token);
             const dataFav = dataFavResponse.data;
 
             const articles = url1.data.articles.items;
@@ -76,7 +76,7 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFavResponse = await controllerFav.Fav.getFav(token);
             const dataFav = dataFavResponse.data;
 
             const articles = url1.data.articles.items;
@@ -102,19 +102,20 @@ class Articles {
     static async getArticleById(req, res) {
         try {
             const token = req.cookies.Token;
-    
             const articleId = req.params.id;
             const article = await Articles.getArticle(articleId);
-    
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFavResponse = await controllerFav.Fav.getFav(token);
             const dataFav = dataFavResponse.data;
+    
+            const like = await controllerFav.getFavID(token, articleId);
     
             res.render("../views/pages/single-article", {
                 article: article.article,
                 articlesWithDifferentColors: article.articlesWithDifferentColors,
                 dataUser,
-                dataFav: dataFav && dataFav.articles ? dataFav.articles : []
+                dataFav: dataFav && dataFav.articles ? dataFav.articles : [],
+                like: like
             });
         } catch (err) {
             console.error("Error retrieving article:", err);
@@ -133,7 +134,7 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFav = await controllerFav.getFav(token);
+            const dataFav = await controllerFav.Fav.getFav(token);
 
             console.log(dataFav);
 

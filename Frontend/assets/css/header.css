@@ -273,7 +273,7 @@ header {
         align-items: center;
         flex-direction: column-reverse;
         width: 100vw;
-        top: -150%;
+        top: -250%;
         left: 0;
         display: flex;
         justify-content: end;
