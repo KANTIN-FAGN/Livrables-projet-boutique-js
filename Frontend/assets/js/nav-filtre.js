@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const resetFilters = document.getElementById("reset-filters");
+    const filterButton = document.getElementById("filter-button");
     const dropdownMenus = {
         cat: document.getElementById("cat-menu"),
         mat: document.getElementById("mat-menu"),
@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         col: document.getElementById("col-count"),
     };
 
+    // Fonction pour mettre à jour le compteur de sélection
     const updateSelectedCount = () => {
         let totalSelected = 0;
         Object.keys(dropdownMenus).forEach(menuId => {
@@ -23,14 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 selectedCounts[menuId].style.display = 'none';
             }
         });
-        resetFilters.style.display = totalSelected > 0 ? 'inline' : 'none';
     };
 
+    // Fonction pour gérer le clic sur un élément de filtre
     const handleItemClick = (e, menuId) => {
         e.target.classList.toggle("selected");
         updateSelectedCount();
+        updateFilters();
     };
 
+    // Ajout des gestionnaires d'événements pour chaque élément de filtre
     Object.keys(dropdownMenus).forEach(menuId => {
         const items = dropdownMenus[menuId].querySelectorAll("li");
         items.forEach(item => {
@@ -38,33 +41,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    resetFilters.addEventListener("click", (e) => {
-        e.preventDefault();
-        Object.keys(dropdownMenus).forEach(menuId => {
-            const items = dropdownMenus[menuId].querySelectorAll("li");
-            items.forEach(item => item.classList.remove("selected"));
-        });
-        updateSelectedCount();
-    });
-    updateSelectedCount();
+    // Fonction pour récupérer les filtres sélectionnés
+    const getSelectedFilters = () => {
+        const selectedCategory = Array.from(document.querySelectorAll('#cat-menu li.selected')).map(li => li.textContent.trim()).join(',');
+        const selectedMaterial = Array.from(document.querySelectorAll('#mat-menu li.selected')).map(li => li.textContent.trim()).join(',');
+        const selectedColor = Array.from(document.querySelectorAll('#col-menu li.selected')).map(li => li.textContent.trim()).join(',');
+        return { category: selectedCategory, material: selectedMaterial, color: selectedColor };
+    };
 
-    const filterButton = document.getElementById("filter-button");
-    const filtersContainer = document.getElementById("filters-container");
-    const filterCloseButton = document.getElementById("close-nav-filtre");
+    // Fonction pour mettre à jour l'URL avec les filtres sélectionnés
+    const updateFilters = () => {
+        const selectedFilters = getSelectedFilters();
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('category', selectedFilters.category);
+        urlParams.set('material', selectedFilters.material);
+        urlParams.set('color', selectedFilters.color);
+        const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+        window.history.pushState({}, '', newUrl);
+        location.reload();
+    };
 
-    const navbar = document.querySelector("header");
-    const html = document.querySelector("body");
 
-    filterButton.addEventListener("click", function() {
-        filtersContainer.classList.add("active");
-        navbar.style.display = 'none';
-        html.classList.toggle('overflow')
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    filterCloseButton.addEventListener("click", function() {
-        filtersContainer.classList.remove("active");
-        navbar.style.display = 'flex';
-        html.classList.toggle('overflow')
-    });
+    // Gestionnaire d'événement pour le bouton de filtrage
+    filterButton.addEventListener("click", updateFilters);
 });

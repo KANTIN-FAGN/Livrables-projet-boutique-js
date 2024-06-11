@@ -18,7 +18,6 @@ class Article {
             const validSortColumns = ['id_article', 'price', 'name', 'created_at'];
             const validSortOrders = ['ASC', 'DESC'];
 
-            // Validate sortBy and sortOrder
             if (!validSortColumns.includes(sortBy)) {
                 sortBy = 'id_article';
             }
@@ -37,7 +36,6 @@ class Article {
             });
         });
     }
-
     static get4RandomArticles() {
         return new Promise((resolve, reject) => {
             const sql = `SELECT * FROM \`article\` ORDER BY RAND() LIMIT 4`;

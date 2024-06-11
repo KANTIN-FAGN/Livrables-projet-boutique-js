@@ -33,9 +33,25 @@ class Articles {
         try {
             const token = req.cookies.Token;
             const sortOrder = req.query.sortOrder || 'asc'; // Par défaut tri ascendant si non spécifié
+            const category = req.query.category; // Récupérer la catégorie sélectionnée
+            const color = req.query.color; // Récupérer la couleur sélectionnée
+            const material = req.query.material; // Récupérer le matériau sélectionné
     
+            // Construire l'URL de l'API en incluant les paramètres de la requête
+            let urlApi = `${url}mode-homme?sortOrder=${sortOrder}`;
+            if (category) {
+                urlApi += `&category=${category}`;
+            }
+            if (color) {
+                urlApi += `&color=${color}`;
+            }
+            if (material) {
+                urlApi += `&material=${material}`;
+            }
+    
+            // Effectuer la requête avec les paramètres de la requête
             const [url1, url2, url3, url4] = await Promise.all([
-                axios.get(`${url}mode-homme?sortOrder=${sortOrder}`),
+                axios.get(urlApi),
                 axios.get(`${url}colors/`),
                 axios.get(`${url}materials/`),
                 axios.get(`${url}categories/`),
@@ -65,6 +81,7 @@ class Articles {
             res.status(500).send("Internal Server Error");
         }
     };
+    
     static async ArticlesFemme(req, res) {
         try {
             const token = req.cookies.Token;

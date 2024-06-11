@@ -129,7 +129,6 @@ $(".text-wrapper").each(function () {
         $paragraph.html(visibleText + '<span class="dots">...</span> <span class="full-text" style="display:none;">' + hiddenText + '</span>');
     }
 });
-
 $('.readmore-btn').click(function (event) {
     event.preventDefault();
     var fullText = $(this).prev().find('.full-text');
@@ -141,7 +140,6 @@ $('.readmore-btn').click(function (event) {
     var dots = $wrapper.find('.dots');
     dots.toggleClass('hidden');
 });
-
 
 // Swipper
 var swiperThumbs = new Swiper(".mySwiper", {
@@ -172,7 +170,6 @@ var swiperMain = new Swiper(".mySwiper2", {
 document.getElementById('sort-options-tailles').addEventListener('change', function () {
     document.getElementById('product_size').value = this.value;
 });
-
 // Pour la version mobile
 document.querySelectorAll('.SizeSpot_button__dZsg8').forEach(button => {
     button.addEventListener('click', function () {
