@@ -99,7 +99,7 @@ class ArticleFunc {
     static async getArticleHomme(req, res) {
         try {
             const articles = await Article.getArticleHomme(req.query);
-
+    
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -113,7 +113,7 @@ class ArticleFunc {
                         Article.getCategoryById(article.id_article),
                         Article.getMaterialById(article.id_article)
                     ]);
-
+    
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
@@ -122,13 +122,12 @@ class ArticleFunc {
                     article.colors = colors.map(color => color.color);
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
-
                 }));
-
+    
                 const offset = parseInt(req.query.offset) || 0;
                 const limit = parseInt(req.query.limit) || 6;
                 const href = baseUrl + "/mode-homme/";
-
+    
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,
@@ -153,7 +152,7 @@ class ArticleFunc {
     static async getArticleFemme(req, res) {
         try {
             const articles = await Article.getArticleFemme(req.query);
-
+    
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -167,7 +166,7 @@ class ArticleFunc {
                         Article.getCategoryById(article.id_article),
                         Article.getMaterialById(article.id_article)
                     ]);
-
+    
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
@@ -177,11 +176,11 @@ class ArticleFunc {
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
                 }));
-
+    
                 const offset = parseInt(req.query.offset) || 0;
                 const limit = parseInt(req.query.limit) || 6;
                 const href = baseUrl + "/mode-femme/";
-
+    
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,

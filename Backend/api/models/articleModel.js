@@ -13,9 +13,21 @@ class Article {
             });
         });
     }
-    static getAllArticles() {
+    static getAllArticles(sortBy = 'id_article', sortOrder = 'ASC') {
         return new Promise((resolve, reject) => {
-            const sql = `SELECT * FROM article`;
+            const validSortColumns = ['id_article', 'price', 'name', 'created_at'];
+            const validSortOrders = ['ASC', 'DESC'];
+
+            // Validate sortBy and sortOrder
+            if (!validSortColumns.includes(sortBy)) {
+                sortBy = 'id_article';
+            }
+            if (!validSortOrders.includes(sortOrder)) {
+                sortOrder = 'ASC';
+            }
+
+            const sql = `SELECT * FROM article ORDER BY ${sortBy} ${sortOrder}`;
+
             connection.query(sql, (err, results) => {
                 if (err) {
                     reject(err);
@@ -25,6 +37,7 @@ class Article {
             });
         });
     }
+
     static get4RandomArticles() {
         return new Promise((resolve, reject) => {
             const sql = `SELECT * FROM \`article\` ORDER BY RAND() LIMIT 4`;
@@ -44,35 +57,41 @@ class Article {
             let conditions = " WHERE article.genders = 'homme'";
             const values = [];
 
-            Object.entries(query).forEach(([key, value], index) => {
+            // Ajout de la gestion de la clause ORDER BY
+            let orderBy = "";
+
+            // Boucle sur les paramètres de requête pour construire la requête SQL
+            Object.entries(query).forEach(([key, value]) => {
                 if (key.toLowerCase() === "limit" || key.toLowerCase() === "offset") {
                     sql += ` ${key.toUpperCase()} ?`;
                     values.push(parseInt(value));
                 } else if (key.toLowerCase() === "color") {
-                    const colors = value.split(',').map(color => color.trim()); // Séparer les couleurs par une virgule
-                    const colorConditions = colors.map((_, index) => `?`).join(', '); // Créer des ? pour chaque couleur
+                    const colors = value.split(',').map(color => color.trim());
+                    const colorConditions = colors.map(() => `?`).join(', ');
                     joins += ` LEFT JOIN have_colors ON article.id_article = have_colors.id_article LEFT JOIN color ON have_colors.id_color = color.id_color`;
-                    conditions += ` AND color.color IN (${colorConditions})`; // Utiliser IN pour vérifier plusieurs couleurs
-                    values.push(...colors); // Ajouter toutes les couleurs à la liste de valeurs
+                    conditions += ` AND color.color IN (${colorConditions})`;
+                    values.push(...colors);
                 } else if (key.toLowerCase() === "category") {
-                    const categorys = value.split(',').map(category => category.trim()); // Séparer les categories par une virgule
-                    const categoryConditions = categorys.map((_, index) => `?`).join(', '); // Créer des ? pour chaque categorie
+                    const categorys = value.split(',').map(category => category.trim());
+                    const categoryConditions = categorys.map(() => `?`).join(', ');
                     joins += ` LEFT JOIN category ON article.id_category = category.id_category`;
-                    conditions += ` AND category.category IN (${categoryConditions})`; // Utiliser IN pour vérifier plusieurs categories
-                    values.push(...categorys); // Ajouter toutes les categories à la liste de valeurs
+                    conditions += ` AND category.category IN (${categoryConditions})`;
+                    values.push(...categorys);
                 } else if (key.toLowerCase() === "material") {
-                    const materials = value.split(',').map(material => material.trim()); // Séparer les matières par une virgule
-                    const materialConditions = materials.map((_, index) => `?`).join(', '); // Créer des ? pour chaque matières
+                    const materials = value.split(',').map(material => material.trim());
+                    const materialConditions = materials.map(() => `?`).join(', ');
                     joins += ` LEFT JOIN have_materials ON article.id_article = have_materials.id_article LEFT JOIN material ON have_materials.id_material = material.id_material`;
-                    conditions += ` AND material.material = (${materialConditions})`; // Utiliser IN pour vérifier plusieurs matières
-                    values.push(...materials); // Ajouter toutes les matières à la liste de valeurs
+                    conditions += ` AND material.material IN (${materialConditions})`;
+                    values.push(...materials);
+                } else if (key.toLowerCase() === "sortorder") {
+                    orderBy = ` ORDER BY article.id_article ${value.toUpperCase()}`;
                 } else {
                     conditions += ` AND ${key} = ?`;
                     values.push(value);
                 }
             });
 
-            sql += joins + conditions;
+            sql += joins + conditions + orderBy;
 
             connection.query(sql, values, (err, results) => err ? reject(err) : resolve(results));
         });
@@ -84,35 +103,41 @@ class Article {
             let conditions = " WHERE article.genders = 'femme'";
             const values = [];
 
-            Object.entries(query).forEach(([key, value], index) => {
+            // Ajout de la gestion de la clause ORDER BY
+            let orderBy = "";
+
+            // Boucle sur les paramètres de requête pour construire la requête SQL
+            Object.entries(query).forEach(([key, value]) => {
                 if (key.toLowerCase() === "limit" || key.toLowerCase() === "offset") {
                     sql += ` ${key.toUpperCase()} ?`;
                     values.push(parseInt(value));
                 } else if (key.toLowerCase() === "color") {
                     const colors = value.split(',').map(color => color.trim());
-                    const colorConditions = colors.map((_, index) => `?`).join(', ');
+                    const colorConditions = colors.map(() => `?`).join(', ');
                     joins += ` LEFT JOIN have_colors ON article.id_article = have_colors.id_article LEFT JOIN color ON have_colors.id_color = color.id_color`;
                     conditions += ` AND color.color IN (${colorConditions})`;
                     values.push(...colors);
                 } else if (key.toLowerCase() === "category") {
                     const categorys = value.split(',').map(category => category.trim());
-                    const categoryConditions = categorys.map((_, index) => `?`).join(', ');
+                    const categoryConditions = categorys.map(() => `?`).join(', ');
                     joins += ` LEFT JOIN category ON article.id_category = category.id_category`;
                     conditions += ` AND category.category IN (${categoryConditions})`;
                     values.push(...categorys);
                 } else if (key.toLowerCase() === "material") {
                     const materials = value.split(',').map(material => material.trim());
-                    const materialConditions = materials.map((_, index) => `?`).join(', ');
+                    const materialConditions = materials.map(() => `?`).join(', ');
                     joins += ` LEFT JOIN have_materials ON article.id_article = have_materials.id_article LEFT JOIN material ON have_materials.id_material = material.id_material`;
-                    conditions += ` AND material.material = (${materialConditions})`;
+                    conditions += ` AND material.material IN (${materialConditions})`;
                     values.push(...materials);
+                } else if (key.toLowerCase() === "sortorder") {
+                    orderBy = ` ORDER BY article.id_article ${value.toUpperCase()}`;
                 } else {
                     conditions += ` AND ${key} = ?`;
                     values.push(value);
                 }
             });
 
-            sql += joins + conditions;
+            sql += joins + conditions + orderBy;
 
             connection.query(sql, values, (err, results) => err ? reject(err) : resolve(results));
         });
@@ -194,7 +219,7 @@ class Article {
         return new Promise((resolve, reject) => {
             const searchTerms = searchTerm.split(' ').map(term => `%${term}%`);
             const placeholders = searchTerms.map(() => `(a.name LIKE ? OR a.detail LIKE ? OR a.description LIKE ? OR a.genders LIKE ? OR m.material LIKE ? OR c.color LIKE ? OR cat.category LIKE ?)`).join(' AND ');
-    
+
             const sql = `SELECT DISTINCT a.id_article, a.name, a.detail, a.description, a.genders, a.id_category, a.price
                 FROM article a
                 LEFT JOIN have_materials hm ON a.id_article = hm.id_article
@@ -203,12 +228,12 @@ class Article {
                 LEFT JOIN color c ON hc.id_color = c.id_color
                 LEFT JOIN category cat ON a.id_category = cat.id_category
             WHERE ${placeholders}`;
-    
+
             const values = [];
             searchTerms.forEach(term => {
                 values.push(term, term, term, term, term, term, term);
             });
-    
+
             connection.query(sql, values, (err, result) => {
                 if (err) {
                     console.log('Error :', err);
