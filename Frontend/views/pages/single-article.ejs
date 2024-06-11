@@ -347,12 +347,12 @@
                   </div>
                 </div>
               </section>
-            </div>
             <%- include('../components/nav-bar-slider'); %>
-              <%- include('../components/logSlide', {dataUser}); %>
-                <%- include('../components/panierSlide'); %>
-                  <%- include('../components/favSlide', {dataFav}); %>
-                    <%- include('../components/searchSlide'); %>
+            <%- include('../components/logSlide', {dataUser}); %>
+            <%- include('../components/panierSlide'); %>
+            <%- include('../components/favSlide', {dataFav, dataUser}); %>
+            <%- include('../components/searchSlide'); %>
+            </div>
           </div>
           <%- include('../components/footer'); %>
             <section class="caroussel-desktop">

@@ -1,14 +1,39 @@
 <section id="sectionFav" class="global-fav-section">
     <div class="overlay-slider"></div>
-    <% if (dataFav) {%>
+    <% if (dataFav && dataFav.length > 0) { %>
         <div class="fav-section">
-            <% dataFav.favArticles.forEach(article=> { %>
-            <p><%= article.name %></p>
+            <% dataFav.forEach(article => { %>
+                <div class="fav-article-global">
+                    <div class="img-fav">
+                        <a href="">
+                            <img src="<%= article.images.img_1 %>" alt="<%= article.name %>">
+                        </a>
+                    </div>
+                    <div class="info-article-fav">
+                        <p><%= article.name %></p>
+                        <p><%= article.detail %></p>
+                        <p><%= article.price %> €</p>
+                        <form action="/Roid/treatment/remove-from-fav" method="post">
+                            <input type="hidden" name="id_article" value="<%= article.id_article %>" />
+                            <input type="hidden" name="id_user" value="<%= dataUser.user.id_user %>" />
+                            <button class="btn-fav-delete">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
             <% }); %>
         </div>
     <% } else { %>
         <div class="fav-section">
-
+            <div class="fav-article-global-vide">
+                <div class="message-fav-vide" style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 3rem;
+            ">
+                    <span>Votre liste de favoris est vide</span>
+                </div>
+            </div>
         </div>
     <% } %>
 </section>

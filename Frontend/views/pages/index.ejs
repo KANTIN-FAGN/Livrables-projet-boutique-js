@@ -22,14 +22,14 @@
           </div>
         </a>
       </section>
+      <%- include('../components/nav-bar-slider'); %>
+      <%- include('../components/searchSlide'); %>
+      <%- include('../components/panierSlide'); %>
+      <%- include('../components/logSlide', {dataUser}); %>
+      <%- include('../components/favSlide', {dataFav, dataUser}); %>
     </div>
-    <%- include('../components/nav-bar-slider'); %>
-    <%- include('../components/searchSlide'); %>
-    <%- include('../components/panierSlide'); %>
-    <%- include('../components/logSlide', {dataUser}); %>
-    <%- include('../components/favSlide', {dataFav}); %>
   </div>
   <%- include('../components/footer'); %>
 </body>
-
+  
 </html>

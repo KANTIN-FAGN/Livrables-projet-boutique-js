@@ -6,13 +6,14 @@ const controllerFav = require('./fav');
 class Articles {
     static async Index(req, res) {
         try {
-            
+            const token = req.cookies.Token;
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFav = await controllerFav.getFav(req, res);
+            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFav = dataFavResponse.data;
 
             res.render('../views/pages/index', {
                 dataUser,
-                dataFav
+                dataFav: dataFav && dataFav.articles ? dataFav.articles : []
             });
 
         } catch (err) {
@@ -30,6 +31,7 @@ class Articles {
     }
     static async ArticlesHomme(req, res) {
         try {
+            const token = req.cookies.Token;
 
             const [url1, url2, url3, url4] = await Promise.all([
                 axios.get(`${url}mode-homme/`),
@@ -39,7 +41,8 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFav = await controllerFav.getFav(req, res);
+            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFav = dataFavResponse.data;
 
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
@@ -52,7 +55,7 @@ class Articles {
                 lst_materials: materials,
                 lst_categorys: categories,
                 dataUser,
-                dataFav,
+                dataFav: dataFav && dataFav.articles ? dataFav.articles : [],
                 err: null
             });
 
@@ -63,6 +66,8 @@ class Articles {
     };
     static async ArticlesFemme(req, res) {
         try {
+            const token = req.cookies.Token;
+
             const [url1, url2, url3, url4] = await Promise.all([
                 axios.get(`${url}mode-femme/`),
                 axios.get(`${url}colors/`),
@@ -71,7 +76,8 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFav = await controllerFav.getFav(req, res);
+            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFav = dataFavResponse.data;
 
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
@@ -84,7 +90,7 @@ class Articles {
                 lst_materials: materials,
                 lst_categorys: categories,
                 dataUser,
-                dataFav,
+                dataFav: dataFav && dataFav.articles ? dataFav.articles : [],
                 err: null
             });
 
@@ -95,17 +101,20 @@ class Articles {
     };
     static async getArticleById(req, res) {
         try {
+            const token = req.cookies.Token;
+    
             const articleId = req.params.id;
             const article = await Articles.getArticle(articleId);
-
+    
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFav = await controllerFav.getFav(req, res);
-
+            const dataFavResponse = await controllerFav.getFav(token);
+            const dataFav = dataFavResponse.data;
+    
             res.render("../views/pages/single-article", {
                 article: article.article,
                 articlesWithDifferentColors: article.articlesWithDifferentColors,
                 dataUser,
-                dataFav
+                dataFav: dataFav && dataFav.articles ? dataFav.articles : []
             });
         } catch (err) {
             console.error("Error retrieving article:", err);
@@ -115,6 +124,7 @@ class Articles {
     static async searchArticle(req, res) {
         const { term } = req.body;
         try {
+            const token = req.cookies.Token;
             const [url1, url2, url3, url4] = await Promise.all([
                 axios.get(`${url}search?term=${term}`),
                 axios.get(`${url}colors/`),
@@ -123,7 +133,9 @@ class Articles {
             ]);
 
             const dataUser = await controllerLog.getUser(req, res);
-            const dataFav = await controllerFav.getFav(req, res);
+            const dataFav = await controllerFav.getFav(token);
+
+            console.log(dataFav);
 
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
@@ -136,7 +148,7 @@ class Articles {
                 lst_materials: materials,
                 lst_categorys: categories,
                 dataUser,
-                dataFav,
+                dataFav: dataFav.articles,
                 err: null
             });
         } catch (err) {

@@ -10,21 +10,19 @@ class Fav {
             if (!token) {
                 return undefined;
             }
-            
+
             if (!id_article || !id_user) {
-                return res.status(400).json({ message: 'Les champs id_article et id_user sont requis.' });
+                res.redirect('back'), {
+                    message: 'Les champs id_article et id_user sont requis.'
+                }
             }
-            const response = await axios.post(`${url}add-to-fav`, { id_article, id_user },{
+            const response = await axios.post(`${url}add-to-fav`, { id_article, id_user }, {
                 headers: {
                     "Authorization": token,
                     "Content-Type": "application/json"
                 }
             });
             if (response.status === 200) {
-                res.status(200).json({
-                    message: 'Article ajouté aux favoris.',
-                    data: response.data
-                });
                 res.redirect('back')
             } else {
                 throw new Error("Erreur lors de la récupération de l'article");
@@ -53,45 +51,24 @@ class Fav {
                 }
             });
             if (response.status === 200) {
-                res.status(200).json({
-                    message: 'Article retiré des favoris.',
-                    data: response.data
-                });
                 res.redirect('back')
             } else {
                 throw new Error("Erreur lors de la récupération de l'article");
             }
         } catch (err) {
-            console.error(err);
-            res.status(500).json({ message: 'Erreur lors de la suppression de l\'article des favoris.', error: err.message });
+            res.redirect('back')
         }
     }
-    static async getFav(req, res) {
+    static async getFav(token) {
         try {
-            const token = req.cookies.Token;
-
-            if (!token) {
-                return undefined;
-            }
-
-            const response = await axios.get(`${url}get-fav/`, {
+            return await axios.get(`${url}get-fav/`, {
                 headers: {
                     "Authorization": token,
                     "Content-Type": "application/json"
                 }
             });
-
-            if (response.status === 200) {
-                return response.data;
-            } else {
-                console.error("Unexpected response status when fetching user data:", response.status);
-                res.status(401).send("Failed to fetch user data");
-                return undefined;
-            }
         } catch (err) {
-            console.error("Error fetching user data:", err);
-            res.status(500).send("Internal Server Error");
-            return undefined;
+            return false;
         }
     }
 }

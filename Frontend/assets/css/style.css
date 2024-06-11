@@ -77,6 +77,46 @@
 }
 
 @media screen and (max-width: 1024px) {
+
+    .fav-article-global {
+        display: flex;
+        width: 100%;
+        font-size: .8125rem;
+        line-height: 1.25rem;
+        align-items: center;
+        margin-bottom: 1.875rem
+    }
+
+    .img-fav {
+        height: 12.8125rem;
+        position: relative;
+        flex: 0 0 11.875rem;
+    }
+    .img-fav img {
+        width: 100%;
+    }
+
+    .info-article-fav {
+        font-size: 13px;
+        margin: 0 .9375rem;
+    }
+
+    .info-article-fav p:first-child,
+    .info-article-fav p:nth-child(3) {
+        font-weight: bold;
+    }
+
+    .btn-fav-delete {
+        background: transparent;
+        text-decoration: underline;
+        border: none;
+        color: #757575;
+    }
+
+    .info-article-fav p:nth-child(3) {
+        margin: .3125rem 0
+    }
+
     .container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -429,11 +469,12 @@
     .btn-deconnexion {
         width: 0;
     }
+
     .btn-deconnexion button:hover {
         font-weight: bold;
     }
 
-    .btn-deconnexion button{
+    .btn-deconnexion button {
         text-decoration: underline;
         color: #757575;
         margin: .375rem 0 0;

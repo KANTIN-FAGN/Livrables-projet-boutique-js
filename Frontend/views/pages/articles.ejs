@@ -49,12 +49,12 @@
         </a>
         <% }); %>
       </section>
+      <%- include('../components/nav-bar-slider'); %>
+      <%- include('../components/logSlide', {dataUser} ); %>
+      <%- include('../components/panierSlide'); %>
+      <%- include('../components/favSlide', {dataFav, dataUser}); %>
+      <%- include('../components/searchSlide'); %>
     </div>
-    <%- include('../components/nav-bar-slider'); %>
-    <%- include('../components/logSlide', {dataUser} ); %>
-    <%- include('../components/panierSlide'); %>
-    <%- include('../components/favSlide', {dataFav}); %>
-    <%- include('../components/searchSlide'); %>
   </div>
   <%- include('../components/footer'); %>
   <% } %>

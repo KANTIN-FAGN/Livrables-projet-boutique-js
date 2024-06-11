@@ -1,6 +1,8 @@
 const Fav = require('../models/favModel');
+const Article = require('../models/articleModel');
 const dotenv = require('dotenv');
 dotenv.config();
+const baseUrl = process.env.BASE_URL;
 
 class FavFunc {
     static async AddToFav(req, res) {
@@ -35,19 +37,31 @@ class FavFunc {
         try {
             const IdUser = req.user.Sub;
             const favArticles = await Fav.getFav(IdUser);
-
-            if (!favArticles) {
-                res.status(404).send({
+    
+            if (!favArticles || favArticles.length === 0) {
+                return res.status(404).send({
                     message: "No favorite articles found!",
                     status: 404
                 });
-            } else {
-                return res.status(200).json({
-                    message: "Favorite articles found",
-                    status: 200,
-                    favArticles
-                });
             }
+    
+            const articlesWithDetails = await Promise.all(favArticles.map(async article => {
+                const [images] = await Promise.all([
+                    Article.getImages(article.id_article),
+                ]);
+    
+                article.images = {
+                    img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null
+                };
+                return article;
+    
+            }));
+    
+            return res.status(200).json({
+                message: "Favorite articles found",
+                status: 200,
+                articles: articlesWithDetails
+            });
         } catch (err) {
             res.status(500).send({
                 message: err.message,
@@ -55,6 +69,7 @@ class FavFunc {
             });
         }
     }
-}
+    
+}    
 
 module.exports = FavFunc;
