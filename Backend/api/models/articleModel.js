@@ -56,10 +56,10 @@ class Article {
             let joins = "";
             let conditions = " WHERE article.genders = 'homme'";
             const values = [];
-
-            // Ajout de la gestion de la clause ORDER BY
+    
+            // Ajout de la gestion de la clause ORDER BY pour trier par prix
             let orderBy = "";
-
+    
             // Boucle sur les paramètres de requête pour construire la requête SQL
             Object.entries(query).forEach(([key, value]) => {
                 if (key.toLowerCase() === "limit" || key.toLowerCase() === "offset") {
@@ -84,28 +84,30 @@ class Article {
                     conditions += ` AND material.material IN (${materialConditions})`;
                     values.push(...materials);
                 } else if (key.toLowerCase() === "sortorder") {
-                    orderBy = ` ORDER BY article.id_article ${value.toUpperCase()}`;
+                    // Si le paramètre de tri est spécifié, trier par prix
+                    orderBy = ` ORDER BY article.price ${value.toUpperCase()}`;
                 } else {
                     conditions += ` AND ${key} = ?`;
                     values.push(value);
                 }
             });
-
+    
             sql += joins + conditions + orderBy;
-
+    
             connection.query(sql, values, (err, results) => err ? reject(err) : resolve(results));
         });
     }
+    
     static getArticleFemme(query) {
         return new Promise((resolve, reject) => {
             let sql = `SELECT article.* FROM article`;
             let joins = "";
             let conditions = " WHERE article.genders = 'femme'";
             const values = [];
-
-            // Ajout de la gestion de la clause ORDER BY
+    
+            // Ajout de la gestion de la clause ORDER BY pour trier par prix
             let orderBy = "";
-
+    
             // Boucle sur les paramètres de requête pour construire la requête SQL
             Object.entries(query).forEach(([key, value]) => {
                 if (key.toLowerCase() === "limit" || key.toLowerCase() === "offset") {
@@ -130,18 +132,20 @@ class Article {
                     conditions += ` AND material.material IN (${materialConditions})`;
                     values.push(...materials);
                 } else if (key.toLowerCase() === "sortorder") {
-                    orderBy = ` ORDER BY article.id_article ${value.toUpperCase()}`;
+                    // Si le paramètre de tri est spécifié, trier par prix
+                    orderBy = ` ORDER BY article.price ${value.toUpperCase()}`;
                 } else {
                     conditions += ` AND ${key} = ?`;
                     values.push(value);
                 }
             });
-
+    
             sql += joins + conditions + orderBy;
-
+    
             connection.query(sql, values, (err, results) => err ? reject(err) : resolve(results));
         });
     }
+    
     static getImages(id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT image.img FROM article LEFT JOIN image ON article.id_article = image.id_article WHERE article.id_article = ?;`

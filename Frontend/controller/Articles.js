@@ -32,23 +32,24 @@ class Articles {
     static async ArticlesHomme(req, res) {
         try {
             const token = req.cookies.Token;
-
+            const sortOrder = req.query.sortOrder || 'asc'; // Par défaut tri ascendant si non spécifié
+    
             const [url1, url2, url3, url4] = await Promise.all([
-                axios.get(`${url}mode-homme/`),
+                axios.get(`${url}mode-homme?sortOrder=${sortOrder}`),
                 axios.get(`${url}colors/`),
                 axios.get(`${url}materials/`),
                 axios.get(`${url}categories/`),
             ]);
-
+    
             const dataUser = await controllerLog.getUser(req, res);
             const dataFavResponse = await controllerFav.Fav.getFav(token);
             const dataFav = dataFavResponse.data;
-
+    
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
             const materials = url3.data.materials;
             const categories = url4.data.categories;
-
+    
             res.render('../views/pages/articles', {
                 lst_article: articles,
                 lst_color: colors,
@@ -58,7 +59,7 @@ class Articles {
                 dataFav: dataFav && dataFav.articles ? dataFav.articles : [],
                 err: null
             });
-
+    
         } catch (err) {
             console.error(err);
             res.status(500).send("Internal Server Error");
@@ -67,23 +68,24 @@ class Articles {
     static async ArticlesFemme(req, res) {
         try {
             const token = req.cookies.Token;
-
+            const sortOrder = req.query.sortOrder || 'asc'; // Par défaut tri ascendant si non spécifié
+    
             const [url1, url2, url3, url4] = await Promise.all([
-                axios.get(`${url}mode-femme/`),
+                axios.get(`${url}mode-femme?sortOrder=${sortOrder}`),
                 axios.get(`${url}colors/`),
                 axios.get(`${url}materials/`),
                 axios.get(`${url}categories/`)
             ]);
-
+    
             const dataUser = await controllerLog.getUser(req, res);
             const dataFavResponse = await controllerFav.Fav.getFav(token);
             const dataFav = dataFavResponse.data;
-
+    
             const articles = url1.data.articles.items;
             const colors = url2.data.colors;
             const materials = url3.data.materials;
             const categories = url4.data.categories;
-
+    
             res.render('../views/pages/articles', {
                 lst_article: articles,
                 lst_color: colors,
@@ -93,7 +95,7 @@ class Articles {
                 dataFav: dataFav && dataFav.articles ? dataFav.articles : [],
                 err: null
             });
-
+    
         } catch (err) {
             console.error(err);
             res.status(500).send("Internal Server Error");
