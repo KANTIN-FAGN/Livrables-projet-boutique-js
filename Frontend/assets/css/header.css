@@ -288,7 +288,7 @@ header {
     .fav-section,
     .search-section {
         width: 100vw;
-        max-height: 33.75rem;
+        max-height: 25.75rem;
         /* Hauteur maximale */
         background: #fff;
         transition: all 0.5s;
@@ -465,7 +465,7 @@ header {
     .input:focus~.highlight {
         animation: inputHighlighter 0.3s ease;
     }
-    
+
     .connnexion-infotitre p:first-child {
         font-weight: bold;
     }
@@ -580,7 +580,7 @@ header {
         top: 0;
         padding: 1.25rem 0 .375rem .75rem;
     }
-    
+
     .input-search {
         display: flex;
         justify-content: center;
@@ -606,13 +606,14 @@ header {
         width: auto;
     }
 
-    .article-like_also{
+    .article-like_also {
         padding: 0 1.25rem;
     }
-    
-    .articles_like_also a img{
+
+    .articles_like_also a img {
         width: 49.42%;
     }
+
     #inscription-mobile .svgMobile {
         display: flex;
         justify-content: center;
@@ -620,23 +621,23 @@ header {
         transform: rotate(0deg);
         transition: all 0.2s ease-in-out;
     }
-    
+
     #inscription-mobile .svgMobile.active {
         transform: rotate(-180deg);
         transition: all 0.2s ease-in-out;
     }
-    
+
     #inscription-btn-global {
         height: 0;
         overflow: hidden;
         transition: height 0.5s ease-in-out;
     }
-    
+
     #inscription-btn-global.active {
         height: auto;
         transition: height 0.5s ease-in-out;
     }
-    
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -863,7 +864,7 @@ header {
         margin-bottom: 1.875rem
     }
 
-    .fav-article-global-vide{
+    .fav-article-global-vide {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1209,6 +1210,51 @@ header {
 
     .input-search {
         padding: 0 40px;
+    }
+
+    .img-fav {
+        height: 12.8125rem;
+    }
+
+    .img-fav img {
+        height: 100%;
+    }
+
+    .fav-article-global {
+        display: flex;
+        border-bottom: .0625rem solid #e5e5e5;
+    }
+
+    .info-article-fav {
+        margin: 0 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .info-article-fav p:nth-child(1){
+        font-weight: bold;
+    }
+
+    .info-article-fav p:nth-child(2){
+        color: var(--gris-descriptionProduit);
+    }
+
+    .info-article-fav p:nth-child(3){
+        margin: 1.25rem 0;
+        font-weight: bold;
+    }
+
+    .btn-fav-delete {
+        background: transparent;
+        text-decoration: underline;
+        border: none;
+        width: 0;
+        color: #757575;
+    }
+    .btn-fav-delete:hover {
+        color: #333333;
+        font-weight: bold;
     }
 }
 
