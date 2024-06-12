@@ -59,6 +59,48 @@ class ArticleFunc {
             });
         }
     };
+    static async getArticlesByIds(req, res) {
+        try {
+            let articleIds = req.query.Ids;
+    
+            if (!articleIds) {
+                return res.status(400).send({
+                    message: 'Invalid or missing article IDs',
+                    status: 400
+                });
+            }
+    
+            if (!Array.isArray(articleIds)) {
+                articleIds = articleIds.split(',');
+            }
+    
+            articleIds = articleIds.map(item => parseInt(item, 10)).filter(Number.isInteger);
+    
+            const articles = await Article.getArticlesByIDs(articleIds);
+    
+            for (const art of articles) {
+                const imgs = await Article.getImages(art.id_article);
+                if (Array.isArray(imgs) && imgs.length > 0) {
+                    art.img = `${baseUrl}/asset${imgs[0].img}.jpg`;
+                } else {
+                    art.img = null; // Or set to a default image URL if desired
+                }
+            }
+    
+            return res.status(200).json({
+                message: 'Articles were successfully retrieved',
+                status: 200,
+                articles: articles
+            });
+        } catch (err) {
+            return res.status(500).json({
+                message: `Error retrieving articles: ${err.message}`,
+                status: 500
+            });
+        }
+    }
+    
+    
     static async get4ArticlesAleatoire(req, res) {
         try {
             const articles = await Article.get4RandomArticles();
@@ -99,7 +141,7 @@ class ArticleFunc {
     static async getArticleHomme(req, res) {
         try {
             const articles = await Article.getArticleHomme(req.query);
-    
+
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -113,7 +155,7 @@ class ArticleFunc {
                         Article.getCategoryById(article.id_article),
                         Article.getMaterialById(article.id_article)
                     ]);
-    
+
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
@@ -123,11 +165,11 @@ class ArticleFunc {
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
                 }));
-    
+
                 const offset = parseInt(req.query.offset) || 0;
                 const limit = parseInt(req.query.limit) || 6;
                 const href = baseUrl + "/mode-homme/";
-    
+
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,
@@ -152,7 +194,7 @@ class ArticleFunc {
     static async getArticleFemme(req, res) {
         try {
             const articles = await Article.getArticleFemme(req.query);
-    
+
             if (!articles || articles.length === 0) {
                 return res.status(404).json({
                     message: `Articles not found`,
@@ -166,7 +208,7 @@ class ArticleFunc {
                         Article.getCategoryById(article.id_article),
                         Article.getMaterialById(article.id_article)
                     ]);
-    
+
                     article.images = {
                         img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
                         img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
@@ -176,11 +218,11 @@ class ArticleFunc {
                     article.category = category.length > 0 ? category[0].category : null;
                     return article;
                 }));
-    
+
                 const offset = parseInt(req.query.offset) || 0;
                 const limit = parseInt(req.query.limit) || 6;
                 const href = baseUrl + "/mode-femme/";
-    
+
                 return res.status(200).json({
                     message: `Articles successfully found`,
                     status: 200,

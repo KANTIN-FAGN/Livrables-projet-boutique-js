@@ -18,6 +18,7 @@ router.get('/materials', controllersArticle.getMaterials);
 router.get('/categories', controllersArticle.getCategories);
 router.get('/search', controllersArticle.searchArticles);
 router.get('/4Articles', controllersArticle.get4ArticlesAleatoire);
+router.get('/articles-by-id', controllersArticle.getArticlesByIds)
 
 router.post('/add-to-fav', middleware.validateToken, controllersFav.AddToFav);
 router.post('/remove-from-fav', middleware.validateToken, controllersFav.RemoveFromFav);

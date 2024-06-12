@@ -133,17 +133,11 @@
             </div>
             <div class="bar-article"></div>
             <div class="global-btn-article-panier">
-              <form action="/Roid/treatment/addToCart" method="post">
-                <input type="hidden" name="product_id" value="<%= article.id %>" />
-                <input type="hidden" name="product_name" value="<%= article.name %>" />
-                <input type="hidden" name="product_detail" value="<%= article.detail %>" />
-                <input type="hidden" name="product_price" value="<%= article.price %>" />
-                <input type="hidden" name="product_size" id="product_size" value="" />
                 <% if (article.totalStock> 0) { %>
-                <button class="btn-article-panier">
-                  <span>
-                    <p>Ajouter au panier</p>
-                    <p>
+                <button id="btn-article-panier" class="btn-article-panier" data-id="<%= article.id_article %>">
+                  <span data-id="<%= article.id_article %>">
+                    <p data-id="<%= article.id_article %>">Ajouter au panier</p>
+                    <p data-id="<%= article.id_article %>">
                       <% if (article.reduction> 0) { %>
                       <%= article.price - (article.price * article.reduction / 100) %> €
                       <% } else { %>
@@ -159,7 +153,6 @@
                   </span>
                 </button>
                 <% } %>
-              </form>
             </div>
             <div class="global-description-article">
               <section class="ProductDetailsTabs_container">

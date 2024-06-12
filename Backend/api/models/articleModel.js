@@ -13,6 +13,20 @@ class Article {
             });
         });
     }
+    static getArticlesByIDs(articleIDs) {
+        const placeholders = articleIDs.map(() => '?').join(',');
+        const query = `SELECT * FROM article WHERE id_article IN (${placeholders});`;
+        return new Promise((resolve, reject) => {
+            connection.query(query, articleIDs, (err, results) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(results);
+                }
+            });
+        });
+    }
+    
     static getAllArticles(sortBy = 'id_article', sortOrder = 'ASC') {
         return new Promise((resolve, reject) => {
             const validSortColumns = ['id_article', 'price', 'name', 'created_at'];
@@ -95,7 +109,6 @@ class Article {
             connection.query(sql, values, (err, results) => err ? reject(err) : resolve(results));
         });
     }
-    
     static getArticleFemme(query) {
         return new Promise((resolve, reject) => {
             let sql = `SELECT article.* FROM article`;
@@ -143,7 +156,6 @@ class Article {
             connection.query(sql, values, (err, results) => err ? reject(err) : resolve(results));
         });
     }
-    
     static getImages(id) {
         return new Promise((resolve, reject) => {
             const sql = `SELECT image.img FROM article LEFT JOIN image ON article.id_article = image.id_article WHERE article.id_article = ?;`
