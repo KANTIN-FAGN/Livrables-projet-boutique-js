@@ -77,7 +77,10 @@
 }
 
 @media screen and (max-width: 1024px) {
-
+    .SizeSpot_button__dZsg8.active {
+        background: #000;
+        color: #fff;
+    }
     .fav-article-global {
         display: flex;
         width: 100%;

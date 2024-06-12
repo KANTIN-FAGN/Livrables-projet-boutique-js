@@ -75,6 +75,7 @@ async function displayCart() {
     articles.articles.forEach(article => {
         const cartItem = cartItems.find(item => item.id === article.id_article);
         let quantity = cartItem ? cartItem.nb : 1;
+        let size = cartItem ? cartItem.size : '';
         let price = article.price * quantity; // Calculer le prix total de cet article
 
         totalPrice += price; // Ajouter le prix de cet article au prix total
@@ -91,6 +92,7 @@ async function displayCart() {
                     <div class="info-cart-name">
                         <p>${article.name}</p>
                         <p>${article.detail}</p>
+                        <p>Taille : ${size}</p>
                     </div>
                     <div class="info-cart-price">
                         <p>${price} €</p>
@@ -102,21 +104,21 @@ async function displayCart() {
                             <p>Qté : </p>
                         </div>
                         <div>
-                            <button class="moins" data-id="${article.id_article}">
-                                <svg data-id="${article.id_article}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black">
-                                    <path data-id="${article.id_article}" d="M12 12h16"/>
+                            <button class="moins" data-id="${article.id_article}" data-id-size="${size}">
+                                <svg data-id="${article.id_article}" data-id-size="${size}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black">
+                                    <path data-id="${article.id_article}" data-id-size="${size}" d="M12 12h16"/>
                                 </svg>
                             </button>
                             <p class="quantity">${quantity}</p>
-                            <button class="plus" data-id="${article.id_article}">
-                                <svg data-id="${article.id_article}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black">
-                                    <path data-id="${article.id_article}" d="M12 4v16M4 12h16"/>
+                            <button class="plus" data-id="${article.id_article}" data-id-size="${size}">
+                                <svg data-id="${article.id_article}" data-id-size="${size}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black">
+                                    <path data-id="${article.id_article}" data-id-size="${size}" d="M12 4v16M4 12h16"/>
                                 </svg>
                             </button>
                         </div>
                     </div>
                     <div class="btn-cart-delete">
-                        <button class="delete-btn-cart" data-id="${article.id_article}">Supprimer</button>
+                        <button class="delete-btn-cart" data-id="${article.id_article}" data-id-size="${size}">Supprimer</button>
                     </div>
                 </div>
             </div>
@@ -142,7 +144,6 @@ async function displayCart() {
     affectEvent();
 }
 
-
 function updateCart(cartItems) {
     localStorage.setItem('cart', JSON.stringify(cartItems));
     displayCart();
@@ -150,39 +151,40 @@ function updateCart(cartItems) {
 
 function cartIncrement(event) {
     const articleId = parseInt(event.target.getAttribute('data-id'));
+    const size = event.target.getAttribute('data-id-size');
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    const cartItem = cartItems.find(item => item.id === articleId);
+
+    const cartItem = cartItems.find(item => item.id === articleId && item.size === size);
     if (cartItem) {
-        if (cartItem.nb < 2) { // Limiter la quantité à 2
+        if (cartItem.nb < 2) {
             cartItem.nb += 1;
         } else {
-            alert("La quantité maximale est de 2."); // Afficher un message d'alerte si la quantité est déjà à 2
+            alert("La quantité maximale est de 2.");
         }
-    } else {
-        cartItems.push({ id: articleId, nb: 1 });
     }
-
+    
     updateCart(cartItems);
 }
 
 function cartDeincrement(event) {
     const articleId = parseInt(event.target.getAttribute('data-id'));
+    const size = event.target.getAttribute('data-id-size');
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-    const cartItem = cartItems.find(item => item.id === articleId);
+    const cartItem = cartItems.find(item => item.id === articleId && item.size === size);
     if (cartItem) {
         cartItem.nb = Math.max(1, cartItem.nb - 1);
     }
-    
+
     updateCart(cartItems);
 }
 
 function cartDelete(event) {
     const articleId = parseInt(event.target.getAttribute('data-id'));
+    const size = event.target.getAttribute('data-id-size');
     let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-    cartItems = cartItems.filter(item => item.id !== articleId);
+    cartItems = cartItems.filter(item => !(item.id === articleId && item.size === size));
 
     updateCart(cartItems);
 }

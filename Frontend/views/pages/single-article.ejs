@@ -106,8 +106,7 @@
                       taille
                     </option>
                     <% article.sizes.forEach(size=> { %>
-                    <option value="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% }
-                                      %>>
+                    <option class="option-taille" value="<%= size.size %>" <% if (size.stock===0) { %> class="out-of-stock" <% } %>>
                       <%= size.size %>
                     </option>
                     <% }); %>
@@ -134,10 +133,10 @@
             <div class="bar-article"></div>
             <div class="global-btn-article-panier">
                 <% if (article.totalStock> 0) { %>
-                <button id="btn-article-panier" class="btn-article-panier" data-id="<%= article.id_article %>">
-                  <span data-id="<%= article.id_article %>">
-                    <p data-id="<%= article.id_article %>">Ajouter au panier</p>
-                    <p data-id="<%= article.id_article %>">
+                <button id="btn-article-panier" class="btn-article-panier" data-id="<%= article.id_article %>" data-id-size="">
+                  <span id="span" data-id-size="" data-id="<%= article.id_article %>">
+                    <p id="span1" data-id-size="" data-id="<%= article.id_article %>">Ajouter au panier</p>
+                    <p id="span2" data-id-size="" data-id="<%= article.id_article %>">
                       <% if (article.reduction> 0) { %>
                       <%= article.price - (article.price * article.reduction / 100) %> €
                       <% } else { %>

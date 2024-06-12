@@ -81,7 +81,6 @@ class Articles {
             res.status(500).send("Internal Server Error");
         }
     };
-    
     static async ArticlesFemme(req, res) {
         try {
             const token = req.cookies.Token;
