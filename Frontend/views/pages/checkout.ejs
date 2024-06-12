@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../components/head'); %>
+  <title>Roid</title>
+</head>
+
+<body>
+  <%- include('../components/headerPay'); %>
+  <div class="main-ctn">
+    <div class="main">
+      <section class="info-paiement-global-ctn">
+        <section id="info-paiement-global" class="info-paiement-global">
+          <div class="info-compte-global-ctn">
+            <div class="titre-info-global">
+              <span>1. COORDONNÉES</span>
+            </div>
+            <div class="info-compte-global">
+              <% if (dataUser) {%>
+              <div class="btn-disconnect">
+                <form action="/Roid/treatment/disconnect" method="get">
+                  <button class="btn-disconnect">Déconnexion</button>
+                </form>
+              </div>
+              <div>
+                <p>Bonjour <span class="name-checkout"><%= dataUser.user.firstname %> <%= dataUser.user.lastname %></span>, vous êtes maintenant connecté(e) avec l'adresse suivante :</p>
+                <p class="email-checkout"><%= dataUser.user.email %></p>
+              </div>
+              <% } else { %>
+              <div class="info-compte-global">
+                <p>Veuillez vous connecter à votre compte personnel pour continuer.</p>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="info-compte-expedition-ctn">
+            <div class="titre-info-global">
+              <span>2. EXPÉDITION ET LIVRAISON</span>
+            </div>
+            <div class="info-compte-global">
+              <form id="shipping-form" action="/path/to/submit" method="POST">
+                <div class="group-global-checkout">
+                  <div class="group">
+                    <input required type="text" name="shipping_address" id="shipping_address" class="input" autocomplete="off">
+                    <label class="label-titre" for="shipping_address">*Adresse</label>
+                    <div id="address-suggestions" class="suggestions"></div>
+                  </div>
+                  <div class="mess-adress">
+                    <span>Veuillez vous assurer que votre adresse est correcte. Il est impossible de la modifier une fois la commande passée.</span>
+                  </div>
+                  <div class="group-livraison">
+                    <input required type="text" name="postal_code" id="postal_code" class="input" autocomplete="postal-code" pattern="\d{5}">
+                    <label class="label-titre" for="postal_code">*Code postal</label>
+                  </div>
+                  <div class="group-livraison">
+                    <input required type="text" name="city" id="city" class="input" autocomplete="address-level2">
+                    <label class="label-titre" for="city">*Ville</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="info-compte-expedition-ctn">
+            <div class="titre-info-global">
+              <span>3. FACTURATION ET PAIEMENT</span>
+            </div>
+            <div class="info-compte-global-paiement">
+              <div class="group-global-checkout-paiement">
+                <div class="group">
+                  <input required="" id="cardPay" type="text" name="adress-livraison" class="input" oninput="insertSpace()">
+                  <label class="label-titre">*Numéro de carte</label>
+                </div>
+                <div class="group">
+                  <input required="" name="code-postal" type="text" class="input">
+                  <label class="label-titre">*Titulaire de la carte</label>
+                </div>
+                <div class="group-livraison">
+                    <input required id="expiryDate" type="text" name="expiry-date" class="input">
+                    <label class="label-titre" for="expiryDate">*Date d'expiration</label>
+                  </div>                  
+                  <div class="group-livraison">
+                    <input required id="cryptogram" type="text" name="cryptogram" class="input">
+                    <label class="label-titre" for="cryptogram">*Cryptogramme</label>
+                  </div>                  
+              </div>
+            </div>
+          </div>
+          <div class="btn-pay-checkout">
+            <form action="">
+                <button>
+                    Payer et valider la commande
+                </button>
+            </form>
+          </div>
+          <div>
+        </section>
+        <section class="info-chekout-global">
+          <div id="cart-global" class="cart-global">
+            <div>
+              <p>VOS ARTICLES</p>
+            </div>
+            <div id="info-chekout-global" class="cart-checkout">
+
+            </div>
+          </div>
+          <div id="total-global" class="total-global">
+
+          </div>
+          <div class="cart-global">
+            <div class="text-aide-checkout-global">
+              <div class="aide-checkout-global">
+                <span class="svg-checkout">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
+                    <path fill="black" d="M16.5 5h-13A1.5 1.5 0 0 0 2 6.5v7A1.5 1.5 0 0 0 3.5 15h13a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 16.5 5m-13 1h13a.55.55 0 0 1 .55.55V7.6H3V6.5a.55.55 0 0 1 .5-.5m13 8.1h-13a.55.55 0 0 1-.5-.6v-5h14.1v5a.55.55 0 0 1-.6.55z">
+                    </path>
+                    <path fill="black" d="M11.5 10.05H5A.475.475 0 1 0 5 11h6.5a.45.45 0 0 0 0-.9z">
+                    </path>
+                  </svg>
+                </span>
+                <span class="titre-aide">
+                  PAIEMENT 100 % SÉCURISÉ
+                </span>
+              </div>
+              <div class="text-aide">
+                <p>Les données de votre carte bancaire sont envoyées de manière sécurisée.
+                  Toutes les informations sont protégées à l’aide de la technologie Secure Sockets Layer (SSL).</p>
+              </div>
+            </div>
+            <div>
+              <div class="aide-checkout-global">
+                <span class="titre-aide">
+                  ÉCHANGE ET REMBOURSEMENT
+                </span>
+              </div>
+              <div class="text-aide">
+                <p>Vous disposez d'un délai de 30 jours à compter de la date de livraison pour demander l'échange
+                  ou le remboursement de votre commande, si celle-ci ne vous donne pas entière satisfaction.
+                  Pour toute question ou changement immédiat, veuillez contacter le service relation clients Roid.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>

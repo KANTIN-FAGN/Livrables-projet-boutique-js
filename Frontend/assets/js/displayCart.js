@@ -130,7 +130,7 @@ async function displayCart() {
     // Ajouter le bouton de finalisation de commande avec le prix total
     const checkoutButton = document.createElement('div');
     checkoutButton.innerHTML = `
-    <a href="/Roid/..." class="checkout-a-cart">
+    <a href="/Roid/checkout" class="checkout-a-cart">
         <button class="checkout-btn-cart">
             <span class="span-btn-chekout-cart">
                 <span>FINALISER MA COMMANDE </span>
