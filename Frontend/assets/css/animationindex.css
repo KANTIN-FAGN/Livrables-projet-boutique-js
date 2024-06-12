@@ -1,0 +1,33 @@
+body.loading .loading-screen {
+    display: flex;
+}
+
+.loading-screen {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.loading-logo {
+    width: 200px;
+}
+
+@keyframes myAnim {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
