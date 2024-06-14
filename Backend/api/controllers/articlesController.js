@@ -99,8 +99,6 @@ class ArticleFunc {
             });
         }
     }
-    
-    
     static async get4ArticlesAleatoire(req, res) {
         try {
             const articles = await Article.get4RandomArticles();
