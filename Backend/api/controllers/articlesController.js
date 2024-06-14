@@ -1,15 +1,21 @@
-const Article = require('../models/articleModel');
-const dotenv = require('dotenv');
+const Article = require('../models/articleModel'); // Modèle pour les opérations sur les articles
+const dotenv = require('dotenv'); // Module pour charger les variables d'environnement
 dotenv.config();
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.BASE_URL; // URL de base pour la construction des URL des images
+
 
 
 class ArticleFunc {
+    /**
+ * Récupère un article par son ID avec ses détails (images, couleurs, catégorie, tailles, articles avec différentes couleurs).
+ * @param {Object} req - Requête HTTP contenant l'article récupéré par un middleware.
+ * @param {Object} res - Réponse HTTP pour retourner l'article avec ses détails.
+ */
     static async getArticleById(req, res) {
         const articleById = req.article;
 
         try {
-            // Execute the queries in parallel
+            // Exécute les requêtes en parallèle pour récupérer les détails de l'article
             const [images, colors, category, sizes, articlesWithDifferentColors] = await Promise.all([
                 Article.getImages(articleById.id_article),
                 Article.getColorsById(articleById.id_article),
@@ -18,20 +24,20 @@ class ArticleFunc {
                 Article.getArticlesByNameWithDifferentColors(articleById.name, articleById.id_article)
             ]);
 
-            // Format the image URLs
+            // Formatage des URLs des images
             articleById.img = images.map(image => `${baseUrl}/asset${image.img}.jpg`);
-            // Add colors to the article
+            // Ajout des couleurs à l'article
             articleById.colors = colors.map(color => color.color);
-            // Add category to the article
+            // Ajout de la catégorie à l'article
             articleById.category = category.length > 0 ? category[0].category : null;
-            // Add sizes to the article
+            // Ajout des tailles à l'article
             articleById.sizes = sizes.map(size => ({ size: size.size, stock: size.stock }));
 
-            // Calculate the total stock
+            // Calcul du stock total
             const totalStock = sizes.reduce((total, size) => total + size.stock, 0);
             articleById.totalStock = totalStock;
 
-            // Fetch and format the first image URL for each article with different colors
+            // Récupération et formatage de la première image pour chaque article avec différentes couleurs
             const formattedArticlesWithDifferentColors = await Promise.all(
                 articlesWithDifferentColors.map(async article => {
                     const firstImage = await Article.getFirstImageByArticleId(article.id_article);
@@ -40,7 +46,7 @@ class ArticleFunc {
                         name: article.name,
                         color: article.color,
                         img: firstImage ? `${baseUrl}/asset${firstImage}.jpg` : null,
-                        // Add other properties if needed
+                        // Ajouter d'autres propriétés si nécessaire
                     };
                 })
             );
@@ -59,34 +65,40 @@ class ArticleFunc {
             });
         }
     };
+
+    /**
+ * Récupère plusieurs articles par leurs IDs.
+ * @param {Object} req - Requête HTTP contenant les IDs des articles à récupérer.
+ * @param {Object} res - Réponse HTTP pour retourner les articles récupérés.
+ */
     static async getArticlesByIds(req, res) {
         try {
             let articleIds = req.query.Ids;
-    
+
             if (!articleIds) {
                 return res.status(400).send({
                     message: 'Invalid or missing article IDs',
                     status: 400
                 });
             }
-    
+
             if (!Array.isArray(articleIds)) {
                 articleIds = articleIds.split(',');
             }
-    
+
             articleIds = articleIds.map(item => parseInt(item, 10)).filter(Number.isInteger);
-    
+
             const articles = await Article.getArticlesByIDs(articleIds);
-    
+
             for (const art of articles) {
                 const imgs = await Article.getImages(art.id_article);
                 if (Array.isArray(imgs) && imgs.length > 0) {
                     art.img = `${baseUrl}/asset${imgs[0].img}.jpg`;
                 } else {
-                    art.img = null; // Or set to a default image URL if desired
+                    art.img = null; // Ou définir une URL d'image par défaut si nécessaire
                 }
             }
-    
+
             return res.status(200).json({
                 message: 'Articles were successfully retrieved',
                 status: 200,
@@ -99,43 +111,12 @@ class ArticleFunc {
             });
         }
     }
-    static async get4ArticlesAleatoire(req, res) {
-        try {
-            const articles = await Article.get4RandomArticles();
 
-            if (!articles || articles.length === 0) {
-                return res.status(404).json({
-                    message: `Articles not found`,
-                    status: 404
-                });
-            } else {
-                const articlesWithDetails = await Promise.all(articles.map(async article => {
-                    const [images] = await Promise.all([
-                        Article.getImages(article.id_article),
-                    ]);
-
-                    article.images = {
-                        img_1: images.length > 0 ? `${baseUrl}/asset${images[0].img}.jpg` : null,
-                        img_2: images.length > 1 ? `${baseUrl}/asset${images[1].img}.jpg` : null
-                    };
-
-                    const { description, name, detail, manufacturing, price, reduction, genders, id_category, ...articleWithoutDescriptionAndName } = article;
-                    return articleWithoutDescriptionAndName;
-                }));
-
-                return res.status(200).json({
-                    message: `Articles successfully found`,
-                    status: 200,
-                    articles: articlesWithDetails
-                });
-            }
-        } catch (err) {
-            return res.status(500).json({
-                message: `Error retrieving articles: ${err.message}`,
-                status: 500
-            });
-        }
-    }
+    /**
+     * Récupère des articles pour la catégorie homme.
+     * @param {Object} req - Requête HTTP contenant éventuellement des paramètres de filtre.
+     * @param {Object} res - Réponse HTTP pour retourner les articles récupérés.
+     */
     static async getArticleHomme(req, res) {
         try {
             const articles = await Article.getArticleHomme(req.query);
@@ -189,6 +170,12 @@ class ArticleFunc {
             });
         }
     };
+
+    /**
+     * Récupère des articles pour la catégorie femme.
+     * @param {Object} req - Requête HTTP contenant éventuellement des paramètres de filtre.
+     * @param {Object} res - Réponse HTTP pour retourner les articles récupérés.
+     */
     static async getArticleFemme(req, res) {
         try {
             const articles = await Article.getArticleFemme(req.query);
@@ -242,6 +229,7 @@ class ArticleFunc {
             });
         }
     };
+
     static async getColors(req, res) {
         try {
             const colors = await Article.getColors(req.query);
@@ -308,6 +296,11 @@ class ArticleFunc {
             });
         }
     };
+    /**
+ * Recherche des articles par terme de recherche.
+ * @param {Object} req - Requête HTTP contenant le terme de recherche.
+ * @param {Object} res - Réponse HTTP pour retourner les articles trouvés.
+ */
     static async searchArticles(req, res) {
         const searchTerm = req.query.term;
 
@@ -358,6 +351,7 @@ class ArticleFunc {
             });
         }
     }
+
 }
 
 module.exports = ArticleFunc;

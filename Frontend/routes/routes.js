@@ -25,13 +25,6 @@ router.post('/Roid/treatment/remove-from-fav', controllerFav.Fav.AddToFav);
 
 // route checkout
 router.get('/Roid/checkout', controllerPage.Checkout);
-router.post('/Roid/treatment/paid', controllerPage.Paiement);
-
-// route pour recupere le localStorage 
-router.get('/getLocalStorage', controllerPage.getLocalStorage);
-
-router.post('/Roid/treatment/addToCart');
-router.post('/Roid/treatment/removeFromCart');
 
 router.use(controllerPage.pageNotFound);
 

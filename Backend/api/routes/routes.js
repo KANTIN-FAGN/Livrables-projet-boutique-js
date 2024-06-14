@@ -9,24 +9,24 @@ const middleware = {
 };
 
 
+// Routes pour les articles
 router.get('/mode-homme/', controllersArticle.getArticleHomme);
 router.get('/mode-femme/', controllersArticle.getArticleFemme);
-router.get('/articles_aleatoire/', controllersArticle.get4ArticlesAleatoire);
 router.get('/article/:id', middleware.articleExist, controllersArticle.getArticleById);
 router.get('/colors', controllersArticle.getColors);
 router.get('/materials', controllersArticle.getMaterials);
 router.get('/categories', controllersArticle.getCategories);
 router.get('/search', controllersArticle.searchArticles);
-router.get('/4Articles', controllersArticle.get4ArticlesAleatoire);
-router.get('/articles-by-id', controllersArticle.getArticlesByIds)
+router.get('/articles-by-id', controllersArticle.getArticlesByIds);
 
+// Routes pour les favoris
 router.post('/add-to-fav', middleware.validateToken, controllersFav.AddToFav);
 router.post('/remove-from-fav', middleware.validateToken, controllersFav.RemoveFromFav);
 router.get('/get-fav', middleware.validateToken, controllersFav.getUserFav);
 
+// Routes pour l'utilisateur
 router.post('/create-compte', controllersUser.Register);
 router.post('/connexion', controllersUser.Login);
 router.get('/getUser', middleware.validateToken, controllersUser.getUser);
-
 
 module.exports = router;
