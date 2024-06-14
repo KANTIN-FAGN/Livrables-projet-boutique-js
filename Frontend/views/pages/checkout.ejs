@@ -72,7 +72,7 @@
                   <label class="label-titre">*Numéro de carte</label>
                 </div>
                 <div class="group">
-                  <input required="" name="code-postal" type="text" class="input">
+                  <input required="" id="card_holder" name="code-postal" type="text" class="input">
                   <label class="label-titre">*Titulaire de la carte</label>
                 </div>
                 <div class="group-livraison">
@@ -87,11 +87,11 @@
             </div>
           </div>
           <div class="btn-pay-checkout">
-            <form action="">
-                <button>
-                    Payer et valider la commande
-                </button>
-            </form>
+            <form id="checkout-form">
+              <button type="submit">
+                  Payer et valider la commande
+              </button>
+          </form>
           </div>
           <div>
         </section>
